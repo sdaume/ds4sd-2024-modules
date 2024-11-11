@@ -8,12 +8,12 @@ This repo contains slides, handouts, examples and other resources for the module
 
 ### Reproducible Workflows
 
-* **Presentation slides**: https://sdaume.github.io/ds4sd-2024-modules/slides/index.html
-* **Handouts**: https://sdaume.github.io/ds4sd-2024-modules/handouts/markdown-handout.html (summary notes for this module, which also serve as an example for a typical R Markdown document) 
+* **Presentation slides**: https://sdaume.github.io/ds4sd-2024-modules/workflows/slides/index.html
+* **Handouts**: https://sdaume.github.io/ds4sd-2024-modules/workflows/handouts/markdown-handout.html (summary notes for this module, which also serve as an example for a typical R Markdown document) 
 * **Other**: Samples of different output formats generated from the handouts.
-  * [PDF](https://sdaume.github.io/ds4sd-2024-modules/handouts/variations/markdown-handout.pdf) 
-  * [HTML with a different theme ('darkly')](https://sdaume.github.io/ds4sd-2024-modules/handouts/variations/markdown-handout-darkly.html) 
-  * [HTML in Tufte style](https://sdaume.github.io/ds4sd-2024-modules/handouts/variations/markdown-handout-tufte.html) 
+  * [PDF](https://sdaume.github.io/ds4sd-2024-modules/workflows/handouts/variations/markdown-handout.pdf) 
+  * [HTML with a different theme ('darkly')](https://sdaume.github.io/ds4sd-2024-modules/workflows/handouts/variations/markdown-handout-darkly.html) 
+  * [HTML in Tufte style](https://sdaume.github.io/ds4sd-2024-modules/workflows/handouts/variations/markdown-handout-tufte.html) 
 
 
 ### Topic Modeling
