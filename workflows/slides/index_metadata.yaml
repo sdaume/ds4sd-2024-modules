@@ -1,0 +1,13 @@
+---
+title: "ds4sd PhD course - Reproducible Workflows"
+subtitle: "RMarkdown, Github & Co"
+author: "Stefan Daume"
+date: '22. November 2024'
+theme: white
+highlight: zenburn
+transition: none
+css: ./css/mycustom_v3.css
+bibliography: references.bib
+link-citations: false
+#csl: plos-one.csl
+---
