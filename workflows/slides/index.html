@@ -47,8 +47,8 @@
 <h2> </h2>
 <div style="display:table;width:100%;table-layout: fixed;">
 <div class="title-without-logo" style="display:table-cell;width:100%;padding-right:3%;padding-left:3%;vertical-align:middle;">
-<p>SRC PhD course ‘Data Science for Sustainable Development’</p>
-<p>Reproducible Workflows using R Markdwon and GitHub</p>
+<p>SRC 2024 PhD course ‘Data Science for Sustainable Development’</p>
+<p>Reproducible Workflows using R Markdown and GitHub</p>
 <p> </p>
 <p> </p>
 <p> </p>
@@ -69,12 +69,27 @@
 <p><em>22. November 2024</em></p>
 </div>
 </div>
+<aside class="notes">
+<ul>
+<li>focus of this module is on two technologies and recipes for those that can be applied to data analysis, documentation and publishing</li>
+<li>split in two parts: 1) providing an introduction to R Markdown and 2) an introduction to git/Github</li>
+<li>an exercise to test the two together</li>
+</ul>
+</aside>
 </section>
 <section><section id="why-learn-r-markdown-gitgithub" class="title-slide slide level1"><h1>Why learn R Markdown &amp; git/Github?</h1></section><section id="key-motivation" class="slide level2">
 <h2>Key motivation</h2>
 <p>Avoid repetitive and error-prone tasks.</p>
-</section><section id="you-should-use-rmarkdown-if-you-want-to" class="slide level2">
-<h2>You should use RMarkdown if you want to …</h2>
+<aside class="notes">
+<ul>
+<li>you are the primary beneficiary of these approaches, but will at the same time adhere to principles of open science</li>
+<li>two tools that allow to share your research in a transparent and reproducible way,</li>
+<li>and make your life easier by structuring your research in a transparent and reproducible way</li>
+</ul>
+</aside>
+</section></section>
+<section><section id="r-markdown" class="title-slide slide level1"><h1>(R) Markdown</h1></section><section id="you-should-use-r-markdown-if-you-want-to" class="slide level2">
+<h2>You should use R Markdown if you want to …</h2>
 <ul>
 <li class="fragment">concentrate on content rather than formatting</li>
 <li class="fragment">share one document in many different formats (Markdown, PDF, Word, HTML)</li>
@@ -83,8 +98,7 @@
 <li class="fragment">integrate your data analysis automatically, not statically</li>
 <li class="fragment">… and much more</li>
 </ul>
-</section></section>
-<section><section id="rmarkdown" class="title-slide slide level1"><h1>(R)Markdown</h1></section><section id="markdown-vs-markup" class="slide level2">
+</section><section id="markdown-vs-markup" class="slide level2">
 <h2>Markdown vs markup</h2>
 <p><strong>Markdown</strong> allows us to concentrate on document structure and content. We can then worry about styling and presentation later.</p>
 <p><strong>Markdown</strong> is a type of <strong>markup language</strong> (like HTML), but it is lightweight and more readable.</p>
@@ -125,6 +139,11 @@ And a \href{https://bookdown.org/yihui/rmarkdown/}{hyperlink} for good
 measure.</code></pre>
 </div>
 </div>
+<aside class="notes">
+<ul>
+<li>achieves the goal of separating content from presentation, but is not very readable for a human reader (and thus editor)</li>
+</ul>
+</aside>
 </section><section id="the-same-with-markdown" class="slide level2">
 <h2>The same with Markdown</h2>
 <div style="display:table;width:100%;table-layout:fixed;">
@@ -137,17 +156,26 @@ measure.</code></pre>
 
 And a [hyperlink](https://bookdown.org/yihui/rmarkdown/) for good measure.</code></pre>
 </div>
-<div style="display:table-cell;width:50%;padding-right:1%;text-align:left;vertical-align:top;">
-<p>Typical workflow with markdown:</p>
+</section><section id="typical-workflow-with-markdown" class="slide level2">
+<h2>Typical workflow with markdown:</h2>
 <ol type="1">
 <li><strong>write</strong> content as a Markdown document,</li>
 <li><strong>generate</strong> the final document in a suitable output format (commonly HTML, PDF, Word)</li>
 <li><strong>publish</strong></li>
 </ol>
-</div>
-</div>
+<aside class="notes">
+<ul>
+<li>we will learn to use R Studio (1), R package knitr (2), and Github (3) to implement those steps</li>
+</ul>
+</aside>
 </section></section>
-<section><section id="essential-markdown-syntax" class="title-slide slide level1"><h1>Essential markdown syntax</h1></section><section id="basic-formatting-and-structuring" class="slide level2">
+<section><section id="essential-markdown-syntax" class="title-slide slide level1"><h1>Essential markdown syntax</h1></section><section id="file-structure-and-conventions" class="slide level2">
+<h2>File structure and conventions</h2>
+<ul>
+<li>Markdown files are <strong>simple text files</strong> and can be created with any text editor.</li>
+<li>Markdown files typically end with the file extension <strong><code>.md</code></strong></li>
+</ul>
+</section><section id="basic-formatting-and-structuring" class="slide level2">
 <h2>Basic formatting and structuring</h2>
 <p><img src="./images/markdown_basic.jpg" width="1301" /></p>
 </section><section id="lists-and-links" class="slide level2">
@@ -159,7 +187,8 @@ And a [hyperlink](https://bookdown.org/yihui/rmarkdown/) for good measure.</code
 <p>An overview of core markdown syntax can be found in <a href="https://bookdown.org/yihui/rmarkdown/markdown-syntax.html">this RMarkdown book chapter</a> and even more options in a condensed form as an <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf">RMarkdown cheat sheet</a>.</p>
 <aside class="notes">
 <ul>
-<li>Tables (but now it gets complicated and RMarkdown makes an entry); show but then lead to RMarkdown; use mtcars or similar</li>
+<li>Tables (but now it gets complicated); show but then lead to RMarkdown; use mtcars or similar</li>
+<li>often table content is the result of data analysis, it could thus be dynamic and we may want to create it programmatically; this is where RMarkdown makes an entry</li>
 </ul>
 </aside>
 </section><section id="r-markdown-vs-markdown" class="slide level2">
@@ -173,6 +202,7 @@ And a [hyperlink](https://bookdown.org/yihui/rmarkdown/) for good measure.</code
 <ul>
 <li>R Markdown files use the file extension <strong><code>.Rmd</code></strong> instead of <strong><code>.md</code></strong>.</li>
 <li>R Markdown files must start with a so-called <strong>YAML header</strong> section.</li>
+<li>R Markdown files are still text files but R Studio should be used to work with those files efficiently.</li>
 </ul>
 </section><section id="yaml---yet-another-markup-language" class="slide level2">
 <h2>YAML - Yet Another Markup Language?</h2>
@@ -180,9 +210,9 @@ And a [hyperlink](https://bookdown.org/yihui/rmarkdown/) for good measure.</code
 <pre class="default"><code>---
 title: &quot;Untitled&quot;
 output: html_document
-date: &#39;2022-06-14&#39;
+date: &#39;2024-11-22&#39;
 ---</code></pre>
-<p>Above is the default <em>YAML header</em> when generating an <code>RMarkdown</code> file in R Studio.</p>
+<p>Above is the default <em>YAML header</em> when generating an <code>R Markdown</code> file in R Studio.</p>
 <aside class="notes">
 <ul>
 <li>see RMarkdown book for details</li>
@@ -530,7 +560,7 @@ year_of_interest &lt;- 2007
 <pre><code>---
 title: &quot;R Course SRC&quot;
 subtitle: &quot;Module 3&quot;
-date: &quot;2024-11-11&quot;
+date: &quot;2024-11-13&quot;
 author: &#39;Stefan Daume&#39; 
 output: 
   html_document:
@@ -551,22 +581,11 @@ link-citations: yes
 </aside>
 </section><section id="include-a-bibliography" class="slide level2">
 <h2>Include a bibliography</h2>
-<pre class="default"><code>After presenting all results we have now reached the end of the document. Here should follow the bibliograpy.
+<p>By default a bibliography is added to the end of the generated (i.e., <code>knitr</code>ed) document.</p>
+<pre class="default"><code>After presenting all results we have now reached the end of the document. Here should follow the bibliography.
 
 # References</code></pre>
 <p>Add the header <code># References</code> at the end of your document, <code>knit</code> and the complete bibliography is added to the output document.</p>
-</section><section id="include-a-bibliography-1" class="slide level2">
-<h2>Include a bibliography</h2>
-<div style="display:table;width:100%;table-layout:fixed;">
-<div style="display:table-cell;width:50%;padding-right:5%;text-align:left;vertical-align:top;">
-<pre class="default"><code>After presenting all results we have now reached the end of the manuscript. As a final section should follow the bibliography.
-
-# References</code></pre>
-</div>
-<div style="display:table-cell;width:50%;padding-left:5%;text-align:left;vertical-align:top;">
-<p>Add the header <strong><code># References</code></strong> at the end of your document, <strong><code>knit</code></strong> and the complete bibliography is added to the output document.</p>
-</div>
-</div>
 </section><section id="switch-citation-and-bibliography-styles-dynamically" class="slide level2">
 <h2>Switch citation and bibliography styles dynamically</h2>
 <div style="display:table;width:100%;table-layout:fixed;">
@@ -575,7 +594,7 @@ link-citations: yes
 <pre><code>---
 title: &quot;R Course SRC&quot;
 subtitle: &quot;Module 3&quot;
-date: &quot;2024-11-11&quot;
+date: &quot;2024-11-13&quot;
 author: &#39;Stefan Daume&#39; 
 output: 
   html_document:
@@ -606,8 +625,7 @@ csl: ecology-and-society.csl
 <p>This is how this presentation works (and the others before).</p>
 </section><section id="continous-analysis-as-the-ultimate-goal" class="slide level2">
 <h2>“Continous Analysis” as the ultimate goal</h2>
-</section></section>
-<section><section id="thank-you" class="title-slide slide level1"><h1>Thank You!</h1></section><section id="key-resources" class="slide level2">
+</section><section id="key-resources" class="slide level2">
 <h2>Key Resources</h2>
 <ul>
 <li>R Markdown
@@ -623,42 +641,8 @@ csl: ecology-and-society.csl
 <li><a href="https://cbea.ms/git-commit/">How to write a great commit message</a></li>
 </ul></li>
 </ul>
-</section><section id="references" class="slide level2">
-<h2>References</h2>
-<div id="refs" role="doc-bibliography">
-<div id="ref-Bryan2017">
-<p>Bryan, Jennifer. 2017. “Excuse me, do you have a moment to talk about version control?” <em>PeerJ Preprints</em> 5:e3159v2 (August). <a href="https://doi.org/10.7287/PEERJ.PREPRINTS.3159V2">https://doi.org/10.7287/PEERJ.PREPRINTS.3159V2</a>.</p>
-</div>
-<div id="ref-Bryan2021">
-<p>———. 2021. “Happy Git and GitHub for the useR.” <a href="https://happygitwithr.com/">https://happygitwithr.com/</a>.</p>
-</div>
-<div id="ref-Chacon_et_2014_Book">
-<p>Chacon, Scott, and Ben Straub. 2014. <em>Pro Git</em>. Apress. <a href="https://doi.org/10.1007/978-1-4842-0076-6">https://doi.org/10.1007/978-1-4842-0076-6</a>.</p>
-</div>
-<div id="ref-XieAllaire_et_2022">
-<p>Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2022. “R Markdown: The Definitive Guide.” <a href="https://bookdown.org/yihui/rmarkdown/">https://bookdown.org/yihui/rmarkdown/</a>.</p>
-</div>
-</div>
-</section><section id="colophon" class="slide level2 colophon">
-<h2>Colophon</h2>
-<p><strong>SRC PhD R course Module 3 — RMarkdown, Github &amp; Co"</strong> by <em>Stefan Daume</em></p>
-<p> </p>
-<p>Presented on 16. June 2022.</p>
-<p> </p>
-<p>This presentation can be cited using: <em>doi:…</em></p>
-<p> </p>
-<p><strong>PRESENTATION DETAILS</strong></p>
-<p><strong>Author/Affiliation:</strong> Stefan Daume, Stockholm Resilience Centre, Stockholm University</p>
-<p><strong>Presentation URL:</strong> <a href="https://sdaume.github.io/r-course-module-3/slides" class="uri">https://sdaume.github.io/r-course-module-3/slides</a></p>
-<p><strong>Presentation Source:</strong> [TBD]</p>
-<p><strong>Presentation PDF:</strong> [TBD]</p>
-<p> </p>
-<p><strong>CREDITS &amp; LICENSES</strong></p>
-<p>This presentation is delivered with the help of several free and open source tools and libraries. It utilises the <a href="https://revealjs.com/">reveal.js</a> presentation framework and has been created using <a href="https://rmarkdown.rstudio.com">RMarkdown</a>, <a href="https://yihui.name/knitr/">knitr</a>, <a href="https://www.rstudio.com">RStudio</a> and <a href="https://pandoc.org/">Pandoc</a>. <a href="https://highlightjs.org">highlight.js</a> provides syntax highlighting for code sections. <a href="https://www.mathjax.org">MathJax</a> supports the rendering of mathematical notations. PDF and JPG copies of this presentation were generated with <a href="https://github.com/astefanutti/decktape">DeckTape</a>. Please note the respective licenses of these tools and libraries.</p>
-<p> </p>
-<p>If not noted and attributed otherwise, the contents (text, charts, images) of this presentation are <strong>Copyright © 2022 of the Author</strong> and provided under a <em>CC BY 4.0</em> public domain license.</p>
 </section></section>
-<section><section id="appendix-some-notes-on-github" class="title-slide slide level1"><h1>Appendix (some notes on Github)</h1></section><section id="you-need-git-and-github-if-non-exhaustive-list" class="slide level2">
+<section><section id="git-github" class="title-slide slide level1"><h1>git &amp; GitHub</h1></section><section id="you-need-git-and-github-if-non-exhaustive-list" class="slide level2">
 <h2>You need git and Github if … (non-exhaustive list)</h2>
 <ul>
 <li>… you have files like this, but realise that this is not efficient
@@ -750,6 +734,37 @@ csl: ecology-and-society.csl
 <li>screenshots</li>
 </ul>
 </aside>
+</section><section id="references" class="slide level2">
+<h2>References</h2>
+<div id="refs" role="doc-bibliography">
+<div id="ref-Bryan2017">
+<p>Bryan, Jennifer. 2017. “Excuse me, do you have a moment to talk about version control?” <em>PeerJ Preprints</em> 5:e3159v2 (August). <a href="https://doi.org/10.7287/PEERJ.PREPRINTS.3159V2">https://doi.org/10.7287/PEERJ.PREPRINTS.3159V2</a>.</p>
+</div>
+<div id="ref-Bryan2021">
+<p>———. 2021. “Happy Git and GitHub for the useR.” <a href="https://happygitwithr.com/">https://happygitwithr.com/</a>.</p>
+</div>
+<div id="ref-Chacon_et_2014_Book">
+<p>Chacon, Scott, and Ben Straub. 2014. <em>Pro Git</em>. Apress. <a href="https://doi.org/10.1007/978-1-4842-0076-6">https://doi.org/10.1007/978-1-4842-0076-6</a>.</p>
+</div>
+<div id="ref-XieAllaire_et_2022">
+<p>Xie, Yihui, J. J. Allaire, and Garrett Grolemund. 2022. “R Markdown: The Definitive Guide.” <a href="https://bookdown.org/yihui/rmarkdown/">https://bookdown.org/yihui/rmarkdown/</a>.</p>
+</div>
+</div>
+</section><section id="colophon" class="slide level2 colophon">
+<h2>Colophon</h2>
+<p><strong>SRC 2024 PhD course ‘Data Science for Sustainable Development’ — Reproducible Workflows using R Markdown and GitHub</strong> by <em>Stefan Daume</em>  </p>
+<p>Presented on 22. November 2024.</p>
+<p> </p>
+<p><strong>PRESENTATION DETAILS</strong></p>
+<p><strong>Author/Affiliation:</strong> Stefan Daume, Stockholm Resilience Centre, Stockholm University</p>
+<p><strong>Presentation URL:</strong> <a href="https://sdaume.github.io/ds4sd-2024-modules/workflows/slides/" class="uri">https://sdaume.github.io/ds4sd-2024-modules/workflows/slides/</a></p>
+<p><strong>Presentation Source:</strong> <a href="https://github.com/sdaume/ds4sd-2024-modules" class="uri">https://github.com/sdaume/ds4sd-2024-modules</a></p>
+<p><strong>Presentation PDF:</strong> <a href="https://github.com/sdaume/ds4sd-2024-modules/workflows/slides/2024-ds4sd-workflows.pdf" class="uri">https://github.com/sdaume/ds4sd-2024-modules/workflows/slides/2024-ds4sd-workflows.pdf</a></p>
+<p> </p>
+<p><strong>CREDITS &amp; LICENSES</strong></p>
+<p>This presentation is delivered with the help of several free and open source tools and libraries. It utilises the <a href="https://revealjs.com/">reveal.js</a> presentation framework and has been created using <a href="https://rmarkdown.rstudio.com">RMarkdown</a>, <a href="https://yihui.name/knitr/">knitr</a>, <a href="https://www.rstudio.com">RStudio</a> and <a href="https://pandoc.org/">Pandoc</a>. <a href="https://highlightjs.org">highlight.js</a> provides syntax highlighting for code sections. <a href="https://www.mathjax.org">MathJax</a> supports the rendering of mathematical notations. PDF and JPG copies of this presentation were generated with <a href="https://github.com/astefanutti/decktape">DeckTape</a>. Please note the respective licenses of these tools and libraries.</p>
+<p> </p>
+<p>If not noted and attributed otherwise, the contents (text, charts, images) of this presentation are <strong>Copyright © 2024 of the Author</strong> and provided under a <em>CC BY 4.0</em> public domain license.</p>
 </section></section>
     </div>
   </div>

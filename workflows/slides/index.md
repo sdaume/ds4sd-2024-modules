@@ -2,9 +2,9 @@
 
 ::: {style="display:table;width:100%;table-layout: fixed;"}
 ::: {.title-without-logo style="display:table-cell;width:100%;padding-right:3%;padding-left:3%;vertical-align:middle;"}
-SRC PhD course 'Data Science for Sustainable Development'
+SRC 2024 PhD course 'Data Science for Sustainable Development'
 
-Reproducible Workflows using R Markdwon and GitHub
+Reproducible Workflows using R Markdown and GitHub
 
  
 
@@ -40,13 +40,40 @@ Economics](https://beijer.kva.se/programmes/complexity/)*
 :::
 :::
 
+```{=html}
+<aside class="notes">
+```
+-   focus of this module is on two technologies and recipes for those
+    that can be applied to data analysis, documentation and publishing
+-   split in two parts: 1) providing an introduction to R Markdown
+    and 2) an introduction to git/Github
+-   an exercise to test the two together
+
+```{=html}
+</aside>
+```
 # Why learn R Markdown & git/Github?
 
 ## Key motivation
 
 Avoid repetitive and error-prone tasks.
 
-## You should use RMarkdown if you want to ...
+```{=html}
+<aside class="notes">
+```
+-   you are the primary beneficiary of these approaches, but will at the
+    same time adhere to principles of open science
+-   two tools that allow to share your research in a transparent and
+    reproducible way,
+-   and make your life easier by structuring your research in a
+    transparent and reproducible way
+
+```{=html}
+</aside>
+```
+# (R) Markdown
+
+## You should use R Markdown if you want to ...
 
 > -   concentrate on content rather than formatting
 > -   share one document in many different formats (Markdown, PDF, Word,
@@ -55,8 +82,6 @@ Avoid repetitive and error-prone tasks.
 > -   switch between different citation formats
 > -   integrate your data analysis automatically, not statically
 > -   ... and much more
-
-# (R)Markdown
 
 ## Markdown vs markup
 
@@ -109,9 +134,20 @@ measure.
 :::
 :::
 
+```{=html}
+<aside class="notes">
+```
+-   achieves the goal of separating content from presentation, but is
+    not very readable for a human reader (and thus editor)
+
+```{=html}
+</aside>
+```
 ## The same with Markdown
 
-::: {style="display:table;width:100%;table-layout:fixed;"}
+```{=html}
+<div style="display:table;width:100%;table-layout:fixed;">
+```
 ::: {style="display:table-cell;width:50%;padding-left:1%;vertical-align:top;"}
 **Basic Markdown**
 
@@ -123,17 +159,29 @@ measure.
     And a [hyperlink](https://bookdown.org/yihui/rmarkdown/) for good measure.
 :::
 
-::: {style="display:table-cell;width:50%;padding-right:1%;text-align:left;vertical-align:top;"}
-Typical workflow with markdown:
+## Typical workflow with markdown:
 
 1.  **write** content as a Markdown document,
 2.  **generate** the final document in a suitable output format
     (commonly HTML, PDF, Word)
 3.  **publish**
-:::
-:::
 
+```{=html}
+<aside class="notes">
+```
+-   we will learn to use R Studio (1), R package knitr (2), and
+    Github (3) to implement those steps
+
+```{=html}
+</aside>
+```
 # Essential markdown syntax
+
+## File structure and conventions
+
+-   Markdown files are **simple text files** and can be created with any
+    text editor.
+-   Markdown files typically end with the file extension **`.md`**
 
 ## Basic formatting and structuring
 
@@ -155,8 +203,11 @@ sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
 ```{=html}
 <aside class="notes">
 ```
--   Tables (but now it gets complicated and RMarkdown makes an entry);
-    show but then lead to RMarkdown; use mtcars or similar
+-   Tables (but now it gets complicated); show but then lead to
+    RMarkdown; use mtcars or similar
+-   often table content is the result of data analysis, it could thus be
+    dynamic and we may want to create it programmatically; this is where
+    RMarkdown makes an entry
 
 ```{=html}
 </aside>
@@ -174,6 +225,8 @@ sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
     **`.md`**.
 -   R Markdown files must start with a so-called **YAML header**
     section.
+-   R Markdown files are still text files but R Studio should be used to
+    work with those files efficiently.
 
 ## YAML - Yet Another Markup Language?
 
@@ -184,11 +237,11 @@ enclosed by three dashes `---`.
 ---
 title: "Untitled"
 output: html_document
-date: '2022-06-14'
+date: '2024-11-22'
 ---
 ```
 
-Above is the default *YAML header* when generating an `RMarkdown` file
+Above is the default *YAML header* when generating an `R Markdown` file
 in R Studio.
 
 ```{=html}
@@ -670,7 +723,7 @@ pages.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-11"
+    date: "2024-11-13"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -701,32 +754,17 @@ And then include citations in the text with the format
 ```
 ## Include a bibliography
 
+By default a bibliography is added to the end of the generated (i.e.,
+`knitr`ed) document.
+
 ``` default
-After presenting all results we have now reached the end of the document. Here should follow the bibliograpy.
+After presenting all results we have now reached the end of the document. Here should follow the bibliography.
 
 # References
 ```
 
 Add the header `# References` at the end of your document, `knit` and
 the complete bibliography is added to the output document.
-
-## Include a bibliography
-
-::: {style="display:table;width:100%;table-layout:fixed;"}
-::: {style="display:table-cell;width:50%;padding-right:5%;text-align:left;vertical-align:top;"}
-``` default
-After presenting all results we have now reached the end of the manuscript. As a final section should follow the bibliography.
-
-# References
-```
-:::
-
-::: {style="display:table-cell;width:50%;padding-left:5%;text-align:left;vertical-align:top;"}
-Add the header **`# References`** at the end of your document,
-**`knit`** and the complete bibliography is added to the output
-document.
-:::
-:::
 
 ## Switch citation and bibliography styles dynamically
 
@@ -737,7 +775,7 @@ document.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-11"
+    date: "2024-11-13"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -778,8 +816,6 @@ This is how this presentation works (and the others before).
 
 ## "Continous Analysis" as the ultimate goal
 
-# Thank You!
-
 ## Key Resources
 
 -   R Markdown
@@ -798,61 +834,7 @@ This is how this presentation works (and the others before).
     -   [How to write a great commit
         message](https://cbea.ms/git-commit/)
 
-## References
-
-::: {#refs}
-:::
-
-## Colophon {#colophon .colophon}
-
-**SRC PhD R course Module 3 --- RMarkdown, Github & Co"** by *Stefan
-Daume*
-
- 
-
-Presented on 16. June 2022.
-
- 
-
-This presentation can be cited using: *doi:...*
-
- 
-
-**PRESENTATION DETAILS**
-
-**Author/Affiliation:** Stefan Daume, Stockholm Resilience Centre,
-Stockholm University
-
-**Presentation URL:**
-<https://sdaume.github.io/r-course-module-3/slides>
-
-**Presentation Source:** \[TBD\]
-
-**Presentation PDF:** \[TBD\]
-
- 
-
-**CREDITS & LICENSES**
-
-This presentation is delivered with the help of several free and open
-source tools and libraries. It utilises the
-[reveal.js](https://revealjs.com/) presentation framework and has been
-created using [RMarkdown](https://rmarkdown.rstudio.com),
-[knitr](https://yihui.name/knitr/), [RStudio](https://www.rstudio.com)
-and [Pandoc](https://pandoc.org/).
-[highlight.js](https://highlightjs.org) provides syntax highlighting for
-code sections. [MathJax](https://www.mathjax.org) supports the rendering
-of mathematical notations. PDF and JPG copies of this presentation were
-generated with [DeckTape](https://github.com/astefanutti/decktape).
-Please note the respective licenses of these tools and libraries.
-
- 
-
-If not noted and attributed otherwise, the contents (text, charts,
-images) of this presentation are **Copyright © 2022 of the Author** and
-provided under a *CC BY 4.0* public domain license.
-
-# Appendix (some notes on Github)
+# git & GitHub
 
 ## You need git and Github if ... (non-exhaustive list)
 
@@ -949,3 +931,51 @@ Document consistently:
 ```{=html}
 </aside>
 ```
+## References
+
+::: {#refs}
+:::
+
+## Colophon {#colophon .colophon}
+
+**SRC 2024 PhD course 'Data Science for Sustainable Development' ---
+Reproducible Workflows using R Markdown and GitHub** by *Stefan Daume*  
+
+Presented on 22. November 2024.
+
+ 
+
+**PRESENTATION DETAILS**
+
+**Author/Affiliation:** Stefan Daume, Stockholm Resilience Centre,
+Stockholm University
+
+**Presentation URL:**
+<https://sdaume.github.io/ds4sd-2024-modules/workflows/slides/>
+
+**Presentation Source:** <https://github.com/sdaume/ds4sd-2024-modules>
+
+**Presentation PDF:**
+<https://github.com/sdaume/ds4sd-2024-modules/workflows/slides/2024-ds4sd-workflows.pdf>
+
+ 
+
+**CREDITS & LICENSES**
+
+This presentation is delivered with the help of several free and open
+source tools and libraries. It utilises the
+[reveal.js](https://revealjs.com/) presentation framework and has been
+created using [RMarkdown](https://rmarkdown.rstudio.com),
+[knitr](https://yihui.name/knitr/), [RStudio](https://www.rstudio.com)
+and [Pandoc](https://pandoc.org/).
+[highlight.js](https://highlightjs.org) provides syntax highlighting for
+code sections. [MathJax](https://www.mathjax.org) supports the rendering
+of mathematical notations. PDF and JPG copies of this presentation were
+generated with [DeckTape](https://github.com/astefanutti/decktape).
+Please note the respective licenses of these tools and libraries.
+
+ 
+
+If not noted and attributed otherwise, the contents (text, charts,
+images) of this presentation are **Copyright © 2024 of the Author** and
+provided under a *CC BY 4.0* public domain license.

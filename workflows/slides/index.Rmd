@@ -75,6 +75,13 @@ year_of_interest <- 2007
 </div>
 
 
+<aside class="notes">
+* focus of this module is on two technologies and recipes for those that can be applied to data analysis, documentation and publishing
+* split in two parts: 1) providing an introduction to R Markdown and 2) an introduction to git/Github
+* an exercise to test the two together
+</aside>
+
+
 # Why learn R Markdown & git/Github?
 
 
@@ -83,9 +90,16 @@ year_of_interest <- 2007
 
 Avoid repetitive and error-prone tasks. 
 
+<aside class="notes">
+* you are the primary beneficiary of these approaches, but will at the same time adhere to principles of open science
+* two tools that allow to share your research in a transparent and reproducible way,
+* and make your life easier by structuring your research in a transparent and reproducible way
+</aside>
 
 
-## You should use RMarkdown if you want to ... 
+# (R) Markdown
+
+## You should use R Markdown if you want to ... 
 
 >* concentrate on content rather than formatting
 >* share one document in many different formats (Markdown, PDF, Word, HTML)
@@ -93,11 +107,6 @@ Avoid repetitive and error-prone tasks.
 >* switch between different citation formats
 >* integrate your data analysis automatically, not statically 
 >* ... and much more 
-
-
-
-
-# (R)Markdown
 
 
 ## Markdown vs markup
@@ -162,6 +171,9 @@ measure.
   </div>
 </div>
 
+<aside class="notes">
+* achieves the goal of separating content from presentation, but is not very readable for a human reader (and thus editor)
+</aside>
 
 
 
@@ -186,21 +198,23 @@ And a [hyperlink](https://bookdown.org/yihui/rmarkdown/) for good measure.
   </div>
   
   
-  <div style="display:table-cell;width:50%;padding-right:1%;text-align:left;vertical-align:top;">
-  
-Typical workflow with markdown: 
+## Typical workflow with markdown: 
 
 1. **write** content as a Markdown document, 
 2. **generate** the final document in a suitable output format (commonly HTML, PDF, Word)
 3. **publish** 
     
-  </div>
-</div>
-
-
+<aside class="notes">
+* we will learn to use R Studio (1), R package knitr (2), and Github (3) to implement those steps
+</aside>
 
 
 # Essential markdown syntax
+
+## File structure and conventions
+
+* Markdown files are **simple text files** and can be created with any text editor.
+* Markdown files typically end with the file extension **`.md`**
 
 
 ## Basic formatting and structuring
@@ -226,7 +240,8 @@ knitr::include_graphics('./images/markdown_tables.jpg')
 An overview of core markdown syntax can be found in [this RMarkdown book chapter](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html) and even more options in a condensed form as an [RMarkdown cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf).
 
 <aside class="notes">
-* Tables (but now it gets complicated and RMarkdown makes an entry); show but then lead to RMarkdown; use mtcars or similar
+* Tables (but now it gets complicated); show but then lead to RMarkdown; use mtcars or similar
+* often table content is the result of data analysis, it could thus be dynamic and we may want to create it programmatically; this is where RMarkdown makes an entry
 </aside>
 
 
@@ -242,6 +257,7 @@ An overview of core markdown syntax can be found in [this RMarkdown book chapter
 
 * R Markdown files use the file extension **`.Rmd`** instead of **`.md`**.
 * R Markdown files must start with a so-called **YAML header** section.
+* R Markdown files are still text files but R Studio should be used to work with those files efficiently.
 
 
 
@@ -253,11 +269,11 @@ The **YAML header** must be placed at the beginning of a document and is enclose
 ---
 title: "Untitled"
 output: html_document
-date: '2022-06-14'
+date: '2024-11-22'
 ---
 ````
 
-Above is the default *YAML header* when generating an `RMarkdown` file in R Studio.
+Above is the default *YAML header* when generating an `R Markdown` file in R Studio.
 
 <aside class="notes">
 * see RMarkdown book for details
@@ -649,40 +665,16 @@ And then include citations in the text with the format **`[@CitationKey]`**, whi
 
 ## Include  a bibliography
 
+By default a bibliography is added to the end of the generated (i.e., `knitr`ed) document.
 
 ````{verbatim}
-After presenting all results we have now reached the end of the document. Here should follow the bibliograpy.
+After presenting all results we have now reached the end of the document. Here should follow the bibliography.
 
 # References
 ````
 
 
 Add the header `# References` at the end of your document, `knit` and the complete bibliography is added to the output document.
-
-
-
-
-## Include  a bibliography
-
-<div style="display:table;width:100%;table-layout:fixed;">
-  <div style="display:table-cell;width:50%;padding-right:5%;text-align:left;vertical-align:top;">
-  
-````{verbatim}
-After presenting all results we have now reached the end of the manuscript. As a final section should follow the bibliography.
-
-# References
-````
-
-  </div>
-  
-  
-  <div style="display:table-cell;width:50%;padding-left:5%;text-align:left;vertical-align:top;">
-  
-Add the header **`# References`** at the end of your document, **`knit`** and the complete bibliography is added to the output document.
-
-  </div>
-</div>
-
 
 
 
@@ -739,10 +731,6 @@ This is how this presentation works (and the others before).
 ## "Continous Analysis" as the ultimate goal
 
 
-
-# Thank You!
-
-
 ## Key Resources
 
 * R Markdown
@@ -756,48 +744,8 @@ This is how this presentation works (and the others before).
 
 
 
-## References
 
-<div id="refs"></div>
-
-
-## Colophon {.colophon}
-**SRC PhD R course Module 3 --- RMarkdown, Github & Co"** by *Stefan Daume*
-
-&nbsp;
-
-Presented on 16. June 2022.
-
-&nbsp;
-
-This presentation can be cited using: *doi:...*
-
-&nbsp;
-
-**PRESENTATION DETAILS**
-
-**Author/Affiliation:** Stefan Daume, Stockholm Resilience Centre, Stockholm University
-
-**Presentation URL:** https://sdaume.github.io/r-course-module-3/slides
-
-**Presentation Source:** [TBD]
-
-**Presentation PDF:** [TBD]
-
-&nbsp;
-
-**CREDITS & LICENSES**
-
-This presentation is delivered with the help of several free and open source tools and libraries. It utilises the [reveal.js](https://revealjs.com/) presentation framework and has been created using [RMarkdown](https://rmarkdown.rstudio.com), [knitr](https://yihui.name/knitr/), [RStudio](https://www.rstudio.com) and [Pandoc](https://pandoc.org/). [highlight.js](https://highlightjs.org) provides syntax highlighting for code sections. [MathJax](https://www.mathjax.org) supports the rendering of mathematical notations. PDF and JPG copies of this presentation were generated with [DeckTape](https://github.com/astefanutti/decktape). Please note the respective licenses of these tools and libraries.
-
-
-&nbsp;
-
-If not noted and attributed otherwise, the contents (text, charts, images) of this presentation are **Copyright &copy; 2022 of the Author** and provided under a *CC BY 4.0* public domain license. 
-
-
-
-# Appendix (some notes on Github)
+# git & GitHub
 
 ## You need git and Github if ... (non-exhaustive list)
 
@@ -886,4 +834,40 @@ Document consistently:
 * Show a basic workflow
 * screenshots
 </aside>
+
+
+## References
+
+<div id="refs"></div>
+
+
+## Colophon {.colophon}
+**SRC 2024 PhD course 'Data Science for Sustainable Development' --- Reproducible Workflows using R Markdown and GitHub** by *Stefan Daume*
+&nbsp;
+
+Presented on 22. November 2024.
+
+&nbsp;
+
+**PRESENTATION DETAILS**
+
+**Author/Affiliation:** Stefan Daume, Stockholm Resilience Centre, Stockholm University
+
+**Presentation URL:** https://sdaume.github.io/ds4sd-2024-modules/workflows/slides/
+
+**Presentation Source:** https://github.com/sdaume/ds4sd-2024-modules
+
+**Presentation PDF:** https://github.com/sdaume/ds4sd-2024-modules/workflows/slides/2024-ds4sd-workflows.pdf
+
+&nbsp;
+
+**CREDITS & LICENSES**
+
+This presentation is delivered with the help of several free and open source tools and libraries. It utilises the [reveal.js](https://revealjs.com/) presentation framework and has been created using [RMarkdown](https://rmarkdown.rstudio.com), [knitr](https://yihui.name/knitr/), [RStudio](https://www.rstudio.com) and [Pandoc](https://pandoc.org/). [highlight.js](https://highlightjs.org) provides syntax highlighting for code sections. [MathJax](https://www.mathjax.org) supports the rendering of mathematical notations. PDF and JPG copies of this presentation were generated with [DeckTape](https://github.com/astefanutti/decktape). Please note the respective licenses of these tools and libraries.
+
+
+&nbsp;
+
+If not noted and attributed otherwise, the contents (text, charts, images) of this presentation are **Copyright &copy; 2024 of the Author** and provided under a *CC BY 4.0* public domain license. 
+
 
