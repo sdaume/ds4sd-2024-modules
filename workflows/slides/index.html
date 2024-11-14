@@ -560,7 +560,7 @@ year_of_interest &lt;- 2007
 <pre><code>---
 title: &quot;R Course SRC&quot;
 subtitle: &quot;Module 3&quot;
-date: &quot;2024-11-13&quot;
+date: &quot;2024-11-14&quot;
 author: &#39;Stefan Daume&#39; 
 output: 
   html_document:
@@ -594,7 +594,7 @@ link-citations: yes
 <pre><code>---
 title: &quot;R Course SRC&quot;
 subtitle: &quot;Module 3&quot;
-date: &quot;2024-11-13&quot;
+date: &quot;2024-11-14&quot;
 author: &#39;Stefan Daume&#39; 
 output: 
   html_document:
@@ -633,13 +633,6 @@ csl: ecology-and-society.csl
 <li><a href="https://bookdown.org/yihui/rmarkdown/">R Markdown: The Definitive Guide</a> <span class="citation" data-cites="XieAllaire_et_2022">(Xie, Allaire, and Grolemund 2022)</span></li>
 <li><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf">Cheatsheet: Dynamic documents with rmarkdown cheatsheet</a></li>
 </ul></li>
-<li>Git/Github:
-<ul>
-<li><a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a> <span class="citation" data-cites="Bryan2021">(Bryan 2021)</span></li>
-<li>“Excuse me, do you have a moment to talk about version control?” <span class="citation" data-cites="Bryan2017">(Bryan 2017)</span></li>
-<li>Advanced git use: <a href="https://git-scm.com/book/en/v2">Pro Git</a> book <span class="citation" data-cites="Chacon_et_2014_Book">(Chacon and Straub 2014)</span></li>
-<li><a href="https://cbea.ms/git-commit/">How to write a great commit message</a></li>
-</ul></li>
 </ul>
 </section></section>
 <section><section id="git-github" class="title-slide slide level1"><h1>git &amp; GitHub</h1></section><section id="you-need-git-and-github-if-non-exhaustive-list" class="slide level2">
@@ -659,10 +652,42 @@ csl: ecology-and-society.csl
 <li>… you want to maintain projects rather than a single file (Google Doc)</li>
 <li>… you want to be able to easily revert back to previous versions of your work</li>
 </ul>
+</section><section id="focus-of-this-session" class="slide level2">
+<h2>Focus of this session</h2>
+<p>git &amp; GitHub are extremely versatile, feature-rich tools that enable collaboration on complex software projects.</p>
+<p>We will only scratch the surface of this and focus on basic recipes and elements, namely:</p>
+<ul>
+<li>understanding the basic concepts</li>
+<li>use GitHub as a repository/backup for your work</li>
+<li>integrate git/GitHub into your workflow</li>
+<li>share and collaborate with others</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>thus it is about organising and reproducibility (for yourself and others as a target audience)</li>
+</ul>
+</aside>
+</section><section id="key-resources-1" class="slide level2">
+<h2>Key Resources</h2>
+<ul>
+<li>Git/Github:
+<ul>
+<li><a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a> <span class="citation" data-cites="Bryan2021">(Bryan 2021)</span></li>
+<li>“Excuse me, do you have a moment to talk about version control?” <span class="citation" data-cites="Bryan2017">(Bryan 2017)</span></li>
+<li>Advanced git use: <a href="https://git-scm.com/book/en/v2">Pro Git</a> book <span class="citation" data-cites="Chacon_et_2014_Book">(Chacon and Straub 2014)</span></li>
+<li><a href="https://cbea.ms/git-commit/">How to write a great commit message</a></li>
+</ul></li>
+</ul>
+<aside class="notes">
+<ul>
+<li>the examples follow these resources</li>
+<li>for different recipes and advanced usage consult the <a href="https://git-scm.com/book/en/v2">Pro Git</a> book <span class="citation" data-cites="Chacon_et_2014_Book">(Chacon and Straub 2014)</span> and <a href="https://happygitwithr.com/">Happy Git and GitHub for the useR</a></li>
+</ul>
+</aside>
 </section><section id="git-history" class="slide level2">
 <h2>Git history</h2>
 <ul>
-<li>linux development, started 2005</li>
+<li>Linux development, started 2005</li>
 <li>a version management system, i.e. tracks changes in project resources</li>
 <li>git takes snapshots of a managed project (image)</li>
 <li>distributed version control system (that means you always have a complete copy of your version history on your local computer)</li>
@@ -671,6 +696,7 @@ csl: ecology-and-society.csl
 <h2>Key concepts</h2>
 <ul>
 <li>repo</li>
+<li>cloning</li>
 <li>staging</li>
 <li>commit</li>
 <li>diff</li>
@@ -679,25 +705,8 @@ csl: ecology-and-society.csl
 <li>branch (advanced)</li>
 <li>remote origin</li>
 </ul>
-</section><section id="useful-things" class="slide level2">
-<h2>Useful things</h2>
-<ul>
-<li>.gitignore</li>
-</ul>
-</section><section id="how-to-write-a-great-commit-comment" class="slide level2 left-aligned-slide">
-<h2>How to write a great commit comment</h2>
-<p>Most important:</p>
-<ul>
-<li>Keep things atomic!</li>
-</ul>
-<p>Document consistently:</p>
-<ul>
-<li>Keep the subject line short.</li>
-<li>Use the imperative mood in the subject line (Because a commit message should always complete the following line: “If applied, this commit will [YOUR_SUBJECT_LINE].”)</li>
-<li>Use the body to explain what and why vs. how (Because “the how” can be obtained from the <em>diff</em>. The commit message should provide the context for “the how”.)</li>
-</ul>
 </section></section>
-<section><section id="setting-git-up-with-r-studio" class="title-slide slide level1"><h1>Setting Git up with R Studio</h1></section><section id="do-this-once" class="slide level2">
+<section><section id="setting-gitgithub-up-with-r-studio" class="title-slide slide level1"><h1>Setting git/GitHub up with R Studio</h1></section><section id="do-this-once" class="slide level2">
 <h2>Do this once:</h2>
 <ul>
 <li>install git locally (see <span class="citation" data-cites="Bryan2021">(Bryan 2021)</span>)</li>
@@ -709,6 +718,33 @@ csl: ecology-and-society.csl
 <li>and then store it with <code>gitcreds::gitcreds_set()</code></li>
 </ul></li>
 </ul>
+</section><section id="installing-and-configuring-git" class="slide level2">
+<h2>Installing and configuring git</h2>
+<p>Select the installer for your OS: <a href="https://git-scm.com/" class="uri">https://git-scm.com/</a></p>
+<p>On the command line set:</p>
+<pre class="shell"><code>$ git config --global user.name &quot;John Doe&quot;
+$ git config --global user.email johndoe@example.com</code></pre>
+<p>Check your settings:</p>
+<pre class="shell"><code>$ git config --list</code></pre>
+</section><section id="create-a-pat-personal-access-token" class="slide level2">
+<h2>Create a PAT (Personal Access Token)</h2>
+<p>You can go to GitHub directly or trigger it from the command line:</p>
+<pre class="shell"><code>usethis::create_github_token()</code></pre>
+</section><section id="create-a-pat-personal-access-token-1" class="slide level2">
+<h2>Create a PAT (Personal Access Token)</h2>
+<p>Configure and create PAT:</p>
+<p><img src="./images/github_pat_creation.png" width="1134" /></p>
+<p>Than copy it:</p>
+<p><img src="./images/github_pat_copy.png" width="1111" /></p>
+</section><section id="store-the-pat-for-local-use" class="slide level2">
+<h2>Store the PAT for local use</h2>
+<p>Set the credentials from the command line:</p>
+<pre class="shell"><code>gitcreds::gitcreds_set()</code></pre>
+<p>Follow instructions and finally provide the PAT:</p>
+<pre class="shell"><code>? Enter new password or token: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+-&gt; Adding new credentials...
+-&gt; Removing credentials from cache...
+-&gt; Done.</code></pre>
 </section><section id="do-this-for-every-new-project" class="slide level2">
 <h2>Do this for every new project:</h2>
 <ul>
@@ -734,6 +770,29 @@ csl: ecology-and-society.csl
 <li>screenshots</li>
 </ul>
 </aside>
+</section></section>
+<section><section id="useful-for-commits" class="title-slide slide level1"><h1>Useful for commits</h1></section><section id="not-tracking-resources" class="slide level2">
+<h2>Not tracking resources</h2>
+<ul>
+<li>.gitignore</li>
+</ul>
+</section><section id="how-to-write-a-great-commit-comment" class="slide level2 left-aligned-slide">
+<h2>How to write a great commit comment</h2>
+<p>Most important:</p>
+<ul>
+<li>Keep things atomic!</li>
+</ul>
+<p>Document consistently:</p>
+<ul>
+<li>Keep the subject line short.</li>
+<li>Use the imperative mood in the subject line (Because a commit message should always complete the following line: “If applied, this commit will [YOUR_SUBJECT_LINE].”)</li>
+<li>Use the body to explain what and why vs. how (Because “the how” can be obtained from the <em>diff</em>. The commit message should provide the context for “the how”.)</li>
+</ul>
+</section></section>
+<section><section id="exercises" class="title-slide slide level1"><h1>Exercises</h1></section><section id="exercise-1-setup-gitgithub-with-r-studio" class="slide level2">
+<h2>Exercise 1: Setup git/GitHub with R Studio</h2>
+</section><section id="exercise-2-create-and-publish-an-r-markdown-document" class="slide level2">
+<h2>Exercise 2: Create and publish an R Markdown document</h2>
 </section><section id="references" class="slide level2">
 <h2>References</h2>
 <div id="refs" role="doc-bibliography">

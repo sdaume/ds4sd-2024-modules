@@ -723,7 +723,7 @@ pages.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-13"
+    date: "2024-11-14"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -775,7 +775,7 @@ the complete bibliography is added to the output document.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-13"
+    date: "2024-11-14"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -824,15 +824,6 @@ This is how this presentation works (and the others before).
         [@XieAllaire_et_2022]
     -   [Cheatsheet: Dynamic documents with rmarkdown
         cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
--   Git/Github:
-    -   [Happy Git and GitHub for the useR](https://happygitwithr.com/)
-        [@Bryan2021]
-    -   "Excuse me, do you have a moment to talk about version control?"
-        [@Bryan2017]
-    -   Advanced git use: [Pro Git](https://git-scm.com/book/en/v2) book
-        [@Chacon_et_2014_Book]
-    -   [How to write a great commit
-        message](https://cbea.ms/git-commit/)
 
 # git & GitHub
 
@@ -852,9 +843,54 @@ This is how this presentation works (and the others before).
 -   ... you want to be able to easily revert back to previous versions
     of your work
 
+## Focus of this session
+
+git & GitHub are extremely versatile, feature-rich tools that enable
+collaboration on complex software projects.
+
+We will only scratch the surface of this and focus on basic recipes and
+elements, namely:
+
+-   understanding the basic concepts
+-   use GitHub as a repository/backup for your work
+-   integrate git/GitHub into your workflow
+-   share and collaborate with others
+
+```{=html}
+<aside class="notes">
+```
+-   thus it is about organising and reproducibility (for yourself and
+    others as a target audience)
+
+```{=html}
+</aside>
+```
+## Key Resources
+
+-   Git/Github:
+    -   [Happy Git and GitHub for the useR](https://happygitwithr.com/)
+        [@Bryan2021]
+    -   "Excuse me, do you have a moment to talk about version control?"
+        [@Bryan2017]
+    -   Advanced git use: [Pro Git](https://git-scm.com/book/en/v2) book
+        [@Chacon_et_2014_Book]
+    -   [How to write a great commit
+        message](https://cbea.ms/git-commit/)
+
+```{=html}
+<aside class="notes">
+```
+-   the examples follow these resources
+-   for different recipes and advanced usage consult the [Pro
+    Git](https://git-scm.com/book/en/v2) book [@Chacon_et_2014_Book] and
+    [Happy Git and GitHub for the useR](https://happygitwithr.com/)
+
+```{=html}
+</aside>
+```
 ## Git history
 
--   linux development, started 2005
+-   Linux development, started 2005
 -   a version management system, i.e. tracks changes in project
     resources
 -   git takes snapshots of a managed project (image)
@@ -864,6 +900,7 @@ This is how this presentation works (and the others before).
 ## Key concepts
 
 -   repo
+-   cloning
 -   staging
 -   commit
 -   diff
@@ -872,27 +909,7 @@ This is how this presentation works (and the others before).
 -   branch (advanced)
 -   remote origin
 
-## Useful things
-
--   .gitignore
-
-## How to write a great commit comment {#how-to-write-a-great-commit-comment .left-aligned-slide}
-
-Most important:
-
--   Keep things atomic!
-
-Document consistently:
-
--   Keep the subject line short.
--   Use the imperative mood in the subject line (Because a commit
-    message should always complete the following line: "If applied, this
-    commit will \[YOUR_SUBJECT_LINE\].")
--   Use the body to explain what and why vs. how (Because "the how" can
-    be obtained from the *diff*. The commit message should provide the
-    context for "the how".)
-
-# Setting Git up with R Studio
+# Setting git/GitHub up with R Studio
 
 ## Do this once:
 
@@ -902,6 +919,58 @@ Document consistently:
     -   either via Github (<https://github.com/settings/tokens>)
     -   or via R with: `usethis::create_github_token()`
     -   and then store it with `gitcreds::gitcreds_set()`
+
+## Installing and configuring git
+
+Select the installer for your OS: <https://git-scm.com/>
+
+On the command line set:
+
+``` shell
+$ git config --global user.name "John Doe"
+$ git config --global user.email johndoe@example.com
+```
+
+Check your settings:
+
+``` shell
+$ git config --list
+```
+
+## Create a PAT (Personal Access Token)
+
+You can go to GitHub directly or trigger it from the command line:
+
+``` shell
+usethis::create_github_token()
+```
+
+## Create a PAT (Personal Access Token)
+
+Configure and create PAT:
+
+`<img src="./images/github_pat_creation.png" width="1134" />`{=html}
+
+Than copy it:
+
+`<img src="./images/github_pat_copy.png" width="1111" />`{=html}
+
+## Store the PAT for local use
+
+Set the credentials from the command line:
+
+``` shell
+gitcreds::gitcreds_set()
+```
+
+Follow instructions and finally provide the PAT:
+
+``` shell
+? Enter new password or token: ghp_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+-> Adding new credentials...
+-> Removing credentials from cache...
+-> Done.
+```
 
 ## Do this for every new project:
 
@@ -931,6 +1000,34 @@ Document consistently:
 ```{=html}
 </aside>
 ```
+# Useful for commits
+
+## Not tracking resources
+
+-   .gitignore
+
+## How to write a great commit comment {#how-to-write-a-great-commit-comment .left-aligned-slide}
+
+Most important:
+
+-   Keep things atomic!
+
+Document consistently:
+
+-   Keep the subject line short.
+-   Use the imperative mood in the subject line (Because a commit
+    message should always complete the following line: "If applied, this
+    commit will \[YOUR_SUBJECT_LINE\].")
+-   Use the body to explain what and why vs. how (Because "the how" can
+    be obtained from the *diff*. The commit message should provide the
+    context for "the how".)
+
+# Exercises
+
+## Exercise 1: Setup git/GitHub with R Studio
+
+## Exercise 2: Create and publish an R Markdown document
+
 ## References
 
 ::: {#refs}
