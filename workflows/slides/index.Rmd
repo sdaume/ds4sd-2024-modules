@@ -763,7 +763,7 @@ git & GitHub are extremely versatile, feature-rich tools that enable collaborati
 
 We will only scratch the surface of this and focus on basic recipes and elements, namely:
 
-* understanding the basic concepts
+* understanding the basic idea behind `git`
 * use GitHub as a repository/backup for your work
 * integrate git/GitHub into your workflow
 * share and collaborate with others
@@ -788,13 +788,50 @@ We will only scratch the surface of this and focus on basic recipes and elements
 
 
 
-## Git history
+## git history
 
 * Linux development, started 2005
 * a version management system, i.e. tracks changes in project resources
 * git takes snapshots of a managed project (image)
 * distributed version control system (that means you always have a complete copy of your version history on your local computer)
 
+
+## Version control
+
+* git book picture: https://git-scm.com/book/en/v2/images/local.png
+
+
+## Centralized version control
+
+Examples: CVS, Subversion
+
+* image repos
+
+
+## Distributed Version Control
+
+* image repos
+
+
+## Versions as snapshots
+
+* https://git-scm.com/book/en/v2/images/snapshots.png
+
+
+## A simple git/GitHub usage scenario
+
+* create a project and enable versioning with git
+* connect it with a remote copy (for sharing and backup)
+* do work locally and track versions of your files
+* push your changes (sync **to** the remote copy on GitHub)
+* pull other's changes (sync **from** the remote copy on GitHub)
+
+
+## Integrated into R Studio
+
+```{r echo=FALSE}
+knitr::include_graphics('./images/rstudio_git_tab.png')
+```
 
 
 ## Key concepts
@@ -807,6 +844,7 @@ We will only scratch the surface of this and focus on basic recipes and elements
 * push
 * pull
 * branch (advanced)
+* merge (advanced)
 * remote origin
 
 
@@ -892,6 +930,43 @@ Follow instructions and finally provide the PAT:
 * then create an R Studio project with the option from "version control > git"  
 
 
+## Create a new GitHub repo
+
+* In your GitHub profile go to **Repositories**, and press **"New"**. 
+* Provide the repo information and press **"Create Repository"**. 
+
+```{r echo=FALSE, out.width="50%"}
+knitr::include_graphics('./images/github_create_repo.png')
+```
+
+
+## Copy the repo URL
+
+* Go to **Repositories** and select the new repo.
+* Copy the HTTPS repo URL.
+
+```{r echo=FALSE}
+knitr::include_graphics('./images/github_copy_repo_url.png')
+```
+
+
+## Create an R Studio project with the repo
+
+Create a new project via *File > New Project > Version Control > Git*
+
+```{r echo=FALSE}
+knitr::include_graphics('./images/rstudio_create_github_project.png')
+```
+
+
+## New project tracked with git
+
+```{r echo=FALSE}
+knitr::include_graphics('./images/rstudio_git_tab.png')
+```
+
+
+
 ## When your new project is set up
 
 * make a change to the `README.md` (a useful project description) 
@@ -903,6 +978,22 @@ Follow instructions and finally provide the PAT:
 * Show a basic workflow
 * screenshots
 </aside>
+
+
+## Commit changes 
+
+```{r echo=FALSE}
+knitr::include_graphics('./images/rstudio_git_commit.png')
+```
+
+
+## Push changes to remote GitHub repo 
+
+```{r echo=FALSE}
+knitr::include_graphics('./images/rstudio_git_push.png')
+```
+
+
 
 
 # Useful for commits

@@ -723,7 +723,7 @@ pages.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-14"
+    date: "2024-11-15"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -775,7 +775,7 @@ the complete bibliography is added to the output document.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-14"
+    date: "2024-11-15"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -851,7 +851,7 @@ collaboration on complex software projects.
 We will only scratch the surface of this and focus on basic recipes and
 elements, namely:
 
--   understanding the basic concepts
+-   understanding the basic idea behind `git`
 -   use GitHub as a repository/backup for your work
 -   integrate git/GitHub into your workflow
 -   share and collaborate with others
@@ -888,7 +888,7 @@ elements, namely:
 ```{=html}
 </aside>
 ```
-## Git history
+## git history
 
 -   Linux development, started 2005
 -   a version management system, i.e. tracks changes in project
@@ -896,6 +896,36 @@ elements, namely:
 -   git takes snapshots of a managed project (image)
 -   distributed version control system (that means you always have a
     complete copy of your version history on your local computer)
+
+## Version control
+
+-   git book picture: <https://git-scm.com/book/en/v2/images/local.png>
+
+## Centralized version control
+
+Examples: CVS, Subversion
+
+-   image repos
+
+## Distributed Version Control
+
+-   image repos
+
+## Versions as snapshots
+
+-   <https://git-scm.com/book/en/v2/images/snapshots.png>
+
+## A simple git/GitHub usage scenario
+
+-   create a project and enable versioning with git
+-   connect it with a remote copy (for sharing and backup)
+-   do work locally and track versions of your files
+-   push your changes (sync **to** the remote copy on GitHub)
+-   pull other's changes (sync **from** the remote copy on GitHub)
+
+## Integrated into R Studio
+
+`<img src="./images/rstudio_git_tab.png" width="504" />`{=html}
 
 ## Key concepts
 
@@ -907,6 +937,7 @@ elements, namely:
 -   push
 -   pull
 -   branch (advanced)
+-   merge (advanced)
 -   remote origin
 
 # Setting git/GitHub up with R Studio
@@ -984,6 +1015,30 @@ Follow instructions and finally provide the PAT:
 -   then create an R Studio project with the option from "version
     control \> git"
 
+## Create a new GitHub repo
+
+-   In your GitHub profile go to **Repositories**, and press **"New"**.
+-   Provide the repo information and press **"Create Repository"**.
+
+`<img src="./images/github_create_repo.png" width="50%" />`{=html}
+
+## Copy the repo URL
+
+-   Go to **Repositories** and select the new repo.
+-   Copy the HTTPS repo URL.
+
+`<img src="./images/github_copy_repo_url.png" width="1112" />`{=html}
+
+## Create an R Studio project with the repo
+
+Create a new project via *File \> New Project \> Version Control \> Git*
+
+`<img src="./images/rstudio_create_github_project.png" width="537" />`{=html}
+
+## New project tracked with git
+
+`<img src="./images/rstudio_git_tab.png" width="504" />`{=html}
+
 ## When your new project is set up
 
 -   make a change to the `README.md` (a useful project description)
@@ -1000,6 +1055,14 @@ Follow instructions and finally provide the PAT:
 ```{=html}
 </aside>
 ```
+## Commit changes
+
+`<img src="./images/rstudio_git_commit.png" width="986" />`{=html}
+
+## Push changes to remote GitHub repo
+
+`<img src="./images/rstudio_git_push.png" width="1277" />`{=html}
+
 # Useful for commits
 
 ## Not tracking resources

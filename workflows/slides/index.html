@@ -560,7 +560,7 @@ year_of_interest &lt;- 2007
 <pre><code>---
 title: &quot;R Course SRC&quot;
 subtitle: &quot;Module 3&quot;
-date: &quot;2024-11-14&quot;
+date: &quot;2024-11-15&quot;
 author: &#39;Stefan Daume&#39; 
 output: 
   html_document:
@@ -594,7 +594,7 @@ link-citations: yes
 <pre><code>---
 title: &quot;R Course SRC&quot;
 subtitle: &quot;Module 3&quot;
-date: &quot;2024-11-14&quot;
+date: &quot;2024-11-15&quot;
 author: &#39;Stefan Daume&#39; 
 output: 
   html_document:
@@ -657,7 +657,7 @@ csl: ecology-and-society.csl
 <p>git &amp; GitHub are extremely versatile, feature-rich tools that enable collaboration on complex software projects.</p>
 <p>We will only scratch the surface of this and focus on basic recipes and elements, namely:</p>
 <ul>
-<li>understanding the basic concepts</li>
+<li>understanding the basic idea behind <code>git</code></li>
 <li>use GitHub as a repository/backup for your work</li>
 <li>integrate git/GitHub into your workflow</li>
 <li>share and collaborate with others</li>
@@ -685,13 +685,46 @@ csl: ecology-and-society.csl
 </ul>
 </aside>
 </section><section id="git-history" class="slide level2">
-<h2>Git history</h2>
+<h2>git history</h2>
 <ul>
 <li>Linux development, started 2005</li>
 <li>a version management system, i.e. tracks changes in project resources</li>
 <li>git takes snapshots of a managed project (image)</li>
 <li>distributed version control system (that means you always have a complete copy of your version history on your local computer)</li>
 </ul>
+</section><section id="version-control" class="slide level2">
+<h2>Version control</h2>
+<ul>
+<li>git book picture: <a href="https://git-scm.com/book/en/v2/images/local.png" class="uri">https://git-scm.com/book/en/v2/images/local.png</a></li>
+</ul>
+</section><section id="centralized-version-control" class="slide level2">
+<h2>Centralized version control</h2>
+<p>Examples: CVS, Subversion</p>
+<ul>
+<li>image repos</li>
+</ul>
+</section><section id="distributed-version-control" class="slide level2">
+<h2>Distributed Version Control</h2>
+<ul>
+<li>image repos</li>
+</ul>
+</section><section id="versions-as-snapshots" class="slide level2">
+<h2>Versions as snapshots</h2>
+<ul>
+<li><a href="https://git-scm.com/book/en/v2/images/snapshots.png" class="uri">https://git-scm.com/book/en/v2/images/snapshots.png</a></li>
+</ul>
+</section><section id="a-simple-gitgithub-usage-scenario" class="slide level2">
+<h2>A simple git/GitHub usage scenario</h2>
+<ul>
+<li>create a project and enable versioning with git</li>
+<li>connect it with a remote copy (for sharing and backup)</li>
+<li>do work locally and track versions of your files</li>
+<li>push your changes (sync <strong>to</strong> the remote copy on GitHub)</li>
+<li>pull other’s changes (sync <strong>from</strong> the remote copy on GitHub)</li>
+</ul>
+</section><section id="integrated-into-r-studio" class="slide level2">
+<h2>Integrated into R Studio</h2>
+<p><img src="./images/rstudio_git_tab.png" width="504" /></p>
 </section><section id="key-concepts" class="slide level2">
 <h2>Key concepts</h2>
 <ul>
@@ -703,6 +736,7 @@ csl: ecology-and-society.csl
 <li>push</li>
 <li>pull</li>
 <li>branch (advanced)</li>
+<li>merge (advanced)</li>
 <li>remote origin</li>
 </ul>
 </section></section>
@@ -756,6 +790,27 @@ $ git config --global user.email johndoe@example.com</code></pre>
 <li>copy the HTTPS link of your new repo</li>
 <li>then create an R Studio project with the option from “version control &gt; git”</li>
 </ul>
+</section><section id="create-a-new-github-repo" class="slide level2">
+<h2>Create a new GitHub repo</h2>
+<ul>
+<li>In your GitHub profile go to <strong>Repositories</strong>, and press <strong>“New”</strong>.</li>
+<li>Provide the repo information and press <strong>“Create Repository”</strong>.</li>
+</ul>
+<p><img src="./images/github_create_repo.png" width="50%" /></p>
+</section><section id="copy-the-repo-url" class="slide level2">
+<h2>Copy the repo URL</h2>
+<ul>
+<li>Go to <strong>Repositories</strong> and select the new repo.</li>
+<li>Copy the HTTPS repo URL.</li>
+</ul>
+<p><img src="./images/github_copy_repo_url.png" width="1112" /></p>
+</section><section id="create-an-r-studio-project-with-the-repo" class="slide level2">
+<h2>Create an R Studio project with the repo</h2>
+<p>Create a new project via <em>File &gt; New Project &gt; Version Control &gt; Git</em></p>
+<p><img src="./images/rstudio_create_github_project.png" width="537" /></p>
+</section><section id="new-project-tracked-with-git" class="slide level2">
+<h2>New project tracked with git</h2>
+<p><img src="./images/rstudio_git_tab.png" width="504" /></p>
 </section><section id="when-your-new-project-is-set-up" class="slide level2">
 <h2>When your new project is set up</h2>
 <ul>
@@ -770,6 +825,12 @@ $ git config --global user.email johndoe@example.com</code></pre>
 <li>screenshots</li>
 </ul>
 </aside>
+</section><section id="commit-changes" class="slide level2">
+<h2>Commit changes</h2>
+<p><img src="./images/rstudio_git_commit.png" width="986" /></p>
+</section><section id="push-changes-to-remote-github-repo" class="slide level2">
+<h2>Push changes to remote GitHub repo</h2>
+<p><img src="./images/rstudio_git_push.png" width="1277" /></p>
 </section></section>
 <section><section id="useful-for-commits" class="title-slide slide level1"><h1>Useful for commits</h1></section><section id="not-tracking-resources" class="slide level2">
 <h2>Not tracking resources</h2>
