@@ -56,6 +56,8 @@ Economics](https://beijer.kva.se/programmes/complexity/)*
 
 ## Key motivation
 
+Document your analysis and enable reproducibility.
+
 Avoid repetitive and error-prone tasks.
 
 ```{=html}
@@ -1127,19 +1129,24 @@ Document consistently:
 
 -   Create a new repo on GitHub and
 -   Clone it as a new project in R Studio
--   Edit the default README in you new R Studio project
+-   Edit the default README in your new R Studio project
 -   Commit and the changes
 -   Push the changes to GitHub
 
-## Exercise 2: Create and publish an R Markdown document
+## Exercise 2: Create an R Markdown document with different output formats
 
 -   In your new project create an R Markdown file
 -   Edit the file and insert
     -   a simple plot with your own or Gapminder data
     -   citation to references exported from your reference manager
-    -   `knitr` to teh default output format
+    -   `knitr` to the default output format
 -   Try different output formats: PDF, Word
--   Try to create a presentation as output
+
+## Exercise 3: Publish an R Markdown document via GitHub
+
+-   Use your earlier R Markdown document
+-   `knit` to HTML, push to GitHub and **publish** the document
+-   Extra: Try to create a presentation as output
 
 ## References
 
