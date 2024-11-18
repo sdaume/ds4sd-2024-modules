@@ -560,7 +560,7 @@ year_of_interest &lt;- 2007
 <pre><code>---
 title: &quot;R Course SRC&quot;
 subtitle: &quot;Module 3&quot;
-date: &quot;2024-11-15&quot;
+date: &quot;2024-11-18&quot;
 author: &#39;Stefan Daume&#39; 
 output: 
   html_document:
@@ -594,7 +594,7 @@ link-citations: yes
 <pre><code>---
 title: &quot;R Course SRC&quot;
 subtitle: &quot;Module 3&quot;
-date: &quot;2024-11-15&quot;
+date: &quot;2024-11-18&quot;
 author: &#39;Stefan Daume&#39; 
 output: 
   html_document:
@@ -655,11 +655,13 @@ csl: ecology-and-society.csl
 </section><section id="focus-of-this-session" class="slide level2">
 <h2>Focus of this session</h2>
 <p>git &amp; GitHub are extremely versatile, feature-rich tools that enable collaboration on complex software projects.</p>
-<p>We will only scratch the surface of this and focus on basic recipes and elements, namely:</p>
+</section><section id="focus-of-this-session-1" class="slide level2">
+<h2>Focus of this session</h2>
+<p>We will only scratch the surface and focus on basic recipes and elements, namely:</p>
 <ul>
 <li>understanding the basic idea behind <code>git</code></li>
 <li>use GitHub as a repository/backup for your work</li>
-<li>integrate git/GitHub into your workflow</li>
+<li>integrate git/GitHub into your workflow with R Studio</li>
 <li>share and collaborate with others</li>
 </ul>
 <aside class="notes">
@@ -694,29 +696,40 @@ csl: ecology-and-society.csl
 </ul>
 </section><section id="version-control" class="slide level2">
 <h2>Version control</h2>
-<ul>
-<li>git book picture: <a href="https://git-scm.com/book/en/v2/images/local.png" class="uri">https://git-scm.com/book/en/v2/images/local.png</a></li>
-</ul>
+<p><img src="./images/local_versions.png" width="50%" /></p>
+<div style="display:table;width:100%;margin-top:0%;table-layout:fixed;">
+<div class="attribution-dark" style="display:table-cell;width:100%;vertical-align:bottom;">
+<p><a href="https://git-scm.com/book/en/v2/images/local.png">Local version control diagram</a>, in <a href="https://git-scm.com/book/en/v2">Pro Git</a> by Scott Chacon and Ben Straub, licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a></p>
+</div>
+</div>
+</section><section id="versions-as-snapshots" class="slide level2">
+<h2>Versions as snapshots</h2>
+<p><img src="./images/version_snapshots.png" width="1674" height="50%" /></p>
+<div style="display:table;width:100%;margin-top:0%;table-layout:fixed;">
+<div class="attribution-dark" style="display:table-cell;width:100%;vertical-align:bottom;">
+<p><a href="https://git-scm.com/book/en/v2/images/snapshots.png">Versions as snapshots diagram</a>, in <a href="https://git-scm.com/book/en/v2">Pro Git</a> by Scott Chacon and Ben Straub, licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a></p>
+</div>
+</div>
 </section><section id="centralized-version-control" class="slide level2">
 <h2>Centralized version control</h2>
 <p>Examples: CVS, Subversion</p>
-<ul>
-<li>image repos</li>
-</ul>
+<p><img src="./images/central_vcs.png" width="1280" height="70%" /></p>
 </section><section id="distributed-version-control" class="slide level2">
 <h2>Distributed Version Control</h2>
-<ul>
-<li>image repos</li>
-</ul>
-</section><section id="versions-as-snapshots" class="slide level2">
-<h2>Versions as snapshots</h2>
-<ul>
-<li><a href="https://git-scm.com/book/en/v2/images/snapshots.png" class="uri">https://git-scm.com/book/en/v2/images/snapshots.png</a></li>
-</ul>
+<p><img src="./images/dvcs_git.png" width="1280" height="70%" /></p>
+</section><section id="distributed-version-control-1" class="slide level2">
+<h2>Distributed Version Control</h2>
+<p><img src="./images/dvcs_git_usage.png" width="1280" height="70%" /></p>
+</section><section id="github-as-a-hosted-git-repo" class="slide level2">
+<h2>GitHub as a hosted git repo</h2>
+<p><img src="./images/dvcs_github.png" width="1280" height="70%" /></p>
+</section><section id="focus-for-today" class="slide level2">
+<h2>Focus for today</h2>
+<p><img src="./images/dvcs_session_focus.png" width="1280" height="70%" /></p>
 </section><section id="a-simple-gitgithub-usage-scenario" class="slide level2">
 <h2>A simple git/GitHub usage scenario</h2>
 <ul>
-<li>create a project and enable versioning with git</li>
+<li>create a project and enable versioning with <code>git</code></li>
 <li>connect it with a remote copy (for sharing and backup)</li>
 <li>do work locally and track versions of your files</li>
 <li>push your changes (sync <strong>to</strong> the remote copy on GitHub)</li>

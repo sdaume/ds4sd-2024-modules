@@ -723,7 +723,7 @@ pages.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-15"
+    date: "2024-11-18"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -775,7 +775,7 @@ the complete bibliography is added to the output document.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-15"
+    date: "2024-11-18"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -848,12 +848,14 @@ This is how this presentation works (and the others before).
 git & GitHub are extremely versatile, feature-rich tools that enable
 collaboration on complex software projects.
 
-We will only scratch the surface of this and focus on basic recipes and
+## Focus of this session
+
+We will only scratch the surface and focus on basic recipes and
 elements, namely:
 
 -   understanding the basic idea behind `git`
 -   use GitHub as a repository/backup for your work
--   integrate git/GitHub into your workflow
+-   integrate git/GitHub into your workflow with R Studio
 -   share and collaborate with others
 
 ```{=html}
@@ -899,25 +901,59 @@ elements, namely:
 
 ## Version control
 
--   git book picture: <https://git-scm.com/book/en/v2/images/local.png>
+`<img src="./images/local_versions.png" width="50%" />`{=html}
+
+::: {style="display:table;width:100%;margin-top:0%;table-layout:fixed;"}
+::: {.attribution-dark style="display:table-cell;width:100%;vertical-align:bottom;"}
+`<a href="https://git-scm.com/book/en/v2/images/local.png">`{=html}Local
+version control diagram`</a>`{=html}, in
+`<a href="https://git-scm.com/book/en/v2">`{=html}Pro Git`</a>`{=html}
+by Scott Chacon and Ben Straub, licensed under
+`<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">`{=html}CC
+BY-NC-SA 3.0`</a>`{=html}
+:::
+:::
+
+## Versions as snapshots
+
+`<img src="./images/version_snapshots.png" width="1674" height="50%" />`{=html}
+
+::: {style="display:table;width:100%;margin-top:0%;table-layout:fixed;"}
+::: {.attribution-dark style="display:table-cell;width:100%;vertical-align:bottom;"}
+`<a href="https://git-scm.com/book/en/v2/images/snapshots.png">`{=html}Versions
+as snapshots diagram`</a>`{=html}, in
+`<a href="https://git-scm.com/book/en/v2">`{=html}Pro Git`</a>`{=html}
+by Scott Chacon and Ben Straub, licensed under
+`<a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">`{=html}CC
+BY-NC-SA 3.0`</a>`{=html}
+:::
+:::
 
 ## Centralized version control
 
 Examples: CVS, Subversion
 
--   image repos
+`<img src="./images/central_vcs.png" width="1280" height="70%" />`{=html}
 
 ## Distributed Version Control
 
--   image repos
+`<img src="./images/dvcs_git.png" width="1280" height="70%" />`{=html}
 
-## Versions as snapshots
+## Distributed Version Control
 
--   <https://git-scm.com/book/en/v2/images/snapshots.png>
+`<img src="./images/dvcs_git_usage.png" width="1280" height="70%" />`{=html}
+
+## GitHub as a hosted git repo
+
+`<img src="./images/dvcs_github.png" width="1280" height="70%" />`{=html}
+
+## Focus for today
+
+`<img src="./images/dvcs_session_focus.png" width="1280" height="70%" />`{=html}
 
 ## A simple git/GitHub usage scenario
 
--   create a project and enable versioning with git
+-   create a project and enable versioning with `git`
 -   connect it with a remote copy (for sharing and backup)
 -   do work locally and track versions of your files
 -   push your changes (sync **to** the remote copy on GitHub)

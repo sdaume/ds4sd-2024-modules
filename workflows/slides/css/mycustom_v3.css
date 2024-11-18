@@ -6,13 +6,19 @@
 }
 
 
-
 .reveal section img {
   border: 0;
   background: None;
   box-shadow: None;
 }
 
+.reveal section {
+  text-align: left;
+}
+
+.reveal section h1 {
+  text-align: center;
+}
 
 /*===========================================*/
 /*Style elements for use on individual slides*/
@@ -115,8 +121,8 @@
 }
 
 .attribution-dark a {
-    color: inherit;
-    text-decoration: none;
+    /*color: inherit;*/
+    /*text-decoration: none;*/
 }
 
 .attribution-light p {

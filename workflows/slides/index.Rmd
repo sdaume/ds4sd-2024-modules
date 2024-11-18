@@ -761,11 +761,14 @@ This is how this presentation works (and the others before).
 
 git & GitHub are extremely versatile, feature-rich tools that enable collaboration on complex software projects. 
 
-We will only scratch the surface of this and focus on basic recipes and elements, namely:
+
+## Focus of this session
+
+We will only scratch the surface and focus on basic recipes and elements, namely:
 
 * understanding the basic idea behind `git`
 * use GitHub as a repository/backup for your work
-* integrate git/GitHub into your workflow
+* integrate git/GitHub into your workflow with R Studio
 * share and collaborate with others
 
 <aside class="notes">
@@ -798,29 +801,70 @@ We will only scratch the surface of this and focus on basic recipes and elements
 
 ## Version control
 
-* git book picture: https://git-scm.com/book/en/v2/images/local.png
+```{r echo=FALSE, out.width="50%"}
+knitr::include_graphics('./images/local_versions.png')
+```
+
+<div style="display:table;width:100%;margin-top:0%;table-layout:fixed;">
+  <div class="attribution-dark" style="display:table-cell;width:100%;vertical-align:bottom;">
+  <a href="https://git-scm.com/book/en/v2/images/local.png">Local version control diagram</a>, in <a href="https://git-scm.com/book/en/v2">Pro Git</a> by Scott Chacon and Ben Straub, licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a>
+  </div>
+</div>
+
+
+## Versions as snapshots
+
+```{r echo=FALSE, out.height="50%"}
+knitr::include_graphics('./images/version_snapshots.png')
+```
+
+<div style="display:table;width:100%;margin-top:0%;table-layout:fixed;">
+  <div class="attribution-dark" style="display:table-cell;width:100%;vertical-align:bottom;">
+  <a href="https://git-scm.com/book/en/v2/images/snapshots.png">Versions as snapshots diagram</a>, in <a href="https://git-scm.com/book/en/v2">Pro Git</a> by Scott Chacon and Ben Straub, licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a>
+  </div>
+</div>
 
 
 ## Centralized version control
 
 Examples: CVS, Subversion
 
-* image repos
+```{r echo=FALSE, out.height="70%"}
+knitr::include_graphics('./images/central_vcs.png')
+```
 
 
 ## Distributed Version Control
 
-* image repos
+```{r echo=FALSE, out.height="70%"}
+knitr::include_graphics('./images/dvcs_git.png')
+```
+
+## Distributed Version Control
+
+```{r echo=FALSE, out.height="70%"}
+knitr::include_graphics('./images/dvcs_git_usage.png')
+```
 
 
-## Versions as snapshots
+## GitHub as a hosted git repo
 
-* https://git-scm.com/book/en/v2/images/snapshots.png
+```{r echo=FALSE, out.height="70%"}
+knitr::include_graphics('./images/dvcs_github.png')
+```
+
+
+## Focus for today
+
+```{r echo=FALSE, out.height="70%"}
+knitr::include_graphics('./images/dvcs_session_focus.png')
+```
+
 
 
 ## A simple git/GitHub usage scenario
 
-* create a project and enable versioning with git
+* create a project and enable versioning with `git`
 * connect it with a remote copy (for sharing and backup)
 * do work locally and track versions of your files
 * push your changes (sync **to** the remote copy on GitHub)
