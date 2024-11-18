@@ -1125,7 +1125,21 @@ Document consistently:
 
 ## Exercise 1: Setup git/GitHub with R Studio
 
+-   Create a new repo on GitHub and
+-   Clone it as a new project in R Studio
+-   Edit the default README in you new R Studio project
+-   Commit and the changes
+-   Push the changes to GitHub
+
 ## Exercise 2: Create and publish an R Markdown document
+
+-   In your new project create an R Markdown file
+-   Edit the file and insert
+    -   a simple plot with your own or Gapminder data
+    -   citation to references exported from your reference manager
+    -   `knitr` to teh default output format
+-   Try different output formats: PDF, Word
+-   Try to create a presentation as output
 
 ## References
 
