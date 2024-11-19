@@ -79,30 +79,48 @@
 </section>
 <section><section id="why-learn-r-markdown-gitgithub" class="title-slide slide level1"><h1>Why learn R Markdown &amp; git/Github?</h1></section><section id="key-motivation" class="slide level2">
 <h2>Key motivation</h2>
-<p>Document your analysis and enable reproducibility.</p>
+<p><strong>Document</strong> your analysis and enable <strong>reproducibility</strong> to follow <strong>Open Science</strong> principles.</p>
 <p>Avoid repetitive and error-prone tasks.</p>
 <aside class="notes">
 <ul>
-<li>you are the primary beneficiary of these approaches, but will at the same time adhere to principles of open science</li>
-<li>two tools that allow to share your research in a transparent and reproducible way,</li>
-<li>and make your life easier by structuring your research in a transparent and reproducible way</li>
+<li><p>you are the primary audience and beneficiary of these approaches,</p></li>
+<li><p>but will at the same time adhere to principles of <strong>open science</strong></p></li>
+<li><p>two tools that allow to share your research in a transparent and reproducible way,</p></li>
+<li><p>and make your life easier by structuring your research in a transparent and reproducible way</p></li>
+<li><p>the combination of <strong>R Markdown</strong> and <strong>git/GitHub</strong> allows you to achieve these goals</p></li>
 </ul>
 </aside>
 </section></section>
 <section><section id="r-markdown" class="title-slide slide level1"><h1>(R) Markdown</h1></section><section id="you-should-use-r-markdown-if-you-want-to" class="slide level2">
 <h2>You should use R Markdown if you want to …</h2>
 <ul>
+<li class="fragment">integrate and document your data analysis dynamically, not statically</li>
 <li class="fragment">concentrate on content rather than formatting</li>
 <li class="fragment">share one document in many different formats (Markdown, PDF, Word, HTML)</li>
 <li class="fragment">ensure correct citations and bibliographies</li>
 <li class="fragment">switch between different citation formats</li>
-<li class="fragment">integrate your data analysis automatically, not statically</li>
 <li class="fragment">… and much more</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>the primary usecases for using R Markdown are:
+<ul>
+<li>document your data science projects</li>
+<li>write publications based on the results of those projects</li>
+</ul></li>
+</ul>
+</aside>
 </section><section id="markdown-vs-markup" class="slide level2">
 <h2>Markdown vs markup</h2>
 <p><strong>Markdown</strong> allows us to concentrate on document structure and content. We can then worry about styling and presentation later.</p>
 <p><strong>Markdown</strong> is a type of <strong>markup language</strong> (like HTML), but it is lightweight and more readable.</p>
+<aside class="notes">
+<ul>
+<li>readability is key for markdown</li>
+<li>there are different flavors of markdown but they largely share the same syntax</li>
+<li>this presentation is in fact also based on a markdown document</li>
+</ul>
+</aside>
 </section><section id="some-text-with-simple-formatting" class="slide level2 left-aligned-slide">
 <h2>Some text with simple formatting</h2>
 <p>This is a list:</p>
@@ -142,7 +160,8 @@ measure.</code></pre>
 </div>
 <aside class="notes">
 <ul>
-<li>achieves the goal of separating content from presentation, but is not very readable for a human reader (and thus editor)</li>
+<li>achieves the goal of separating content from presentation (although HTML is geared to jsut one presentation format),</li>
+<li>but it is not very readable for a human reader (and thus editor)</li>
 </ul>
 </aside>
 </section><section id="the-same-with-markdown" class="slide level2">
@@ -185,11 +204,11 @@ And a [hyperlink](https://bookdown.org/yihui/rmarkdown/) for good measure.</code
 </section><section id="even-tables" class="slide level2">
 <h2>Even tables</h2>
 <p><img src="./images/markdown_tables.jpg" width="1302" /></p>
-<p>An overview of core markdown syntax can be found in <a href="https://bookdown.org/yihui/rmarkdown/markdown-syntax.html">this RMarkdown book chapter</a> and even more options in a condensed form as an <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf">RMarkdown cheat sheet</a>.</p>
+<p>An overview of core markdown syntax can be found in <a href="https://bookdown.org/yihui/rmarkdown/markdown-syntax.html">this R Markdown book chapter</a> and even more options in a condensed form as an <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf">R Markdown cheat sheet</a>.</p>
 <aside class="notes">
 <ul>
-<li>Tables (but now it gets complicated); show but then lead to RMarkdown; use mtcars or similar</li>
-<li>often table content is the result of data analysis, it could thus be dynamic and we may want to create it programmatically; this is where RMarkdown makes an entry</li>
+<li>Tables (but now it gets complicated); show but then lead to R Markdown; use mtcars or similar</li>
+<li>often table content is the result of data analysis, it could thus be dynamic and we may want to create it programmatically; this is where R Markdown makes an entry</li>
 </ul>
 </aside>
 </section><section id="r-markdown-vs-markdown" class="slide level2">
@@ -259,7 +278,7 @@ link-citations: yes
 </section><section id="r-markdown-data-driven-documents" class="slide level2">
 <h2>R Markdown: data-driven documents</h2>
 <ul>
-<li>You can now integrate your analysis as <strong>R code</strong> into the document</li>
+<li>R Markdown allows to integrate your analysis as <strong>R code</strong> into the document</li>
 <li>The analysis (i.e. the R code) is executed and the results updated when you <strong><code>knit</code></strong> the document.</li>
 <li>Text and code are <strong>interspersed</strong>.</li>
 <li>Code sections are included in <strong>code chunks</strong> like this.</li>
@@ -269,13 +288,11 @@ link-citations: yes
 # here goes your R code
 ```</code></pre>
 <aside class="notes">
-<ul>
-<li>contains an <strong>optional</strong> label (can be used for references), options controlling the output, such as figure size, caption, resolution</li>
-</ul>
+<p>Chunk options include, for example: * an <strong>optional</strong> label (can be used for references), * options controlling the output, such as figure size, caption, resolution * options controlling the execution of the output (you can disable the code chunk with <code>eval=FALSE</code> for example)</p>
 </aside>
 </section><section id="an-example-from-the-previous-sessions" class="slide level2">
 <h2>An example from the previous sessions</h2>
-<pre class="default"><code>```{r life-expectancy, echo=FALSE}
+<pre class="default"><code>```{r life-expectancy, echo=FALSE, fig.cap=&quot;A figure caption.&quot;}
 library(gapminder)
 
 gapminder %&gt;% 
@@ -427,20 +444,18 @@ gapminder_latest %&gt;%
 </table>
 </div>
 </div>
-</section><section id="more-expressive-tables-with-kableextra" class="slide level2">
-<h2>More expressive tables with <code>kableExtra</code></h2>
-<div style="display:table;width:100%;table-layout:fixed;">
-<div style="display:table-cell;width:50%;padding-right:5%;text-align:left;vertical-align:top;">
-<p>The <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html"><code>kableExtra</code></a> package offers even more options:</p>
+</section><section id="more-expressive-tables-with-kableextra-or-gt" class="slide level2">
+<h2>More expressive tables with <code>kableExtra</code> or <code>gt</code></h2>
+<p>The <a href="https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html"><code>kableExtra</code></a> and <a href="https://gt.rstudio.com/index.html"><code>gt</code></a> packages offer even more options:</p>
 <ul>
-<li><p>data-driven colouring</p></li>
-<li><p>interactive tables</p></li>
-<li><p>grouped headers</p></li>
-<li><p>tables with (interactive) sparklines</p></li>
-<li><p>and more …</p>
-</div>
-<div style="display:table-cell;width:50%;padding-left:5%;vertical-align:top;"></li>
+<li>data-driven colouring</li>
+<li>interactive tables</li>
+<li>grouped headers</li>
+<li>tables with (interactive) sparklines</li>
+<li>and more …</li>
 </ul>
+</section><section id="kableextra-example" class="slide level2">
+<h2><code>kableExtra</code> example</h2>
 <table class="table lightable-paper" style="font-size: 10px; color: black; margin-left: auto; margin-right: auto; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
 <caption style="font-size: initial !important;">
 <p>Table caption: Dynamic formatting with the the help of <code>kableExtra</code>. This example shows Gapminder data summarised by continent for the year 2007.</p>
@@ -463,7 +478,7 @@ gapminder_latest %&gt;%
 <td style="text-align:left;">
 <p>Africa</p>
 </td>
-<td style="text-align:right;color: white !important;background-color: rgba(68, 1, 84, 255) !important;">
+<td style="text-align:right;">
 <p>54.8</p>
 </td>
 <td style="text-align:right;color: white !important;background-color: rgba(68, 1, 84, 255) !important;">
@@ -474,7 +489,7 @@ gapminder_latest %&gt;%
 <td style="text-align:left;">
 <p>Americas</p>
 </td>
-<td style="text-align:right;color: white !important;background-color: rgba(80, 196, 106, 255) !important;">
+<td style="text-align:right;">
 <p>73.6</p>
 </td>
 <td style="text-align:right;color: white !important;background-color: rgba(53, 95, 141, 255) !important;">
@@ -485,7 +500,7 @@ gapminder_latest %&gt;%
 <td style="text-align:left;">
 <p>Asia</p>
 </td>
-<td style="text-align:right;color: white !important;background-color: rgba(37, 172, 130, 255) !important;">
+<td style="text-align:right;">
 <p>70.7</p>
 </td>
 <td style="text-align:right;color: white !important;background-color: rgba(46, 109, 142, 255) !important;">
@@ -496,7 +511,7 @@ gapminder_latest %&gt;%
 <td style="text-align:left;">
 <p>Europe</p>
 </td>
-<td style="text-align:right;color: white !important;background-color: rgba(176, 221, 47, 255) !important;">
+<td style="text-align:right;">
 <p>77.6</p>
 </td>
 <td style="text-align:right;color: white !important;background-color: rgba(137, 213, 72, 255) !important;">
@@ -507,7 +522,7 @@ gapminder_latest %&gt;%
 <td style="text-align:left;">
 <p>Oceania</p>
 </td>
-<td style="text-align:right;color: white !important;background-color: rgba(253, 231, 37, 255) !important;">
+<td style="text-align:right;">
 <p>80.7</p>
 </td>
 <td style="text-align:right;color: white !important;background-color: rgba(253, 231, 37, 255) !important;">
@@ -516,7 +531,478 @@ gapminder_latest %&gt;%
 </tr>
 </tbody>
 </table>
-</div>
+</section><section id="gt-example" class="slide level2">
+<h2><code>gt</code> example</h2>
+<div id="iyzyhplxpd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iyzyhplxpd table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#iyzyhplxpd thead, #iyzyhplxpd tbody, #iyzyhplxpd tfoot, #iyzyhplxpd tr, #iyzyhplxpd td, #iyzyhplxpd th {
+  border-style: none;
+}
+
+#iyzyhplxpd p {
+  margin: 0;
+  padding: 0;
+}
+
+#iyzyhplxpd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#iyzyhplxpd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#iyzyhplxpd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#iyzyhplxpd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#iyzyhplxpd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#iyzyhplxpd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#iyzyhplxpd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#iyzyhplxpd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#iyzyhplxpd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#iyzyhplxpd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#iyzyhplxpd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#iyzyhplxpd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#iyzyhplxpd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#iyzyhplxpd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#iyzyhplxpd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iyzyhplxpd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#iyzyhplxpd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#iyzyhplxpd .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#iyzyhplxpd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iyzyhplxpd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#iyzyhplxpd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iyzyhplxpd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#iyzyhplxpd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iyzyhplxpd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iyzyhplxpd .gt_left {
+  text-align: left;
+}
+
+#iyzyhplxpd .gt_center {
+  text-align: center;
+}
+
+#iyzyhplxpd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#iyzyhplxpd .gt_font_normal {
+  font-weight: normal;
+}
+
+#iyzyhplxpd .gt_font_bold {
+  font-weight: bold;
+}
+
+#iyzyhplxpd .gt_font_italic {
+  font-style: italic;
+}
+
+#iyzyhplxpd .gt_super {
+  font-size: 65%;
+}
+
+#iyzyhplxpd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#iyzyhplxpd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#iyzyhplxpd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#iyzyhplxpd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#iyzyhplxpd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#iyzyhplxpd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#iyzyhplxpd .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <caption>Table caption: Dynamic formatting with the the help of the <code>gt</code> package. This example shows Gapminder data summarised by continent for the year 2007.</caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Continent">Continent</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mean life expectancy">Mean life expectancy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mean GDP">Mean GDP</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="continent" class="gt_row gt_center">Africa</td>
+<td headers="avrg_le" class="gt_row gt_right">54.8</td>
+<td headers="avrg_gdp" class="gt_row gt_right" style="background-color: #EBF5F7;">3,089.03</td></tr>
+    <tr><td headers="continent" class="gt_row gt_center">Americas</td>
+<td headers="avrg_le" class="gt_row gt_right">73.6</td>
+<td headers="avrg_gdp" class="gt_row gt_right" style="background-color: #B8DDE2;">11,003.03</td></tr>
+    <tr><td headers="continent" class="gt_row gt_center">Asia</td>
+<td headers="avrg_le" class="gt_row gt_right">70.7</td>
+<td headers="avrg_gdp" class="gt_row gt_right" style="background-color: #AED9DE;">12,473.03</td></tr>
+    <tr><td headers="continent" class="gt_row gt_center">Europe</td>
+<td headers="avrg_le" class="gt_row gt_right">77.6</td>
+<td headers="avrg_gdp" class="gt_row gt_right" style="background-color: #50B2BE;">25,054.48</td></tr>
+    <tr><td headers="continent" class="gt_row gt_center">Oceania</td>
+<td headers="avrg_le" class="gt_row gt_right">80.7</td>
+<td headers="avrg_gdp" class="gt_row gt_right" style="background-color: #00A4B2;">29,810.19</td></tr>
+  </tbody>
+  
+  
+</table>
 </div>
 </section><section id="central-setup-code-section" class="slide level2">
 <h2>Central ‘Setup’ code section</h2>
@@ -531,10 +1017,22 @@ library(gapminder)
 year_of_interest &lt;- 2007
 ```</code></pre>
 <p>Simplify library import and prepare datasets for reference in the whole document.</p>
+<aside class="notes">
+<ul>
+<li>this sets options for knitr that apply to the whole document</li>
+<li>and allows to define variables that are accessible for all code chunks in the document</li>
+</ul>
+</aside>
 </section></section>
 <section><section id="handling-citations" class="title-slide slide level1"><h1>Handling citations</h1></section><section id="citations-and-bibliographies" class="slide level2">
 <h2>Citations and bibliographies</h2>
 <p>One of the most useful and powerful features for researchers using R Markdown.</p>
+<aside class="notes">
+<ul>
+<li>code chunks that create text, tables and figures dynamically allow to create dynamic data-driven documents</li>
+<li>the ability to handle references and control formatting of citations and bibliographies allows to use R Markdown for your scientific publications</li>
+</ul>
+</aside>
 </section><section id="requires-a-bibtex-database" class="slide level2">
 <h2>Requires a BibTeX database</h2>
 <p>A <strong>BibTeX</strong> database is simply a text file with the extension <strong><code>.bib</code></strong> and entries such as:</p>
@@ -587,6 +1085,12 @@ link-citations: yes
 
 # References</code></pre>
 <p>Add the header <code># References</code> at the end of your document, <code>knit</code> and the complete bibliography is added to the output document.</p>
+<aside class="notes">
+<ul>
+<li>if a resource is referenced that is missing in the “.bib” file you will get an error</li>
+<li>and only referenced resources will be included in the bibliography, even if the “.bib” file contains more resources</li>
+</ul>
+</aside>
 </section><section id="switch-citation-and-bibliography-styles-dynamically" class="slide level2">
 <h2>Switch citation and bibliography styles dynamically</h2>
 <div style="display:table;width:100%;table-layout:fixed;">
@@ -619,7 +1123,7 @@ csl: ecology-and-society.csl
 </section><section id="easy-sharing-and-online-publishing" class="slide level2">
 <h2>Easy sharing and online publishing</h2>
 <ol type="1">
-<li><code>knit</code> your R Mardown document to HTML</li>
+<li><code>knit</code> your R Markdown document to HTML</li>
 <li>push the HTML to Github (next part of this module)</li>
 <li>enable sharing of <strong>Github Pages</strong></li>
 </ol>
@@ -635,6 +1139,14 @@ csl: ecology-and-society.csl
 <li><a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf">Cheatsheet: Dynamic documents with rmarkdown cheatsheet</a></li>
 </ul></li>
 </ul>
+<aside class="notes">
+<ul>
+<li><p>R Markdown is a rich tool that supports a broad range of output formats</p></li>
+<li><p>including interactive websites (R shiny apps)</p></li>
+<li><p>allows for numerous customizations</p></li>
+<li><p>even if you do not want to produce your final publication manuscript in R Markdown, it is advisable to at least support the analysis process in an R Markdown document and only move to another format and export static charts and/or tables to another writing tool</p></li>
+</ul>
+</aside>
 </section></section>
 <section><section id="git-github" class="title-slide slide level1"><h1>git &amp; GitHub</h1></section><section id="you-need-git-and-github-if-non-exhaustive-list" class="slide level2">
 <h2>You need git and Github if … (non-exhaustive list)</h2>
@@ -653,6 +1165,15 @@ csl: ecology-and-society.csl
 <li>… you want to maintain projects rather than a single file (Google Doc)</li>
 <li>… you want to be able to easily revert back to previous versions of your work</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>here we move to the second element for reproducible workflows</li>
+<li>complex analysis may go through multiple iterations, that you might want to track</li>
+<li>you may also want to share your resources with others, or even allow them to collaborate on an analysis</li>
+<li>and eventually want to pubvlish your results online</li>
+<li>here git &amp; GitHub come into play</li>
+</ul>
+</aside>
 </section><section id="focus-of-this-session" class="slide level2">
 <h2>Focus of this session</h2>
 <p>git &amp; GitHub are extremely versatile, feature-rich tools that enable collaboration on complex software projects.</p>
@@ -802,11 +1323,11 @@ $ git config --global user.email johndoe@example.com</code></pre>
 <ul>
 <li>create a Github repo first (follow the <a href="https://happygitwithr.com/new-github-first.html">New project, Github first</a> workflow in <span class="citation" data-cites="Bryan2021">(Bryan 2021)</span>)
 <ul>
-<li>say yes to creating a README</li>
-<li>why? its easiest! you have everything in place to create remote backups!</li>
+<li>Why? Its easiest! You have everything in place to create remote backups!</li>
 </ul></li>
+<li>say yes to creating a README</li>
 <li>copy the HTTPS link of your new repo</li>
-<li>then create an R Studio project with the option from “version control &gt; git”</li>
+<li>then create an R Studio project with the option from “Version control &gt; git”</li>
 </ul>
 </section><section id="create-a-new-github-repo" class="slide level2">
 <h2>Create a new GitHub repo</h2>

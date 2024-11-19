@@ -88,14 +88,17 @@ year_of_interest <- 2007
 
 ## Key motivation
 
-Document your analysis and enable reproducibility.
+**Document** your analysis and enable **reproducibility** to follow **Open Science** principles.
 
 Avoid repetitive and error-prone tasks. 
 
 <aside class="notes">
-* you are the primary beneficiary of these approaches, but will at the same time adhere to principles of open science
+* you are the primary audience and beneficiary of these approaches, 
+* but will at the same time adhere to principles of **open science**
 * two tools that allow to share your research in a transparent and reproducible way,
 * and make your life easier by structuring your research in a transparent and reproducible way
+
+* the combination of **R Markdown** and **git/GitHub** allows you to achieve these goals
 </aside>
 
 
@@ -103,12 +106,19 @@ Avoid repetitive and error-prone tasks.
 
 ## You should use R Markdown if you want to ... 
 
+>* integrate and document your data analysis dynamically, not statically 
 >* concentrate on content rather than formatting
 >* share one document in many different formats (Markdown, PDF, Word, HTML)
 >* ensure correct citations and bibliographies
 >* switch between different citation formats
->* integrate your data analysis automatically, not statically 
 >* ... and much more 
+
+
+<aside class="notes">
+* the primary usecases for using R Markdown are:
+  * document your data science projects
+  * write publications based on the results of those projects
+</aside>
 
 
 ## Markdown vs markup
@@ -117,6 +127,11 @@ Avoid repetitive and error-prone tasks.
 
 **Markdown** is a type of **markup language** (like HTML), but it is lightweight and more readable.
 
+<aside class="notes">
+* readability is key for markdown
+* there are different flavors of markdown but they largely share the same syntax
+* this presentation is in fact also based on a markdown document
+</aside>
 
 
 ## Some text with simple formatting {.left-aligned-slide}
@@ -174,7 +189,8 @@ measure.
 </div>
 
 <aside class="notes">
-* achieves the goal of separating content from presentation, but is not very readable for a human reader (and thus editor)
+* achieves the goal of separating content from presentation (although HTML is geared to jsut one presentation format), 
+* but it is not very readable for a human reader (and thus editor)
 </aside>
 
 
@@ -239,11 +255,11 @@ knitr::include_graphics('./images/markdown_lists_links.jpg')
 knitr::include_graphics('./images/markdown_tables.jpg')
 ```
 
-An overview of core markdown syntax can be found in [this RMarkdown book chapter](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html) and even more options in a condensed form as an [RMarkdown cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf).
+An overview of core markdown syntax can be found in [this R Markdown book chapter](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html) and even more options in a condensed form as an [R Markdown cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf).
 
 <aside class="notes">
-* Tables (but now it gets complicated); show but then lead to RMarkdown; use mtcars or similar
-* often table content is the result of data analysis, it could thus be dynamic and we may want to create it programmatically; this is where RMarkdown makes an entry
+* Tables (but now it gets complicated); show but then lead to R Markdown; use mtcars or similar
+* often table content is the result of data analysis, it could thus be dynamic and we may want to create it programmatically; this is where R Markdown makes an entry
 </aside>
 
 
@@ -341,7 +357,7 @@ knitr::include_graphics('./images/rstudio_knit.jpg')
 
 ## R Markdown: data-driven documents
 
-* You can now integrate your analysis as **R code** into the document
+* R Markdown allows to integrate your analysis as **R code** into the document
 * The analysis (i.e. the R code) is executed and the results updated when you **`knit`** the document.
 * Text and code are **interspersed**.
 * Code sections are included in **code chunks** like this. 
@@ -355,14 +371,17 @@ knitr::include_graphics('./images/rstudio_knit.jpg')
 ````
 
 <aside class="notes">
-* contains an **optional** label (can be used for references), options controlling the output, such as figure size, caption, resolution 
+Chunk options include, for example:
+  * an **optional** label (can be used for references), 
+  * options controlling the output, such as figure size, caption, resolution 
+  * options controlling the execution of the output (you can disable the code chunk with `eval=FALSE` for example)
 </aside>
 
 
 ## An example from the previous sessions
 
 ````{verbatim}
-```{r life-expectancy, echo=FALSE}
+```{r life-expectancy, echo=FALSE, fig.cap="A figure caption."}
 library(gapminder)
 
 gapminder %>% 
@@ -511,14 +530,12 @@ gapminder_latest %>%
   **... creates this table:**
   
 ```{r, echo=FALSE}
-# summarize gapminder data by continent
 gapminder_latest <- gapminder %>% 
   filter(year == year_of_interest) %>%
   group_by(continent) %>%
   summarise(avrg_le = mean(lifeExp),
             avrg_gdp = mean(gdpPercap))
               
-# print the results as a table
 gapminder_latest %>%
   knitr::kable(digits = c(0,1,2))
 ```
@@ -528,13 +545,9 @@ gapminder_latest %>%
 
 
 
+## More expressive tables with `kableExtra` or `gt` 
 
-## More expressive tables with `kableExtra` 
-
-<div style="display:table;width:100%;table-layout:fixed;">
-  <div style="display:table-cell;width:50%;padding-right:5%;text-align:left;vertical-align:top;">
-  
-The [`kableExtra`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) package offers even more options:
+The [`kableExtra`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html) and [`gt`](https://gt.rstudio.com/index.html) packages offer even more options:
 
 * data-driven colouring
 * interactive tables
@@ -542,10 +555,8 @@ The [`kableExtra`](https://cran.r-project.org/web/packages/kableExtra/vignettes/
 * tables with (interactive) sparklines
 * and more ... 
 
-  </div>
-  
-  
-  <div style="display:table-cell;width:50%;padding-left:5%;vertical-align:top;">
+
+## `kableExtra` example
 
 ```{r, echo=FALSE}
 library(kableExtra)
@@ -564,15 +575,42 @@ gapminder_latest %>%
       col.names = c("Continent", "Mean life expectancy", "Mean GDP")) %>%
   kable_styling(font_size = 10) %>%
   kable_paper(full_width = F) %>%
-  column_spec(2, color = "white",
-                 background = spec_color(gapminder_latest$avrg_le[1:5])) %>%
+  #column_spec(2, color = "white",
+  #               background = spec_color(gapminder_latest$avrg_le[1:5])) %>%
   column_spec(3, color = "white",
                  background = spec_color(gapminder_latest$avrg_gdp[1:5]))
 ```
-    
-  </div>
-</div>
 
+
+## `gt` example
+
+```{r, echo=FALSE}
+library(gt)
+library(gapminder)
+library(dplyr)
+
+gapminder_latest <- gapminder::gapminder %>% 
+  filter(year == year_of_interest) %>%
+  group_by(continent) %>%
+  summarise(avrg_le = mean(lifeExp),
+            avrg_gdp = mean(gdpPercap))
+            
+gapminder_latest %>%
+  gt() %>%
+  data_color(
+    columns = c("avrg_gdp"),
+    method = "numeric",
+    palette = c("white", "#00A4B2"),
+    domain = c(0, max(gapminder_latest$avrg_gdp)),
+    autocolor_text = FALSE) |>
+  cols_label(
+    continent = "Continent",
+    avrg_le = "Mean life expectancy",
+    avrg_gdp = "Mean GDP") |>
+  fmt_number(columns = c("avrg_le"), decimals = 1) %>%
+  fmt_number(columns = c("avrg_gdp"), decimals = 2) %>%
+  tab_caption(caption = md(paste("Table caption: Dynamic formatting with the the help of the `gt` package. This example shows Gapminder data summarised by continent for the year ", year_of_interest, ".", sep = "")))
+```
 
 
 
@@ -593,6 +631,10 @@ year_of_interest <- 2007
 
 Simplify library import and prepare datasets for reference in the whole document.
 
+<aside class="notes">
+* this sets options for knitr that apply to the whole document
+* and allows to define variables that are accessible for all code chunks in the document
+</aside>
 
 
 # Handling citations
@@ -602,6 +644,10 @@ Simplify library import and prepare datasets for reference in the whole document
 
 One of the most useful and powerful features for researchers using R Markdown.
 
+<aside class="notes">
+* code chunks that create text, tables and figures dynamically allow to create dynamic data-driven documents
+* the ability to handle references and control formatting of citations and bibliographies allows to use R Markdown for your scientific publications
+</aside>
 
 
 ## Requires a BibTeX database
@@ -678,6 +724,11 @@ After presenting all results we have now reached the end of the document. Here s
 
 Add the header `# References` at the end of your document, `knit` and the complete bibliography is added to the output document.
 
+<aside class="notes">
+* if a resource is referenced that is missing in the ".bib" file you will get an error
+* and only referenced resources will be included in the bibliography, even if the ".bib" file contains more resources
+</aside>
+
 
 
 ## Switch citation and bibliography styles dynamically
@@ -722,7 +773,7 @@ The **[Citation Style Database](https://www.zotero.org/styles)** database contai
 
 ## Easy sharing and online publishing
 
-1. `knit` your R Mardown document to HTML
+1. `knit` your R Markdown document to HTML
 2. push the HTML to Github (next part of this module)
 3. enable sharing of **Github Pages** 
 
@@ -739,7 +790,13 @@ This is how this presentation works (and the others before).
   * [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/) [@XieAllaire_et_2022]
   * [Cheatsheet: Dynamic documents with rmarkdown cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
 
+<aside class="notes">
+* R Markdown is a rich tool that supports a broad range of output formats
+* including interactive websites (R shiny apps)
+* allows for numerous customizations
 
+* even if you do not want to produce your final publication manuscript in R Markdown, it is advisable to at least support the analysis process in an R Markdown document and only move to another format and export static charts and/or tables to another writing tool
+</aside>
 
 
 # git & GitHub
@@ -757,6 +814,14 @@ This is how this presentation works (and the others before).
 * ... you want to collaborate with others 
 * ... you want to maintain projects rather than a single file (Google Doc)
 * ... you want to be able to easily revert back to previous versions of your work 
+
+<aside class="notes">
+* here we move to the second element for reproducible workflows
+* complex analysis may go through multiple iterations, that you might want to track
+* you may also want to share your resources with others, or even allow them to collaborate on an analysis
+* and eventually want to pubvlish your results online
+* here git & GitHub come into play
+</aside>
 
 
 ## Focus of this session
@@ -977,10 +1042,10 @@ Consult **[Set up keys for SSH](https://happygitwithr.com/ssh-keys)** [@Bryan202
 ## Do this for every new project:
 
 * create a Github repo first (follow the [New project, Github first](https://happygitwithr.com/new-github-first.html) workflow in [@Bryan2021])
-  * say yes to creating a README
-  * why? its easiest! you have everything in place to create remote backups!
+  * Why? Its easiest! You have everything in place to create remote backups!
+* say yes to creating a README
 * copy the HTTPS link of your new repo
-* then create an R Studio project with the option from "version control > git"  
+* then create an R Studio project with the option from "Version control > git"  
 
 
 ## Create a new GitHub repo

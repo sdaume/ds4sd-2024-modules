@@ -56,19 +56,26 @@ Economics](https://beijer.kva.se/programmes/complexity/)*
 
 ## Key motivation
 
-Document your analysis and enable reproducibility.
+**Document** your analysis and enable **reproducibility** to follow
+**Open Science** principles.
 
 Avoid repetitive and error-prone tasks.
 
 ```{=html}
 <aside class="notes">
 ```
--   you are the primary beneficiary of these approaches, but will at the
-    same time adhere to principles of open science
+-   you are the primary audience and beneficiary of these approaches,
+
+-   but will at the same time adhere to principles of **open science**
+
 -   two tools that allow to share your research in a transparent and
     reproducible way,
+
 -   and make your life easier by structuring your research in a
     transparent and reproducible way
+
+-   the combination of **R Markdown** and **git/GitHub** allows you to
+    achieve these goals
 
 ```{=html}
 </aside>
@@ -77,14 +84,25 @@ Avoid repetitive and error-prone tasks.
 
 ## You should use R Markdown if you want to ...
 
+> -   integrate and document your data analysis dynamically, not
+>     statically
 > -   concentrate on content rather than formatting
 > -   share one document in many different formats (Markdown, PDF, Word,
 >     HTML)
 > -   ensure correct citations and bibliographies
 > -   switch between different citation formats
-> -   integrate your data analysis automatically, not statically
 > -   ... and much more
 
+```{=html}
+<aside class="notes">
+```
+-   the primary usecases for using R Markdown are:
+    -   document your data science projects
+    -   write publications based on the results of those projects
+
+```{=html}
+</aside>
+```
 ## Markdown vs markup
 
 **Markdown** allows us to concentrate on document structure and content.
@@ -93,6 +111,17 @@ We can then worry about styling and presentation later.
 **Markdown** is a type of **markup language** (like HTML), but it is
 lightweight and more readable.
 
+```{=html}
+<aside class="notes">
+```
+-   readability is key for markdown
+-   there are different flavors of markdown but they largely share the
+    same syntax
+-   this presentation is in fact also based on a markdown document
+
+```{=html}
+</aside>
+```
 ## Some text with simple formatting {#some-text-with-simple-formatting .left-aligned-slide}
 
 This is a list:
@@ -139,8 +168,9 @@ measure.
 ```{=html}
 <aside class="notes">
 ```
--   achieves the goal of separating content from presentation, but is
-    not very readable for a human reader (and thus editor)
+-   achieves the goal of separating content from presentation (although
+    HTML is geared to jsut one presentation format),
+-   but it is not very readable for a human reader (and thus editor)
 
 ```{=html}
 </aside>
@@ -197,19 +227,19 @@ measure.
 
 `<img src="./images/markdown_tables.jpg" width="1302" />`{=html}
 
-An overview of core markdown syntax can be found in [this RMarkdown book
-chapter](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html) and
-even more options in a condensed form as an [RMarkdown cheat
+An overview of core markdown syntax can be found in [this R Markdown
+book chapter](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html)
+and even more options in a condensed form as an [R Markdown cheat
 sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf).
 
 ```{=html}
 <aside class="notes">
 ```
--   Tables (but now it gets complicated); show but then lead to
-    RMarkdown; use mtcars or similar
+-   Tables (but now it gets complicated); show but then lead to R
+    Markdown; use mtcars or similar
 -   often table content is the result of data analysis, it could thus be
     dynamic and we may want to create it programmatically; this is where
-    RMarkdown makes an entry
+    R Markdown makes an entry
 
 ```{=html}
 </aside>
@@ -310,7 +340,8 @@ link-citations: yes
 ```
 ## R Markdown: data-driven documents
 
--   You can now integrate your analysis as **R code** into the document
+-   R Markdown allows to integrate your analysis as **R code** into the
+    document
 -   The analysis (i.e. the R code) is executed and the results updated
     when you **`knit`** the document.
 -   Text and code are **interspersed**.
@@ -326,16 +357,17 @@ link-citations: yes
 ```{=html}
 <aside class="notes">
 ```
--   contains an **optional** label (can be used for references), options
-    controlling the output, such as figure size, caption, resolution
-
+Chunk options include, for example: \* an **optional** label (can be
+used for references), \* options controlling the output, such as figure
+size, caption, resolution \* options controlling the execution of the
+output (you can disable the code chunk with `eval=FALSE` for example)
 ```{=html}
 </aside>
 ```
 ## An example from the previous sessions
 
 ```` default
-```{r life-expectancy, echo=FALSE}
+```{r life-expectancy, echo=FALSE, fig.cap="A figure caption."}
 library(gapminder)
 
 gapminder %>% 
@@ -448,30 +480,20 @@ gapminder_latest %>%
 :::
 :::
 
-## More expressive tables with `kableExtra`
+## More expressive tables with `kableExtra` or `gt`
 
-::: {style="display:table;width:100%;table-layout:fixed;"}
-::: {style="display:table-cell;width:50%;padding-right:5%;text-align:left;vertical-align:top;"}
 The
 [`kableExtra`](https://cran.r-project.org/web/packages/kableExtra/vignettes/awesome_table_in_html.html)
-package offers even more options:
+and [`gt`](https://gt.rstudio.com/index.html) packages offer even more
+options:
 
 -   data-driven colouring
-
 -   interactive tables
-
 -   grouped headers
-
 -   tables with (interactive) sparklines
-
 -   and more ...
 
-    ```{=html}
-    </div>
-    ```
-    ```{=html}
-    <div style="display:table-cell;width:50%;padding-left:5%;vertical-align:top;">
-    ```
+## `kableExtra` example
 
 ```{=html}
 <table class="table lightable-paper" style="font-size: 10px; color: black; margin-left: auto; margin-right: auto; color: black; font-family: &quot;Arial Narrow&quot;, arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;">
@@ -532,7 +554,7 @@ Africa
 </td>
 ```
 ```{=html}
-<td style="text-align:right;color: white !important;background-color: rgba(68, 1, 84, 255) !important;">
+<td style="text-align:right;">
 ```
 54.8
 ```{=html}
@@ -559,7 +581,7 @@ Americas
 </td>
 ```
 ```{=html}
-<td style="text-align:right;color: white !important;background-color: rgba(80, 196, 106, 255) !important;">
+<td style="text-align:right;">
 ```
 73.6
 ```{=html}
@@ -586,7 +608,7 @@ Asia
 </td>
 ```
 ```{=html}
-<td style="text-align:right;color: white !important;background-color: rgba(37, 172, 130, 255) !important;">
+<td style="text-align:right;">
 ```
 70.7
 ```{=html}
@@ -613,7 +635,7 @@ Europe
 </td>
 ```
 ```{=html}
-<td style="text-align:right;color: white !important;background-color: rgba(176, 221, 47, 255) !important;">
+<td style="text-align:right;">
 ```
 77.6
 ```{=html}
@@ -640,7 +662,7 @@ Oceania
 </td>
 ```
 ```{=html}
-<td style="text-align:right;color: white !important;background-color: rgba(253, 231, 37, 255) !important;">
+<td style="text-align:right;">
 ```
 80.7
 ```{=html}
@@ -662,9 +684,481 @@ Oceania
 ```{=html}
 </table>
 ```
-:::
-:::
+## `gt` example
 
+```{=html}
+<div id="iyzyhplxpd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#iyzyhplxpd table {
+  font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#iyzyhplxpd thead, #iyzyhplxpd tbody, #iyzyhplxpd tfoot, #iyzyhplxpd tr, #iyzyhplxpd td, #iyzyhplxpd th {
+  border-style: none;
+}
+
+#iyzyhplxpd p {
+  margin: 0;
+  padding: 0;
+}
+
+#iyzyhplxpd .gt_table {
+  display: table;
+  border-collapse: collapse;
+  line-height: normal;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#iyzyhplxpd .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#iyzyhplxpd .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 3px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#iyzyhplxpd .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#iyzyhplxpd .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#iyzyhplxpd .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#iyzyhplxpd .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#iyzyhplxpd .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#iyzyhplxpd .gt_spanner_row {
+  border-bottom-style: hidden;
+}
+
+#iyzyhplxpd .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#iyzyhplxpd .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#iyzyhplxpd .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#iyzyhplxpd .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#iyzyhplxpd .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#iyzyhplxpd .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iyzyhplxpd .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#iyzyhplxpd .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#iyzyhplxpd .gt_row_group_first th {
+  border-top-width: 2px;
+}
+
+#iyzyhplxpd .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iyzyhplxpd .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#iyzyhplxpd .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iyzyhplxpd .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_last_grand_summary_row_top {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: double;
+  border-bottom-width: 6px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#iyzyhplxpd .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iyzyhplxpd .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#iyzyhplxpd .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#iyzyhplxpd .gt_left {
+  text-align: left;
+}
+
+#iyzyhplxpd .gt_center {
+  text-align: center;
+}
+
+#iyzyhplxpd .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#iyzyhplxpd .gt_font_normal {
+  font-weight: normal;
+}
+
+#iyzyhplxpd .gt_font_bold {
+  font-weight: bold;
+}
+
+#iyzyhplxpd .gt_font_italic {
+  font-style: italic;
+}
+
+#iyzyhplxpd .gt_super {
+  font-size: 65%;
+}
+
+#iyzyhplxpd .gt_footnote_marks {
+  font-size: 75%;
+  vertical-align: 0.4em;
+  position: initial;
+}
+
+#iyzyhplxpd .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#iyzyhplxpd .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#iyzyhplxpd .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#iyzyhplxpd .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#iyzyhplxpd .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#iyzyhplxpd .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table" data-quarto-disable-processing="false" data-quarto-bootstrap="false">
+  <caption>Table caption: Dynamic formatting with the the help of the <code>gt</code> package. This example shows Gapminder data summarised by continent for the year 2007.</caption>
+  <thead>
+    
+    <tr class="gt_col_headings">
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Continent">Continent</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mean life expectancy">Mean life expectancy</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_right" rowspan="1" colspan="1" scope="col" id="Mean GDP">Mean GDP</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="continent" class="gt_row gt_center">Africa</td>
+<td headers="avrg_le" class="gt_row gt_right">54.8</td>
+<td headers="avrg_gdp" class="gt_row gt_right" style="background-color: #EBF5F7;">3,089.03</td></tr>
+    <tr><td headers="continent" class="gt_row gt_center">Americas</td>
+<td headers="avrg_le" class="gt_row gt_right">73.6</td>
+<td headers="avrg_gdp" class="gt_row gt_right" style="background-color: #B8DDE2;">11,003.03</td></tr>
+    <tr><td headers="continent" class="gt_row gt_center">Asia</td>
+<td headers="avrg_le" class="gt_row gt_right">70.7</td>
+<td headers="avrg_gdp" class="gt_row gt_right" style="background-color: #AED9DE;">12,473.03</td></tr>
+    <tr><td headers="continent" class="gt_row gt_center">Europe</td>
+<td headers="avrg_le" class="gt_row gt_right">77.6</td>
+<td headers="avrg_gdp" class="gt_row gt_right" style="background-color: #50B2BE;">25,054.48</td></tr>
+    <tr><td headers="continent" class="gt_row gt_center">Oceania</td>
+<td headers="avrg_le" class="gt_row gt_right">80.7</td>
+<td headers="avrg_gdp" class="gt_row gt_right" style="background-color: #00A4B2;">29,810.19</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+```
 ## Central 'Setup' code section
 
 ```` default
@@ -683,6 +1177,16 @@ year_of_interest <- 2007
 Simplify library import and prepare datasets for reference in the whole
 document.
 
+```{=html}
+<aside class="notes">
+```
+-   this sets options for knitr that apply to the whole document
+-   and allows to define variables that are accessible for all code
+    chunks in the document
+
+```{=html}
+</aside>
+```
 # Handling citations
 
 ## Citations and bibliographies
@@ -690,6 +1194,18 @@ document.
 One of the most useful and powerful features for researchers using R
 Markdown.
 
+```{=html}
+<aside class="notes">
+```
+-   code chunks that create text, tables and figures dynamically allow
+    to create dynamic data-driven documents
+-   the ability to handle references and control formatting of citations
+    and bibliographies allows to use R Markdown for your scientific
+    publications
+
+```{=html}
+</aside>
+```
 ## Requires a BibTeX database
 
 A **BibTeX** database is simply a text file with the extension
@@ -768,6 +1284,17 @@ After presenting all results we have now reached the end of the document. Here s
 Add the header `# References` at the end of your document, `knit` and
 the complete bibliography is added to the output document.
 
+```{=html}
+<aside class="notes">
+```
+-   if a resource is referenced that is missing in the ".bib" file you
+    will get an error
+-   and only referenced resources will be included in the bibliography,
+    even if the ".bib" file contains more resources
+
+```{=html}
+</aside>
+```
 ## Switch citation and bibliography styles dynamically
 
 ::: {style="display:table;width:100%;table-layout:fixed;"}
@@ -810,7 +1337,7 @@ required citation style.
 ```
 ## Easy sharing and online publishing
 
-1.  `knit` your R Mardown document to HTML
+1.  `knit` your R Markdown document to HTML
 2.  push the HTML to Github (next part of this module)
 3.  enable sharing of **Github Pages**
 
@@ -827,6 +1354,24 @@ This is how this presentation works (and the others before).
     -   [Cheatsheet: Dynamic documents with rmarkdown
         cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
 
+```{=html}
+<aside class="notes">
+```
+-   R Markdown is a rich tool that supports a broad range of output
+    formats
+
+-   including interactive websites (R shiny apps)
+
+-   allows for numerous customizations
+
+-   even if you do not want to produce your final publication manuscript
+    in R Markdown, it is advisable to at least support the analysis
+    process in an R Markdown document and only move to another format
+    and export static charts and/or tables to another writing tool
+
+```{=html}
+</aside>
+```
 # git & GitHub
 
 ## You need git and Github if ... (non-exhaustive list)
@@ -845,6 +1390,20 @@ This is how this presentation works (and the others before).
 -   ... you want to be able to easily revert back to previous versions
     of your work
 
+```{=html}
+<aside class="notes">
+```
+-   here we move to the second element for reproducible workflows
+-   complex analysis may go through multiple iterations, that you might
+    want to track
+-   you may also want to share your resources with others, or even allow
+    them to collaborate on an analysis
+-   and eventually want to pubvlish your results online
+-   here git & GitHub come into play
+
+```{=html}
+</aside>
+```
 ## Focus of this session
 
 git & GitHub are extremely versatile, feature-rich tools that enable
@@ -1053,11 +1612,11 @@ Consult **[Set up keys for SSH](https://happygitwithr.com/ssh-keys)**
 -   create a Github repo first (follow the [New project, Github
     first](https://happygitwithr.com/new-github-first.html) workflow in
     [@Bryan2021])
-    -   say yes to creating a README
-    -   why? its easiest! you have everything in place to create remote
+    -   Why? Its easiest! You have everything in place to create remote
         backups!
+-   say yes to creating a README
 -   copy the HTTPS link of your new repo
--   then create an R Studio project with the option from "version
+-   then create an R Studio project with the option from "Version
     control \> git"
 
 ## Create a new GitHub repo
