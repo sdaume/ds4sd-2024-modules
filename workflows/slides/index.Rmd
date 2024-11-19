@@ -966,6 +966,13 @@ Follow instructions and finally provide the PAT:
 ```
 
 
+## Alternative to PATs
+
+You can also configure **SSH keys** to connect to GitHub.
+
+Consult **[Set up keys for SSH](https://happygitwithr.com/ssh-keys)** [@Bryan2021] to explore this option.
+
+
 
 ## Do this for every new project:
 
@@ -1040,13 +1047,49 @@ knitr::include_graphics('./images/rstudio_git_push.png')
 ```
 
 
+## Publish your content
+
+Repo content can be hosted online via GitHub pages. 
 
 
-# Useful for commits
+## Enable GitHub pages for a repo
+
+Go to *Settings > Pages* and select *Branch > main*
+
+```{r echo=FALSE, out.width="65%"}
+knitr::include_graphics('./images/github_pages_settings.png')
+```
+
+
+## One GitHub page per repo
+
+Once enabled a site becomes available with the format:
+
+`https://[GITHUB_USER].github.io/[REPO_NAME]/`
+
+```{r echo=FALSE, out.width="65%"}
+knitr::include_graphics('./images/github_pages_link.png')
+```
+
+
+## Deployed GitHub page
+
+```{r echo=FALSE, out.width="65%"}
+knitr::include_graphics('./images/github_pages_deployed.png')
+```
+
+By default either the README is served or the content of a file called *index.html*, if it is available.
+
+Alternatively, provide the filename in the URL, e.g., https://sdaume.github.io/ds4sd-test/default.html
+
+
+# Useful to know for commits
 
 ## Not tracking resources
 
-* .gitignore
+`.gitignore` allows to exclude resources from being tracked.
+
+You may have sensitive files (e.g., pass keys, private data) that should not end up in a public repo. 
 
 
 ## How to write a great commit comment {.left-aligned-slide} 
@@ -1069,7 +1112,7 @@ Document consistently:
 * Create a new repo on GitHub and 
 * Clone it as a new project in R Studio
 * Edit the default README in your new R Studio project
-* Commit and the changes
+* Commit the changes
 * Push the changes to GitHub
 
 ## Exercise 2: Create an R Markdown document with different output formats
@@ -1078,7 +1121,7 @@ Document consistently:
 * Edit the file and insert
   * a simple plot with your own or Gapminder data
   * citation to references exported from your reference manager
-  * `knitr` to the default output format
+* `knit` to the default output format (HTML)
 * Try different output formats: PDF, Word
 
 

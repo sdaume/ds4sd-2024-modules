@@ -561,7 +561,7 @@ year_of_interest &lt;- 2007
 <pre><code>---
 title: &quot;R Course SRC&quot;
 subtitle: &quot;Module 3&quot;
-date: &quot;2024-11-18&quot;
+date: &quot;2024-11-19&quot;
 author: &#39;Stefan Daume&#39; 
 output: 
   html_document:
@@ -595,7 +595,7 @@ link-citations: yes
 <pre><code>---
 title: &quot;R Course SRC&quot;
 subtitle: &quot;Module 3&quot;
-date: &quot;2024-11-18&quot;
+date: &quot;2024-11-19&quot;
 author: &#39;Stefan Daume&#39; 
 output: 
   html_document:
@@ -793,6 +793,10 @@ $ git config --global user.email johndoe@example.com</code></pre>
 -&gt; Adding new credentials...
 -&gt; Removing credentials from cache...
 -&gt; Done.</code></pre>
+</section><section id="alternative-to-pats" class="slide level2">
+<h2>Alternative to PATs</h2>
+<p>You can also configure <strong>SSH keys</strong> to connect to GitHub.</p>
+<p>Consult <strong><a href="https://happygitwithr.com/ssh-keys">Set up keys for SSH</a></strong> <span class="citation" data-cites="Bryan2021">(Bryan 2021)</span> to explore this option.</p>
 </section><section id="do-this-for-every-new-project" class="slide level2">
 <h2>Do this for every new project:</h2>
 <ul>
@@ -845,12 +849,28 @@ $ git config --global user.email johndoe@example.com</code></pre>
 </section><section id="push-changes-to-remote-github-repo" class="slide level2">
 <h2>Push changes to remote GitHub repo</h2>
 <p><img src="./images/rstudio_git_push.png" width="1277" /></p>
+</section><section id="publish-your-content" class="slide level2">
+<h2>Publish your content</h2>
+<p>Repo content can be hosted online via GitHub pages.</p>
+</section><section id="enable-github-pages-for-a-repo" class="slide level2">
+<h2>Enable GitHub pages for a repo</h2>
+<p>Go to <em>Settings &gt; Pages</em> and select <em>Branch &gt; main</em></p>
+<p><img src="./images/github_pages_settings.png" width="65%" /></p>
+</section><section id="one-github-page-per-repo" class="slide level2">
+<h2>One GitHub page per repo</h2>
+<p>Once enabled a site becomes available with the format:</p>
+<p><code>https://[GITHUB_USER].github.io/[REPO_NAME]/</code></p>
+<p><img src="./images/github_pages_link.png" width="65%" /></p>
+</section><section id="deployed-github-page" class="slide level2">
+<h2>Deployed GitHub page</h2>
+<p><img src="./images/github_pages_deployed.png" width="65%" /></p>
+<p>By default either the README is served or the content of a file called <em>index.html</em>, if it is available.</p>
+<p>Alternatively, provide the filename in the URL, e.g., <a href="https://sdaume.github.io/ds4sd-test/default.html" class="uri">https://sdaume.github.io/ds4sd-test/default.html</a></p>
 </section></section>
-<section><section id="useful-for-commits" class="title-slide slide level1"><h1>Useful for commits</h1></section><section id="not-tracking-resources" class="slide level2">
+<section><section id="useful-to-know-for-commits" class="title-slide slide level1"><h1>Useful to know for commits</h1></section><section id="not-tracking-resources" class="slide level2">
 <h2>Not tracking resources</h2>
-<ul>
-<li>.gitignore</li>
-</ul>
+<p><code>.gitignore</code> allows to exclude resources from being tracked.</p>
+<p>You may have sensitive files (e.g., pass keys, private data) that should not end up in a public repo.</p>
 </section><section id="how-to-write-a-great-commit-comment" class="slide level2 left-aligned-slide">
 <h2>How to write a great commit comment</h2>
 <p>Most important:</p>
@@ -870,7 +890,7 @@ $ git config --global user.email johndoe@example.com</code></pre>
 <li>Create a new repo on GitHub and</li>
 <li>Clone it as a new project in R Studio</li>
 <li>Edit the default README in your new R Studio project</li>
-<li>Commit and the changes</li>
+<li>Commit the changes</li>
 <li>Push the changes to GitHub</li>
 </ul>
 </section><section id="exercise-2-create-an-r-markdown-document-with-different-output-formats" class="slide level2">
@@ -881,8 +901,8 @@ $ git config --global user.email johndoe@example.com</code></pre>
 <ul>
 <li>a simple plot with your own or Gapminder data</li>
 <li>citation to references exported from your reference manager</li>
-<li><code>knitr</code> to the default output format</li>
 </ul></li>
+<li><code>knit</code> to the default output format (HTML)</li>
 <li>Try different output formats: PDF, Word</li>
 </ul>
 </section><section id="exercise-3-publish-an-r-markdown-document-via-github" class="slide level2">

@@ -725,7 +725,7 @@ pages.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-18"
+    date: "2024-11-19"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -777,7 +777,7 @@ the complete bibliography is added to the output document.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-18"
+    date: "2024-11-19"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -1041,6 +1041,13 @@ Follow instructions and finally provide the PAT:
 -> Done.
 ```
 
+## Alternative to PATs
+
+You can also configure **SSH keys** to connect to GitHub.
+
+Consult **[Set up keys for SSH](https://happygitwithr.com/ssh-keys)**
+[@Bryan2021] to explore this option.
+
 ## Do this for every new project:
 
 -   create a Github repo first (follow the [New project, Github
@@ -1101,11 +1108,42 @@ Create a new project via *File \> New Project \> Version Control \> Git*
 
 `<img src="./images/rstudio_git_push.png" width="1277" />`{=html}
 
-# Useful for commits
+## Publish your content
+
+Repo content can be hosted online via GitHub pages.
+
+## Enable GitHub pages for a repo
+
+Go to *Settings \> Pages* and select *Branch \> main*
+
+`<img src="./images/github_pages_settings.png" width="65%" />`{=html}
+
+## One GitHub page per repo
+
+Once enabled a site becomes available with the format:
+
+`https://[GITHUB_USER].github.io/[REPO_NAME]/`
+
+`<img src="./images/github_pages_link.png" width="65%" />`{=html}
+
+## Deployed GitHub page
+
+`<img src="./images/github_pages_deployed.png" width="65%" />`{=html}
+
+By default either the README is served or the content of a file called
+*index.html*, if it is available.
+
+Alternatively, provide the filename in the URL, e.g.,
+<https://sdaume.github.io/ds4sd-test/default.html>
+
+# Useful to know for commits
 
 ## Not tracking resources
 
--   .gitignore
+`.gitignore` allows to exclude resources from being tracked.
+
+You may have sensitive files (e.g., pass keys, private data) that should
+not end up in a public repo.
 
 ## How to write a great commit comment {#how-to-write-a-great-commit-comment .left-aligned-slide}
 
@@ -1130,7 +1168,7 @@ Document consistently:
 -   Create a new repo on GitHub and
 -   Clone it as a new project in R Studio
 -   Edit the default README in your new R Studio project
--   Commit and the changes
+-   Commit the changes
 -   Push the changes to GitHub
 
 ## Exercise 2: Create an R Markdown document with different output formats
@@ -1139,7 +1177,7 @@ Document consistently:
 -   Edit the file and insert
     -   a simple plot with your own or Gapminder data
     -   citation to references exported from your reference manager
-    -   `knitr` to the default output format
+-   `knit` to the default output format (HTML)
 -   Try different output formats: PDF, Word
 
 ## Exercise 3: Publish an R Markdown document via GitHub
