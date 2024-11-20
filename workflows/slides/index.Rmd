@@ -925,7 +925,7 @@ knitr::include_graphics('./images/dvcs_github.png')
 ## Focus for today
 
 ```{r echo=FALSE, out.height="70%"}
-knitr::include_graphics('./images/dvcs_session_focus.png')
+knitr::include_graphics('./images/dvcs_todays_session_focus.png')
 ```
 
 

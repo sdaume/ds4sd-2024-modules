@@ -691,23 +691,23 @@ Oceania
 ## `gt` example
 
 ```{=html}
-<div id="ednkvyzgbb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ednkvyzgbb table {
+<div id="smesdccrik" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#smesdccrik table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ednkvyzgbb thead, #ednkvyzgbb tbody, #ednkvyzgbb tfoot, #ednkvyzgbb tr, #ednkvyzgbb td, #ednkvyzgbb th {
+#smesdccrik thead, #smesdccrik tbody, #smesdccrik tfoot, #smesdccrik tr, #smesdccrik td, #smesdccrik th {
   border-style: none;
 }
 
-#ednkvyzgbb p {
+#smesdccrik p {
   margin: 0;
   padding: 0;
 }
 
-#ednkvyzgbb .gt_table {
+#smesdccrik .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -733,12 +733,12 @@ Oceania
   border-left-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_caption {
+#smesdccrik .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ednkvyzgbb .gt_title {
+#smesdccrik .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -750,7 +750,7 @@ Oceania
   border-bottom-width: 0;
 }
 
-#ednkvyzgbb .gt_subtitle {
+#smesdccrik .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -762,7 +762,7 @@ Oceania
   border-top-width: 0;
 }
 
-#ednkvyzgbb .gt_heading {
+#smesdccrik .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -774,13 +774,13 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_bottom_border {
+#smesdccrik .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_col_headings {
+#smesdccrik .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -795,7 +795,7 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_col_heading {
+#smesdccrik .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -815,7 +815,7 @@ Oceania
   overflow-x: hidden;
 }
 
-#ednkvyzgbb .gt_column_spanner_outer {
+#smesdccrik .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -827,15 +827,15 @@ Oceania
   padding-right: 4px;
 }
 
-#ednkvyzgbb .gt_column_spanner_outer:first-child {
+#smesdccrik .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ednkvyzgbb .gt_column_spanner_outer:last-child {
+#smesdccrik .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ednkvyzgbb .gt_column_spanner {
+#smesdccrik .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -847,11 +847,11 @@ Oceania
   width: 100%;
 }
 
-#ednkvyzgbb .gt_spanner_row {
+#smesdccrik .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ednkvyzgbb .gt_group_heading {
+#smesdccrik .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -877,7 +877,7 @@ Oceania
   text-align: left;
 }
 
-#ednkvyzgbb .gt_empty_group_heading {
+#smesdccrik .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -892,15 +892,15 @@ Oceania
   vertical-align: middle;
 }
 
-#ednkvyzgbb .gt_from_md > :first-child {
+#smesdccrik .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ednkvyzgbb .gt_from_md > :last-child {
+#smesdccrik .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ednkvyzgbb .gt_row {
+#smesdccrik .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -919,7 +919,7 @@ Oceania
   overflow-x: hidden;
 }
 
-#ednkvyzgbb .gt_stub {
+#smesdccrik .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -932,7 +932,7 @@ Oceania
   padding-right: 5px;
 }
 
-#ednkvyzgbb .gt_stub_row_group {
+#smesdccrik .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -946,15 +946,15 @@ Oceania
   vertical-align: top;
 }
 
-#ednkvyzgbb .gt_row_group_first td {
+#smesdccrik .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ednkvyzgbb .gt_row_group_first th {
+#smesdccrik .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ednkvyzgbb .gt_summary_row {
+#smesdccrik .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -964,16 +964,16 @@ Oceania
   padding-right: 5px;
 }
 
-#ednkvyzgbb .gt_first_summary_row {
+#smesdccrik .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_first_summary_row.thick {
+#smesdccrik .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ednkvyzgbb .gt_last_summary_row {
+#smesdccrik .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -983,7 +983,7 @@ Oceania
   border-bottom-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_grand_summary_row {
+#smesdccrik .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -993,7 +993,7 @@ Oceania
   padding-right: 5px;
 }
 
-#ednkvyzgbb .gt_first_grand_summary_row {
+#smesdccrik .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1003,7 +1003,7 @@ Oceania
   border-top-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_last_grand_summary_row_top {
+#smesdccrik .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1013,11 +1013,11 @@ Oceania
   border-bottom-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_striped {
+#smesdccrik .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ednkvyzgbb .gt_table_body {
+#smesdccrik .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1026,7 +1026,7 @@ Oceania
   border-bottom-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_footnotes {
+#smesdccrik .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1040,7 +1040,7 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_footnote {
+#smesdccrik .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1049,7 +1049,7 @@ Oceania
   padding-right: 5px;
 }
 
-#ednkvyzgbb .gt_sourcenotes {
+#smesdccrik .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1063,7 +1063,7 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#ednkvyzgbb .gt_sourcenote {
+#smesdccrik .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1071,63 +1071,63 @@ Oceania
   padding-right: 5px;
 }
 
-#ednkvyzgbb .gt_left {
+#smesdccrik .gt_left {
   text-align: left;
 }
 
-#ednkvyzgbb .gt_center {
+#smesdccrik .gt_center {
   text-align: center;
 }
 
-#ednkvyzgbb .gt_right {
+#smesdccrik .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ednkvyzgbb .gt_font_normal {
+#smesdccrik .gt_font_normal {
   font-weight: normal;
 }
 
-#ednkvyzgbb .gt_font_bold {
+#smesdccrik .gt_font_bold {
   font-weight: bold;
 }
 
-#ednkvyzgbb .gt_font_italic {
+#smesdccrik .gt_font_italic {
   font-style: italic;
 }
 
-#ednkvyzgbb .gt_super {
+#smesdccrik .gt_super {
   font-size: 65%;
 }
 
-#ednkvyzgbb .gt_footnote_marks {
+#smesdccrik .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ednkvyzgbb .gt_asterisk {
+#smesdccrik .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ednkvyzgbb .gt_indent_1 {
+#smesdccrik .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ednkvyzgbb .gt_indent_2 {
+#smesdccrik .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ednkvyzgbb .gt_indent_3 {
+#smesdccrik .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ednkvyzgbb .gt_indent_4 {
+#smesdccrik .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ednkvyzgbb .gt_indent_5 {
+#smesdccrik .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1514,7 +1514,7 @@ Examples: CVS, Subversion
 
 ## Focus for today
 
-`<img src="./images/dvcs_session_focus.png" width="1280" height="70%" />`{=html}
+`<img src="./images/dvcs_todays_session_focus.png" width="1280" height="70%" />`{=html}
 
 ## A simple git/GitHub usage scenario
 
