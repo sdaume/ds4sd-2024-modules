@@ -932,11 +932,11 @@ knitr::include_graphics('./images/dvcs_todays_session_focus.png')
 
 ## A simple git/GitHub usage scenario
 
-* create a project and enable versioning with `git`
-* connect it with a remote copy (for sharing and backup)
-* do work locally and track versions of your files
-* push your changes (sync **to** the remote copy on GitHub)
-* pull other's changes (sync **from** the remote copy on GitHub)
+* create a project and **enable versioning** with `git`
+* connect it with a **remote copy** (for sharing and backup)
+* do work locally and track (**commit**) versions of your files
+* **push** your changes (sync **to** the remote copy on GitHub)
+* **pull** other's changes (sync **from** the remote copy on GitHub)
 
 
 ## Integrated into R Studio
@@ -964,8 +964,8 @@ knitr::include_graphics('./images/rstudio_git_tab.png')
 
 ## Do this once: 
 
-* install git locally (see [@Bryan2021]) 
 * sign up for a Github account
+* install git locally (see [@Bryan2021]) 
 * create a personal access token 
   * either via Github (https://github.com/settings/tokens)
   * or via R with: `usethis::create_github_token()`
@@ -979,9 +979,11 @@ Select the installer for your OS: https://git-scm.com/
 On the command line set:
 
 ```{shell}
-$ git config --global user.name "John Doe"
+$ git config --global user.name "JohnDoe"
 $ git config --global user.email johndoe@example.com
 ```
+
+Use the same username/email you use for your GitHub account!
 
 Check your settings:
 
@@ -1006,6 +1008,9 @@ Configure and create PAT:
 ```{r echo=FALSE}
 knitr::include_graphics('./images/github_pat_creation.png')
 ```
+
+
+## Create a PAT (Personal Access Token)
 
 Than copy it:
 
