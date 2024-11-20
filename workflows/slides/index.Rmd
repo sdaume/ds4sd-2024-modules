@@ -38,7 +38,7 @@ year_of_interest <- 2007
   <div class="title-without-logo" style="display:table-cell;width:100%;padding-right:3%;padding-left:3%;vertical-align:middle;">
   SRC 2024 PhD course 'Data Science for Sustainable Development'
   
-  Reproducible Workflows using R Markdown and GitHub
+  Reproducible Workflows using R Markdown, git and GitHub
     
   &nbsp;
     
@@ -291,7 +291,7 @@ date: '2024-11-22'
 ---
 ````
 
-Above is the default *YAML header* when generating an `R Markdown` file in R Studio.
+Above is the default *YAML header* when creating a new `R Markdown` file in R Studio.
 
 <aside class="notes">
 * see RMarkdown book for details
@@ -372,6 +372,7 @@ knitr::include_graphics('./images/rstudio_knit.jpg')
 
 <aside class="notes">
 Chunk options include, for example:
+
   * an **optional** label (can be used for references), 
   * options controlling the output, such as figure size, caption, resolution 
   * options controlling the execution of the output (you can disable the code chunk with `eval=FALSE` for example)
@@ -387,11 +388,11 @@ library(gapminder)
 gapminder %>% 
     group_by(year) %>%
     summarise(ale = mean(lifeExp)) %>%
-    ggplot(aes(x = year, y = ale)) +
-    geom_line(color = "orange") +
-    labs(x = "Year", 
-         y = "Average life expectancy") +
-    theme_classic(base_size = 16)
+      ggplot(aes(x = year, y = ale)) +
+        geom_line(color = "orange") +
+        labs(x = "Year", 
+             y = "Average life expectancy") +
+        theme_classic(base_size = 16)
 ```
 ````
 
@@ -819,7 +820,7 @@ This is how this presentation works (and the others before).
 * here we move to the second element for reproducible workflows
 * complex analysis may go through multiple iterations, that you might want to track
 * you may also want to share your resources with others, or even allow them to collaborate on an analysis
-* and eventually want to pubvlish your results online
+* and eventually want to publish your results online
 * here git & GitHub come into play
 </aside>
 

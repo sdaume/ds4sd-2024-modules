@@ -4,7 +4,7 @@
 ::: {.title-without-logo style="display:table-cell;width:100%;padding-right:3%;padding-left:3%;vertical-align:middle;"}
 SRC 2024 PhD course 'Data Science for Sustainable Development'
 
-Reproducible Workflows using R Markdown and GitHub
+Reproducible Workflows using R Markdown, git and GitHub
 
  
 
@@ -273,7 +273,7 @@ date: '2024-11-22'
 ---
 ```
 
-Above is the default *YAML header* when generating an `R Markdown` file
+Above is the default *YAML header* when creating a new `R Markdown` file
 in R Studio.
 
 ```{=html}
@@ -357,10 +357,14 @@ link-citations: yes
 ```{=html}
 <aside class="notes">
 ```
-Chunk options include, for example: \* an **optional** label (can be
-used for references), \* options controlling the output, such as figure
-size, caption, resolution \* options controlling the execution of the
-output (you can disable the code chunk with `eval=FALSE` for example)
+Chunk options include, for example:
+
+-   an **optional** label (can be used for references),
+-   options controlling the output, such as figure size, caption,
+    resolution
+-   options controlling the execution of the output (you can disable the
+    code chunk with `eval=FALSE` for example)
+
 ```{=html}
 </aside>
 ```
@@ -373,11 +377,11 @@ library(gapminder)
 gapminder %>% 
     group_by(year) %>%
     summarise(ale = mean(lifeExp)) %>%
-    ggplot(aes(x = year, y = ale)) +
-    geom_line(color = "orange") +
-    labs(x = "Year", 
-         y = "Average life expectancy") +
-    theme_classic(base_size = 16)
+      ggplot(aes(x = year, y = ale)) +
+        geom_line(color = "orange") +
+        labs(x = "Year", 
+             y = "Average life expectancy") +
+        theme_classic(base_size = 16)
 ```
 ````
 
@@ -687,23 +691,23 @@ Oceania
 ## `gt` example
 
 ```{=html}
-<div id="iyzyhplxpd" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#iyzyhplxpd table {
+<div id="ednkvyzgbb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ednkvyzgbb table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#iyzyhplxpd thead, #iyzyhplxpd tbody, #iyzyhplxpd tfoot, #iyzyhplxpd tr, #iyzyhplxpd td, #iyzyhplxpd th {
+#ednkvyzgbb thead, #ednkvyzgbb tbody, #ednkvyzgbb tfoot, #ednkvyzgbb tr, #ednkvyzgbb td, #ednkvyzgbb th {
   border-style: none;
 }
 
-#iyzyhplxpd p {
+#ednkvyzgbb p {
   margin: 0;
   padding: 0;
 }
 
-#iyzyhplxpd .gt_table {
+#ednkvyzgbb .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -729,12 +733,12 @@ Oceania
   border-left-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_caption {
+#ednkvyzgbb .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#iyzyhplxpd .gt_title {
+#ednkvyzgbb .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -746,7 +750,7 @@ Oceania
   border-bottom-width: 0;
 }
 
-#iyzyhplxpd .gt_subtitle {
+#ednkvyzgbb .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -758,7 +762,7 @@ Oceania
   border-top-width: 0;
 }
 
-#iyzyhplxpd .gt_heading {
+#ednkvyzgbb .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -770,13 +774,13 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_bottom_border {
+#ednkvyzgbb .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_col_headings {
+#ednkvyzgbb .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -791,7 +795,7 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_col_heading {
+#ednkvyzgbb .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -811,7 +815,7 @@ Oceania
   overflow-x: hidden;
 }
 
-#iyzyhplxpd .gt_column_spanner_outer {
+#ednkvyzgbb .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -823,15 +827,15 @@ Oceania
   padding-right: 4px;
 }
 
-#iyzyhplxpd .gt_column_spanner_outer:first-child {
+#ednkvyzgbb .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#iyzyhplxpd .gt_column_spanner_outer:last-child {
+#ednkvyzgbb .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#iyzyhplxpd .gt_column_spanner {
+#ednkvyzgbb .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -843,11 +847,11 @@ Oceania
   width: 100%;
 }
 
-#iyzyhplxpd .gt_spanner_row {
+#ednkvyzgbb .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#iyzyhplxpd .gt_group_heading {
+#ednkvyzgbb .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -873,7 +877,7 @@ Oceania
   text-align: left;
 }
 
-#iyzyhplxpd .gt_empty_group_heading {
+#ednkvyzgbb .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -888,15 +892,15 @@ Oceania
   vertical-align: middle;
 }
 
-#iyzyhplxpd .gt_from_md > :first-child {
+#ednkvyzgbb .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#iyzyhplxpd .gt_from_md > :last-child {
+#ednkvyzgbb .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#iyzyhplxpd .gt_row {
+#ednkvyzgbb .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -915,7 +919,7 @@ Oceania
   overflow-x: hidden;
 }
 
-#iyzyhplxpd .gt_stub {
+#ednkvyzgbb .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -928,7 +932,7 @@ Oceania
   padding-right: 5px;
 }
 
-#iyzyhplxpd .gt_stub_row_group {
+#ednkvyzgbb .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -942,15 +946,15 @@ Oceania
   vertical-align: top;
 }
 
-#iyzyhplxpd .gt_row_group_first td {
+#ednkvyzgbb .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#iyzyhplxpd .gt_row_group_first th {
+#ednkvyzgbb .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#iyzyhplxpd .gt_summary_row {
+#ednkvyzgbb .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -960,16 +964,16 @@ Oceania
   padding-right: 5px;
 }
 
-#iyzyhplxpd .gt_first_summary_row {
+#ednkvyzgbb .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_first_summary_row.thick {
+#ednkvyzgbb .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#iyzyhplxpd .gt_last_summary_row {
+#ednkvyzgbb .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -979,7 +983,7 @@ Oceania
   border-bottom-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_grand_summary_row {
+#ednkvyzgbb .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -989,7 +993,7 @@ Oceania
   padding-right: 5px;
 }
 
-#iyzyhplxpd .gt_first_grand_summary_row {
+#ednkvyzgbb .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -999,7 +1003,7 @@ Oceania
   border-top-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_last_grand_summary_row_top {
+#ednkvyzgbb .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1009,11 +1013,11 @@ Oceania
   border-bottom-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_striped {
+#ednkvyzgbb .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#iyzyhplxpd .gt_table_body {
+#ednkvyzgbb .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1022,7 +1026,7 @@ Oceania
   border-bottom-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_footnotes {
+#ednkvyzgbb .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1036,7 +1040,7 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_footnote {
+#ednkvyzgbb .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1045,7 +1049,7 @@ Oceania
   padding-right: 5px;
 }
 
-#iyzyhplxpd .gt_sourcenotes {
+#ednkvyzgbb .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1059,7 +1063,7 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#iyzyhplxpd .gt_sourcenote {
+#ednkvyzgbb .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1067,63 +1071,63 @@ Oceania
   padding-right: 5px;
 }
 
-#iyzyhplxpd .gt_left {
+#ednkvyzgbb .gt_left {
   text-align: left;
 }
 
-#iyzyhplxpd .gt_center {
+#ednkvyzgbb .gt_center {
   text-align: center;
 }
 
-#iyzyhplxpd .gt_right {
+#ednkvyzgbb .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#iyzyhplxpd .gt_font_normal {
+#ednkvyzgbb .gt_font_normal {
   font-weight: normal;
 }
 
-#iyzyhplxpd .gt_font_bold {
+#ednkvyzgbb .gt_font_bold {
   font-weight: bold;
 }
 
-#iyzyhplxpd .gt_font_italic {
+#ednkvyzgbb .gt_font_italic {
   font-style: italic;
 }
 
-#iyzyhplxpd .gt_super {
+#ednkvyzgbb .gt_super {
   font-size: 65%;
 }
 
-#iyzyhplxpd .gt_footnote_marks {
+#ednkvyzgbb .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#iyzyhplxpd .gt_asterisk {
+#ednkvyzgbb .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#iyzyhplxpd .gt_indent_1 {
+#ednkvyzgbb .gt_indent_1 {
   text-indent: 5px;
 }
 
-#iyzyhplxpd .gt_indent_2 {
+#ednkvyzgbb .gt_indent_2 {
   text-indent: 10px;
 }
 
-#iyzyhplxpd .gt_indent_3 {
+#ednkvyzgbb .gt_indent_3 {
   text-indent: 15px;
 }
 
-#iyzyhplxpd .gt_indent_4 {
+#ednkvyzgbb .gt_indent_4 {
   text-indent: 20px;
 }
 
-#iyzyhplxpd .gt_indent_5 {
+#ednkvyzgbb .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1241,7 +1245,7 @@ pages.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-19"
+    date: "2024-11-20"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -1304,7 +1308,7 @@ the complete bibliography is added to the output document.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-19"
+    date: "2024-11-20"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -1398,7 +1402,7 @@ This is how this presentation works (and the others before).
     want to track
 -   you may also want to share your resources with others, or even allow
     them to collaborate on an analysis
--   and eventually want to pubvlish your results online
+-   and eventually want to publish your results online
 -   here git & GitHub come into play
 
 ```{=html}
