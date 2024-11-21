@@ -349,7 +349,7 @@ link-citations: yes
 
 ```` default
 
-```{r some-explanatory-label, echo=FALSE}
+```{r some-explanatory-label, eval=TRUE, echo=FALSE}
 # here goes your R code
 ```
 ````
@@ -357,6 +357,10 @@ link-citations: yes
 ```{=html}
 <aside class="notes">
 ```
+`knitr`ing an R Markdown document means interpreting and executing the
+included R code and generating an output document (in a chosen format)
+that combines the text and results of the R computations.
+
 Chunk options include, for example:
 
 -   an **optional** label (can be used for references),
@@ -688,26 +692,34 @@ Oceania
 ```{=html}
 </table>
 ```
+```{=html}
+<aside class="notes">
+```
+-   `kableExtra` extends `kable()`
+
+```{=html}
+</aside>
+```
 ## `gt` example
 
 ```{=html}
-<div id="zlfyhnbkso" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#zlfyhnbkso table {
+<div id="ryjyqhgvij" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ryjyqhgvij table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#zlfyhnbkso thead, #zlfyhnbkso tbody, #zlfyhnbkso tfoot, #zlfyhnbkso tr, #zlfyhnbkso td, #zlfyhnbkso th {
+#ryjyqhgvij thead, #ryjyqhgvij tbody, #ryjyqhgvij tfoot, #ryjyqhgvij tr, #ryjyqhgvij td, #ryjyqhgvij th {
   border-style: none;
 }
 
-#zlfyhnbkso p {
+#ryjyqhgvij p {
   margin: 0;
   padding: 0;
 }
 
-#zlfyhnbkso .gt_table {
+#ryjyqhgvij .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -733,12 +745,12 @@ Oceania
   border-left-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_caption {
+#ryjyqhgvij .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#zlfyhnbkso .gt_title {
+#ryjyqhgvij .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -750,7 +762,7 @@ Oceania
   border-bottom-width: 0;
 }
 
-#zlfyhnbkso .gt_subtitle {
+#ryjyqhgvij .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -762,7 +774,7 @@ Oceania
   border-top-width: 0;
 }
 
-#zlfyhnbkso .gt_heading {
+#ryjyqhgvij .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -774,13 +786,13 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_bottom_border {
+#ryjyqhgvij .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_col_headings {
+#ryjyqhgvij .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -795,7 +807,7 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_col_heading {
+#ryjyqhgvij .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -815,7 +827,7 @@ Oceania
   overflow-x: hidden;
 }
 
-#zlfyhnbkso .gt_column_spanner_outer {
+#ryjyqhgvij .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -827,15 +839,15 @@ Oceania
   padding-right: 4px;
 }
 
-#zlfyhnbkso .gt_column_spanner_outer:first-child {
+#ryjyqhgvij .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#zlfyhnbkso .gt_column_spanner_outer:last-child {
+#ryjyqhgvij .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#zlfyhnbkso .gt_column_spanner {
+#ryjyqhgvij .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -847,11 +859,11 @@ Oceania
   width: 100%;
 }
 
-#zlfyhnbkso .gt_spanner_row {
+#ryjyqhgvij .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#zlfyhnbkso .gt_group_heading {
+#ryjyqhgvij .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -877,7 +889,7 @@ Oceania
   text-align: left;
 }
 
-#zlfyhnbkso .gt_empty_group_heading {
+#ryjyqhgvij .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -892,15 +904,15 @@ Oceania
   vertical-align: middle;
 }
 
-#zlfyhnbkso .gt_from_md > :first-child {
+#ryjyqhgvij .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#zlfyhnbkso .gt_from_md > :last-child {
+#ryjyqhgvij .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#zlfyhnbkso .gt_row {
+#ryjyqhgvij .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -919,7 +931,7 @@ Oceania
   overflow-x: hidden;
 }
 
-#zlfyhnbkso .gt_stub {
+#ryjyqhgvij .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -932,7 +944,7 @@ Oceania
   padding-right: 5px;
 }
 
-#zlfyhnbkso .gt_stub_row_group {
+#ryjyqhgvij .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -946,15 +958,15 @@ Oceania
   vertical-align: top;
 }
 
-#zlfyhnbkso .gt_row_group_first td {
+#ryjyqhgvij .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#zlfyhnbkso .gt_row_group_first th {
+#ryjyqhgvij .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#zlfyhnbkso .gt_summary_row {
+#ryjyqhgvij .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -964,16 +976,16 @@ Oceania
   padding-right: 5px;
 }
 
-#zlfyhnbkso .gt_first_summary_row {
+#ryjyqhgvij .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_first_summary_row.thick {
+#ryjyqhgvij .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#zlfyhnbkso .gt_last_summary_row {
+#ryjyqhgvij .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -983,7 +995,7 @@ Oceania
   border-bottom-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_grand_summary_row {
+#ryjyqhgvij .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -993,7 +1005,7 @@ Oceania
   padding-right: 5px;
 }
 
-#zlfyhnbkso .gt_first_grand_summary_row {
+#ryjyqhgvij .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1003,7 +1015,7 @@ Oceania
   border-top-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_last_grand_summary_row_top {
+#ryjyqhgvij .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1013,11 +1025,11 @@ Oceania
   border-bottom-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_striped {
+#ryjyqhgvij .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#zlfyhnbkso .gt_table_body {
+#ryjyqhgvij .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1026,7 +1038,7 @@ Oceania
   border-bottom-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_footnotes {
+#ryjyqhgvij .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1040,7 +1052,7 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_footnote {
+#ryjyqhgvij .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -1049,7 +1061,7 @@ Oceania
   padding-right: 5px;
 }
 
-#zlfyhnbkso .gt_sourcenotes {
+#ryjyqhgvij .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1063,7 +1075,7 @@ Oceania
   border-right-color: #D3D3D3;
 }
 
-#zlfyhnbkso .gt_sourcenote {
+#ryjyqhgvij .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1071,63 +1083,63 @@ Oceania
   padding-right: 5px;
 }
 
-#zlfyhnbkso .gt_left {
+#ryjyqhgvij .gt_left {
   text-align: left;
 }
 
-#zlfyhnbkso .gt_center {
+#ryjyqhgvij .gt_center {
   text-align: center;
 }
 
-#zlfyhnbkso .gt_right {
+#ryjyqhgvij .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#zlfyhnbkso .gt_font_normal {
+#ryjyqhgvij .gt_font_normal {
   font-weight: normal;
 }
 
-#zlfyhnbkso .gt_font_bold {
+#ryjyqhgvij .gt_font_bold {
   font-weight: bold;
 }
 
-#zlfyhnbkso .gt_font_italic {
+#ryjyqhgvij .gt_font_italic {
   font-style: italic;
 }
 
-#zlfyhnbkso .gt_super {
+#ryjyqhgvij .gt_super {
   font-size: 65%;
 }
 
-#zlfyhnbkso .gt_footnote_marks {
+#ryjyqhgvij .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#zlfyhnbkso .gt_asterisk {
+#ryjyqhgvij .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#zlfyhnbkso .gt_indent_1 {
+#ryjyqhgvij .gt_indent_1 {
   text-indent: 5px;
 }
 
-#zlfyhnbkso .gt_indent_2 {
+#ryjyqhgvij .gt_indent_2 {
   text-indent: 10px;
 }
 
-#zlfyhnbkso .gt_indent_3 {
+#ryjyqhgvij .gt_indent_3 {
   text-indent: 15px;
 }
 
-#zlfyhnbkso .gt_indent_4 {
+#ryjyqhgvij .gt_indent_4 {
   text-indent: 20px;
 }
 
-#zlfyhnbkso .gt_indent_5 {
+#ryjyqhgvij .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1162,6 +1174,14 @@ Oceania
   
 </table>
 </div>
+```
+```{=html}
+<aside class="notes">
+```
+-   gt is a standalone package, i.e., independent of `kable()`
+
+```{=html}
+</aside>
 ```
 ## Central 'Setup' code section
 
@@ -1245,7 +1265,7 @@ pages.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-20"
+    date: "2024-11-21"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -1308,7 +1328,7 @@ the complete bibliography is added to the output document.
     ---
     title: "R Course SRC"
     subtitle: "Module 3"
-    date: "2024-11-20"
+    date: "2024-11-21"
     author: 'Stefan Daume' 
     output: 
       html_document:
@@ -1355,6 +1375,9 @@ This is how this presentation works (and the others before).
     -   [R Markdown: The Definitive
         Guide](https://bookdown.org/yihui/rmarkdown/)
         [@XieAllaire_et_2022]
+    -   [R Markdown
+        Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/)
+        [@XieDervieux_et_2024_BOOK]
     -   [Cheatsheet: Dynamic documents with rmarkdown
         cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
 
@@ -1585,6 +1608,14 @@ Configure and create PAT:
 
 `<img src="./images/github_pat_creation.png" width="1134" />`{=html}
 
+```{=html}
+<aside class="notes">
+```
+-   leave the standard scopes that are already selected
+
+```{=html}
+</aside>
+```
 ## Create a PAT (Personal Access Token)
 
 Than copy it:
@@ -1593,7 +1624,7 @@ Than copy it:
 
 ## Store the PAT for local use
 
-Set the credentials from the command line:
+Set the credentials from the command line in R Studio:
 
 ``` shell
 gitcreds::gitcreds_set()
@@ -1671,6 +1702,15 @@ Create a new project via *File \> New Project \> Version Control \> Git*
 
 `<img src="./images/rstudio_git_commit.png" width="986" />`{=html}
 
+```{=html}
+<aside class="notes">
+```
+-   once you have made a commit the changes are tracked/recorded in your
+    local git repository
+
+```{=html}
+</aside>
+```
 ## Push changes to remote GitHub repo
 
 `<img src="./images/rstudio_git_push.png" width="1277" />`{=html}
@@ -1679,6 +1719,16 @@ Create a new project via *File \> New Project \> Version Control \> Git*
 
 Repo content can be hosted online via GitHub pages.
 
+```{=html}
+<aside class="notes">
+```
+-   GitHub has a builtin feature that allow to publish content in a repo
+    online
+-   its called GitHub Pages
+
+```{=html}
+</aside>
+```
 ## Enable GitHub pages for a repo
 
 Go to *Settings \> Pages* and select *Branch \> main*
@@ -1711,6 +1761,8 @@ Alternatively, provide the filename in the URL, e.g.,
 
 You may have sensitive files (e.g., pass keys, private data) that should
 not end up in a public repo.
+
+`<img src="./images/rstudio_git_ignore.png" width="50%" />`{=html}
 
 ## How to write a great commit comment {#how-to-write-a-great-commit-comment .left-aligned-slide}
 

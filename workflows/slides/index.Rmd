@@ -364,13 +364,15 @@ knitr::include_graphics('./images/rstudio_knit.jpg')
 
 ````{verbatim}
 
-```{r some-explanatory-label, echo=FALSE}
+```{r some-explanatory-label, eval=TRUE, echo=FALSE}
 # here goes your R code
 ```
 
 ````
 
 <aside class="notes">
+`knitr`ing an R Markdown document means interpreting and executing the included R code and generating an output document (in a chosen format) that combines the text and results of the R computations.
+
 Chunk options include, for example:
 
   * an **optional** label (can be used for references), 
@@ -582,6 +584,9 @@ gapminder_latest %>%
                  background = spec_color(gapminder_latest$avrg_gdp[1:5]))
 ```
 
+<aside class="notes">
+* `kableExtra` extends `kable()`
+</aside>
 
 ## `gt` example
 
@@ -613,6 +618,9 @@ gapminder_latest %>%
   tab_caption(caption = md(paste("Table caption: Dynamic formatting with the the help of the `gt` package. This example shows Gapminder data summarised by continent for the year ", year_of_interest, ".", sep = "")))
 ```
 
+<aside class="notes">
+* gt is a standalone package, i.e., independent of `kable()`
+</aside>
 
 
 ## Central 'Setup' code section
@@ -789,6 +797,7 @@ This is how this presentation works (and the others before).
 
 * R Markdown
   * [R Markdown: The Definitive Guide](https://bookdown.org/yihui/rmarkdown/) [@XieAllaire_et_2022]
+  * [R Markdown Cookbook](https://bookdown.org/yihui/rmarkdown-cookbook/) [@XieDervieux_et_2024_BOOK]
   * [Cheatsheet: Dynamic documents with rmarkdown cheatsheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf)
 
 <aside class="notes">
@@ -1009,6 +1018,10 @@ Configure and create PAT:
 knitr::include_graphics('./images/github_pat_creation.png')
 ```
 
+<aside class="notes">
+* leave the standard scopes that are already selected
+</aside>
+
 
 ## Create a PAT (Personal Access Token)
 
@@ -1021,7 +1034,7 @@ knitr::include_graphics('./images/github_pat_copy.png')
 
 ## Store the PAT for local use
 
-Set the credentials from the command line:
+Set the credentials from the command line in R Studio:
 
 ```{shell}
 gitcreds::gitcreds_set()
@@ -1110,6 +1123,9 @@ knitr::include_graphics('./images/rstudio_git_tab.png')
 knitr::include_graphics('./images/rstudio_git_commit.png')
 ```
 
+<aside class="notes">
+* once you have made a commit the changes are tracked/recorded in your local git repository
+</aside>
 
 ## Push changes to remote GitHub repo 
 
@@ -1122,6 +1138,10 @@ knitr::include_graphics('./images/rstudio_git_push.png')
 
 Repo content can be hosted online via GitHub pages. 
 
+<aside class="notes">
+* GitHub has a builtin feature that allow to publish content in a repo online
+* its called GitHub Pages
+</aside>
 
 ## Enable GitHub pages for a repo
 
@@ -1161,6 +1181,11 @@ Alternatively, provide the filename in the URL, e.g., https://sdaume.github.io/d
 `.gitignore` allows to exclude resources from being tracked.
 
 You may have sensitive files (e.g., pass keys, private data) that should not end up in a public repo. 
+
+```{r echo=FALSE, out.width="50%"}
+knitr::include_graphics('./images/rstudio_git_ignore.png')
+```
+
 
 
 ## How to write a great commit comment {.left-aligned-slide} 
