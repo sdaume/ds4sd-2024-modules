@@ -258,7 +258,8 @@ knitr::include_graphics('./images/markdown_tables.jpg')
 An overview of core markdown syntax can be found in [this R Markdown book chapter](https://bookdown.org/yihui/rmarkdown/markdown-syntax.html) and even more options in a condensed form as an [R Markdown cheat sheet](https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf).
 
 <aside class="notes">
-* Tables (but now it gets complicated); show but then lead to R Markdown; use mtcars or similar
+* Tables (but now it gets complicated); we will see that R Markdown makes this much easier
+* tables can be represented with pipes, dashes and colons (the latter to indicate table cell alignment)
 * often table content is the result of data analysis, it could thus be dynamic and we may want to create it programmatically; this is where R Markdown makes an entry
 </aside>
 
@@ -268,6 +269,10 @@ An overview of core markdown syntax can be found in [this R Markdown book chapte
 
 * Purpose: dynamically weave together text, data and analysis workflows.
 * This is accomplished with the [`knitr`](https://yihui.org/knitr/) package, an R package conveniently integrated into the R Studio UI.
+
+<aside class="notes">
+* instead of having an R script for your analysis and a markdown file to summarise the results of that analysis, R Markdown allows us to weave the two into one document
+</aside>
 
 
 
@@ -790,7 +795,7 @@ This is how this presentation works (and the others before).
 
 
 
-## "Continous Analysis" as the ultimate goal
+## "Continuous Analysis" as the ultimate goal
 
 
 ## Key Resources
@@ -888,6 +893,11 @@ knitr::include_graphics('./images/local_versions.png')
   </div>
 </div>
 
+<aside class="notes">
+* version control allows you to record ("check in") and document specific versions of a resource and thus maintain a record of a file at specific stage of its development
+</aside>
+
+
 
 ## Versions as snapshots
 
@@ -975,7 +985,7 @@ knitr::include_graphics('./images/rstudio_git_tab.png')
 
 * sign up for a Github account
 * install git locally (see [@Bryan2021]) 
-* create a personal access token 
+* create a Personal Access Token (PAT) 
   * either via Github (https://github.com/settings/tokens)
   * or via R with: `usethis::create_github_token()`
   * and then store it with `gitcreds::gitcreds_set()`
@@ -1050,12 +1060,22 @@ Follow instructions and finally provide the PAT:
 ```
 
 
+<aside class="notes">
+* now your setup is complete
+* you have installed git, told git who you are and provided your local git installation with credentials needed if it wants to connect to GitHub
+</aside>
+
+
 ## Alternative to PATs
 
 You can also configure **SSH keys** to connect to GitHub.
 
 Consult **[Set up keys for SSH](https://happygitwithr.com/ssh-keys)** [@Bryan2021] to explore this option.
 
+<aside class="notes">
+* PATs are the recommended option by GitHub and J. Bryan in Happy Git
+* they have the advantage that they can be used both for commits and other interactions you may have with GitHub (for example when you set up R package development workflows)
+</aside>
 
 
 ## Do this for every new project:

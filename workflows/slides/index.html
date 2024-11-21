@@ -207,7 +207,8 @@ And a [hyperlink](https://bookdown.org/yihui/rmarkdown/) for good measure.</code
 <p>An overview of core markdown syntax can be found in <a href="https://bookdown.org/yihui/rmarkdown/markdown-syntax.html">this R Markdown book chapter</a> and even more options in a condensed form as an <a href="https://raw.githubusercontent.com/rstudio/cheatsheets/main/rmarkdown.pdf">R Markdown cheat sheet</a>.</p>
 <aside class="notes">
 <ul>
-<li>Tables (but now it gets complicated); show but then lead to R Markdown; use mtcars or similar</li>
+<li>Tables (but now it gets complicated); we will see that R Markdown makes this much easier</li>
+<li>tables can be represented with pipes, dashes and colons (the latter to indicate table cell alignment)</li>
 <li>often table content is the result of data analysis, it could thus be dynamic and we may want to create it programmatically; this is where R Markdown makes an entry</li>
 </ul>
 </aside>
@@ -217,6 +218,11 @@ And a [hyperlink](https://bookdown.org/yihui/rmarkdown/) for good measure.</code
 <li>Purpose: dynamically weave together text, data and analysis workflows.</li>
 <li>This is accomplished with the <a href="https://yihui.org/knitr/"><code>knitr</code></a> package, an R package conveniently integrated into the R Studio UI.</li>
 </ul>
+<aside class="notes">
+<ul>
+<li>instead of having an R script for your analysis and a markdown file to summarise the results of that analysis, R Markdown allows us to weave the two into one document</li>
+</ul>
+</aside>
 </section><section id="differences-to-basic-markdown" class="slide level2">
 <h2>Differences to basic Markdown</h2>
 <ul>
@@ -544,23 +550,23 @@ gapminder_latest %&gt;%
 </aside>
 </section><section id="gt-example" class="slide level2">
 <h2><code>gt</code> example</h2>
-<div id="ryjyqhgvij" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>#ryjyqhgvij table {
+<div id="ompijpikxh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>#ompijpikxh table {
   font-family: system-ui, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-#ryjyqhgvij thead, #ryjyqhgvij tbody, #ryjyqhgvij tfoot, #ryjyqhgvij tr, #ryjyqhgvij td, #ryjyqhgvij th {
+#ompijpikxh thead, #ompijpikxh tbody, #ompijpikxh tfoot, #ompijpikxh tr, #ompijpikxh td, #ompijpikxh th {
   border-style: none;
 }
 
-#ryjyqhgvij p {
+#ompijpikxh p {
   margin: 0;
   padding: 0;
 }
 
-#ryjyqhgvij .gt_table {
+#ompijpikxh .gt_table {
   display: table;
   border-collapse: collapse;
   line-height: normal;
@@ -586,12 +592,12 @@ gapminder_latest %&gt;%
   border-left-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_caption {
+#ompijpikxh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#ryjyqhgvij .gt_title {
+#ompijpikxh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -603,7 +609,7 @@ gapminder_latest %&gt;%
   border-bottom-width: 0;
 }
 
-#ryjyqhgvij .gt_subtitle {
+#ompijpikxh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -615,7 +621,7 @@ gapminder_latest %&gt;%
   border-top-width: 0;
 }
 
-#ryjyqhgvij .gt_heading {
+#ompijpikxh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -627,13 +633,13 @@ gapminder_latest %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_bottom_border {
+#ompijpikxh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_col_headings {
+#ompijpikxh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -648,7 +654,7 @@ gapminder_latest %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_col_heading {
+#ompijpikxh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -668,7 +674,7 @@ gapminder_latest %&gt;%
   overflow-x: hidden;
 }
 
-#ryjyqhgvij .gt_column_spanner_outer {
+#ompijpikxh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -680,15 +686,15 @@ gapminder_latest %&gt;%
   padding-right: 4px;
 }
 
-#ryjyqhgvij .gt_column_spanner_outer:first-child {
+#ompijpikxh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#ryjyqhgvij .gt_column_spanner_outer:last-child {
+#ompijpikxh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#ryjyqhgvij .gt_column_spanner {
+#ompijpikxh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -700,11 +706,11 @@ gapminder_latest %&gt;%
   width: 100%;
 }
 
-#ryjyqhgvij .gt_spanner_row {
+#ompijpikxh .gt_spanner_row {
   border-bottom-style: hidden;
 }
 
-#ryjyqhgvij .gt_group_heading {
+#ompijpikxh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -730,7 +736,7 @@ gapminder_latest %&gt;%
   text-align: left;
 }
 
-#ryjyqhgvij .gt_empty_group_heading {
+#ompijpikxh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -745,15 +751,15 @@ gapminder_latest %&gt;%
   vertical-align: middle;
 }
 
-#ryjyqhgvij .gt_from_md > :first-child {
+#ompijpikxh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#ryjyqhgvij .gt_from_md > :last-child {
+#ompijpikxh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#ryjyqhgvij .gt_row {
+#ompijpikxh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -772,7 +778,7 @@ gapminder_latest %&gt;%
   overflow-x: hidden;
 }
 
-#ryjyqhgvij .gt_stub {
+#ompijpikxh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -785,7 +791,7 @@ gapminder_latest %&gt;%
   padding-right: 5px;
 }
 
-#ryjyqhgvij .gt_stub_row_group {
+#ompijpikxh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -799,15 +805,15 @@ gapminder_latest %&gt;%
   vertical-align: top;
 }
 
-#ryjyqhgvij .gt_row_group_first td {
+#ompijpikxh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#ryjyqhgvij .gt_row_group_first th {
+#ompijpikxh .gt_row_group_first th {
   border-top-width: 2px;
 }
 
-#ryjyqhgvij .gt_summary_row {
+#ompijpikxh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -817,16 +823,16 @@ gapminder_latest %&gt;%
   padding-right: 5px;
 }
 
-#ryjyqhgvij .gt_first_summary_row {
+#ompijpikxh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_first_summary_row.thick {
+#ompijpikxh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#ryjyqhgvij .gt_last_summary_row {
+#ompijpikxh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -836,7 +842,7 @@ gapminder_latest %&gt;%
   border-bottom-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_grand_summary_row {
+#ompijpikxh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -846,7 +852,7 @@ gapminder_latest %&gt;%
   padding-right: 5px;
 }
 
-#ryjyqhgvij .gt_first_grand_summary_row {
+#ompijpikxh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -856,7 +862,7 @@ gapminder_latest %&gt;%
   border-top-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_last_grand_summary_row_top {
+#ompijpikxh .gt_last_grand_summary_row_top {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -866,11 +872,11 @@ gapminder_latest %&gt;%
   border-bottom-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_striped {
+#ompijpikxh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#ryjyqhgvij .gt_table_body {
+#ompijpikxh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -879,7 +885,7 @@ gapminder_latest %&gt;%
   border-bottom-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_footnotes {
+#ompijpikxh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -893,7 +899,7 @@ gapminder_latest %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_footnote {
+#ompijpikxh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-top: 4px;
@@ -902,7 +908,7 @@ gapminder_latest %&gt;%
   padding-right: 5px;
 }
 
-#ryjyqhgvij .gt_sourcenotes {
+#ompijpikxh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -916,7 +922,7 @@ gapminder_latest %&gt;%
   border-right-color: #D3D3D3;
 }
 
-#ryjyqhgvij .gt_sourcenote {
+#ompijpikxh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -924,63 +930,63 @@ gapminder_latest %&gt;%
   padding-right: 5px;
 }
 
-#ryjyqhgvij .gt_left {
+#ompijpikxh .gt_left {
   text-align: left;
 }
 
-#ryjyqhgvij .gt_center {
+#ompijpikxh .gt_center {
   text-align: center;
 }
 
-#ryjyqhgvij .gt_right {
+#ompijpikxh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#ryjyqhgvij .gt_font_normal {
+#ompijpikxh .gt_font_normal {
   font-weight: normal;
 }
 
-#ryjyqhgvij .gt_font_bold {
+#ompijpikxh .gt_font_bold {
   font-weight: bold;
 }
 
-#ryjyqhgvij .gt_font_italic {
+#ompijpikxh .gt_font_italic {
   font-style: italic;
 }
 
-#ryjyqhgvij .gt_super {
+#ompijpikxh .gt_super {
   font-size: 65%;
 }
 
-#ryjyqhgvij .gt_footnote_marks {
+#ompijpikxh .gt_footnote_marks {
   font-size: 75%;
   vertical-align: 0.4em;
   position: initial;
 }
 
-#ryjyqhgvij .gt_asterisk {
+#ompijpikxh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#ryjyqhgvij .gt_indent_1 {
+#ompijpikxh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#ryjyqhgvij .gt_indent_2 {
+#ompijpikxh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#ryjyqhgvij .gt_indent_3 {
+#ompijpikxh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#ryjyqhgvij .gt_indent_4 {
+#ompijpikxh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#ryjyqhgvij .gt_indent_5 {
+#ompijpikxh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1144,8 +1150,8 @@ csl: ecology-and-society.csl
 <li>enable sharing of <strong>Github Pages</strong></li>
 </ol>
 <p>This is how this presentation works (and the others before).</p>
-</section><section id="continous-analysis-as-the-ultimate-goal" class="slide level2">
-<h2>“Continous Analysis” as the ultimate goal</h2>
+</section><section id="continuous-analysis-as-the-ultimate-goal" class="slide level2">
+<h2>“Continuous Analysis” as the ultimate goal</h2>
 </section><section id="key-resources" class="slide level2">
 <h2>Key Resources</h2>
 <ul>
@@ -1241,6 +1247,11 @@ csl: ecology-and-society.csl
 <p><a href="https://git-scm.com/book/en/v2/images/local.png">Local version control diagram</a>, in <a href="https://git-scm.com/book/en/v2">Pro Git</a> by Scott Chacon and Ben Straub, licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/">CC BY-NC-SA 3.0</a></p>
 </div>
 </div>
+<aside class="notes">
+<ul>
+<li>version control allows you to record (“check in”) and document specific versions of a resource and thus maintain a record of a file at specific stage of its development</li>
+</ul>
+</aside>
 </section><section id="versions-as-snapshots" class="slide level2">
 <h2>Versions as snapshots</h2>
 <p><img src="./images/version_snapshots.png" width="1674" height="50%" /></p>
@@ -1297,7 +1308,7 @@ csl: ecology-and-society.csl
 <ul>
 <li>sign up for a Github account</li>
 <li>install git locally (see <span class="citation" data-cites="Bryan2021">(Bryan 2021)</span>)</li>
-<li>create a personal access token
+<li>create a Personal Access Token (PAT)
 <ul>
 <li>either via Github (<a href="https://github.com/settings/tokens" class="uri">https://github.com/settings/tokens</a>)</li>
 <li>or via R with: <code>usethis::create_github_token()</code></li>
@@ -1339,10 +1350,22 @@ $ git config --global user.email johndoe@example.com</code></pre>
 -&gt; Adding new credentials...
 -&gt; Removing credentials from cache...
 -&gt; Done.</code></pre>
+<aside class="notes">
+<ul>
+<li>now your setup is complete</li>
+<li>you have installed git, told git who you are and provided your local git installation with credentials needed if it wants to connect to GitHub</li>
+</ul>
+</aside>
 </section><section id="alternative-to-pats" class="slide level2">
 <h2>Alternative to PATs</h2>
 <p>You can also configure <strong>SSH keys</strong> to connect to GitHub.</p>
 <p>Consult <strong><a href="https://happygitwithr.com/ssh-keys">Set up keys for SSH</a></strong> <span class="citation" data-cites="Bryan2021">(Bryan 2021)</span> to explore this option.</p>
+<aside class="notes">
+<ul>
+<li>PATs are the recommended option by GitHub and J. Bryan in Happy Git</li>
+<li>they have the advantage that they can be used both for commits and other interactions you may have with GitHub (for example when you set up R package development workflows)</li>
+</ul>
+</aside>
 </section><section id="do-this-for-every-new-project" class="slide level2">
 <h2>Do this for every new project:</h2>
 <ul>
