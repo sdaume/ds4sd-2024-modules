@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="Stefan Daume">
+  <title>Structural Topic Modeling with R</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="./reveal.js-3.6.0/css/reveal.css">
+  <style type="text/css">
+      code{white-space: pre-wrap;}
+      span.smallcaps{font-variant: small-caps;}
+      span.underline{text-decoration: underline;}
+      div.column{display: inline-block; vertical-align: top; width: 50%;}
+  </style>
+  <link rel="stylesheet" href="./custom_highlight.js-9.12.0/styles/zenburn.css">
+  <script src="./custom_highlight.js-9.12.0/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <link rel="stylesheet" href="./reveal.js-3.6.0/css/theme/white.css" id="theme">
+  <link rel="stylesheet" href="./css/mycustom.css"/>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? './reveal.js-3.6.0/css/print/pdf.css' : './reveal.js-3.6.0/css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <!--[if lt IE 9]>
+  <script src="./reveal.js-3.6.0/lib/js/html5shiv.js"></script>
+  <![endif]-->
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">Structural Topic Modeling with R</h1>
+  <p class="author">Stefan Daume</p>
+  <p class="date">11. April 2025</p>
+</section>
+
+<section id="section" class="slide level2 hideslideheader" data-background="#061C30">
+<h2> </h2>
+<div style="display:table;width:100%;table-layout: fixed;">
+<div class="title-without-logo" style="display:table-cell;width:100%;padding-right:3%;padding-left:3%;vertical-align:middle;">
+<p>SRC 2024/25 PhD course ‘Data Science for Sustainable Development’</p>
+<p>Structural Topic Modeling with R</p>
+<p> </p>
+<p> </p>
+<p> </p>
+<p> </p>
+</div>
+</div>
+<div style="display:table;width:100%;table-layout: fixed;">
+<div class="mytitlepage linksection" style="display:table-cell;width:30%;padding-left:3%;vertical-align:bottom;">
+<p><em><a href="https://scitingly.net/" class="uri">https://scitingly.net/</a></em></p>
+<p><em><a href="mailto:stefan.daume@su.se" class="email">stefan.daume@su.se</a></em></p>
+</div>
+<div class="mytitlepage authorsection" style="display:table-cell;width:70%;padding-right:3%;">
+<p>  <strong>Stefan Daume</strong></p>
+<p><em><a href="https://www.stockholmresilience.org/meet-our-team/staff/2021-01-27-daume.html">Stockholm Resilience Centre, Stockholm University</a></em></p>
+<p>&amp; <em><a href="https://beijer.kva.se/programmes/complexity/">Beijer Institute of Ecological Economics</a></em></p>
+<p> </p>
+<p><em>11. April 2025</em></p>
+</div>
+</div>
+</section>
+<section><section id="topic-modeling-text-as-data" class="title-slide slide level1"><h1>Topic modeling: “Text as data”</h1></section><section id="the-notion-of-latent-topics" class="slide level2">
+<h2>The notion of “latent topics”</h2>
+<p>Topic modeling applies <strong>unsupervised probabilistic classification</strong> to identify the <strong>latent</strong> (“hidden”) topics in a collection of documents.</p>
+<aside class="notes">
+<ul>
+<li>requires document collections!</li>
+<li>topics are defined as collections of words</li>
+</ul>
+</aside>
+</section><section id="supervised-vs-unsupervised-learningclassification" class="slide level2">
+<h2>Supervised vs unsupervised learning/classification</h2>
+<p>Key difference: supervised learning requires <strong>labelled</strong> training data</p>
+<aside class="notes">
+<ul>
+<li>Key takeaway: this has substantial practical and economical implications for research (different efforts, costs, teams)</li>
+<li>add examples of effort processes</li>
+</ul>
+</aside>
+</section><section id="why-topic-modeling" class="slide level2">
+<h2>Why topic modeling?</h2>
+<ul>
+<li>summarize large text collections</li>
+<li>discover “latent” topics</li>
+<li>text-based (causal) inferences and testing social science theories</li>
+</ul>
+</section></section>
+<section><section id="examples" class="title-slide slide level1"><h1>Examples</h1></section><section id="long-term-trends-in-climate-change-reports" class="slide level2">
+<h2>Long-term trends in climate change reports</h2>
+<p>A topography of climate change research <span class="citation" data-cites="CallaghanMinx_et_2020_NCC_10">(Callaghan, Minx, and Forster <a href="#/ref-CallaghanMinx_et_2020_NCC_10" role="doc-biblioref">2020</a>)</span></p>
+<ul>
+<li>more than 400.000 climate change publications analysed</li>
+<li>over-representation of social sciences are in recent assessment reports</li>
+<li>demand of more solution-oriented research</li>
+</ul>
+</section><section id="corporate-sustainability-reporting" class="slide level2">
+<h2>Corporate sustainability reporting</h2>
+<p>Analysis of 9,500 corporate sustainability reports (published 1999 to 2015) <span class="citation" data-cites="SzekelyBrocke_2017_PO_12">(Székely and Brocke <a href="#/ref-SzekelyBrocke_2017_PO_12" role="doc-biblioref">2017</a>)</span>:</p>
+<ul>
+<li>reports cover environmental, social, and economic sustainability</li>
+<li>economic sustainability is of increasing importance</li>
+<li>environmental sustainability is focused on emissions and energy</li>
+<li>biodiversity receives little attention</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>sustainability reports published between 1999 and 2015 for our study. We retrieved the PDF documents from the GRI website (<a href="http://database.globalreporting.org/search" class="uri">http://database.globalreporting.org/search</a>)</li>
+</ul>
+</aside>
+</section><section id="climate-communication" class="slide level2">
+<h2>Climate communication</h2>
+<ul>
+<li><strong>topic modeling</strong> of <strong>organizational climate communication</strong> to identify <strong>impact of corporate funding</strong> on climate polarization <span class="citation" data-cites="Farell_2016_PNAS_113">(Farrell <a href="#/ref-Farell_2016_PNAS_113" role="doc-biblioref">2016</a>)</span></li>
+</ul>
+<aside class="notes">
+<ul>
+<li>the last example is based on text and illustrates the use of the method we will focus on today</li>
+</ul>
+</aside>
+</section><section id="perception-and-communication-of-policies" class="slide level2">
+<h2>Perception and communication of policies</h2>
+<p>Analysis of open-ended survey responses asking why carbon taxes are unfair <span class="citation" data-cites="PovitkinaCarlssonJagers_et_2021_GEC_70">(Povitkina et al. <a href="#/ref-PovitkinaCarlssonJagers_et_2021_GEC_70" role="doc-biblioref">2021</a>)</span>:</p>
+<ul>
+<li>impact of demographic factors on perceptions of fairness</li>
+<li>implications for policy design</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>Why are carbon taxes unfair? Disentangling public perceptions of fairness</p></li>
+<li><p>mention that this (open-ended survey responses) is also the original usecase for STM</p></li>
+<li><p><strong>several usecases that might relate to your own research and give an indication where topic models may be useful</strong></p></li>
+<li><p><strong>also the reason we chose this techniques because we all deal with text in one way or another</strong></p></li>
+</ul>
+</aside>
+</section></section>
+<section><section id="topic-modeling-algorithm" class="title-slide slide level1"><h1>Topic modeling algorithm</h1></section><section id="how-does-it-work" class="slide level2">
+<h2>How does it work?</h2>
+<p>Generative model that reverses the assumed document generation process.</p>
+</section><section id="generative-model" class="slide level2 xs-small-pg-text">
+<h2>Generative model</h2>
+<p><img src="images/topic_modelling_explained.jpg" width="60%" /></p>
+<p>Illustration of the topic modeling process (<span class="citation" data-cites="DaumeAlbertEt2014_FORESTECOSYST_1">(Daume, Albert, and von Gadow <a href="#/ref-DaumeAlbertEt2014_FORESTECOSYST_1" role="doc-biblioref">2014</a>)</span> (adapted from <span class="citation" data-cites="Blei2012_COMMACM_55">(Blei <a href="#/ref-Blei2012_COMMACM_55" role="doc-biblioref">2012</a>)</span>)).</p>
+</section><section id="topic-modelling-algorithms" class="slide level2">
+<h2>Topic modelling algorithms</h2>
+<ul>
+<li>LSA - <a href="https://asistdl.onlinelibrary.wiley.com/doi/10.1002/(SICI)1097-4571(199009)41:6%3C391::AID-ASI1%3E3.0.CO;2-9">Latent semantic analysis</a></li>
+<li>LDA - Latent dirichlet allocation <span class="citation" data-cites="BleiNgEt2003_JMLR_3">(Blei, Ng, and Jordan <a href="#/ref-BleiNgEt2003_JMLR_3" role="doc-biblioref">2003</a>)</span></li>
+<li>CTM - Correlated topic model <span class="citation" data-cites="BleiLafferty2007_AAS_1">(Blei and Lafferty <a href="#/ref-BleiLafferty2007_AAS_1" role="doc-biblioref">2007</a>)</span></li>
+<li>STM - Structural topic model <span class="citation" data-cites="RobertsStewart_et_2019_JSTATS_91">(Roberts, Stewart, and Tingley <a href="#/ref-RobertsStewart_et_2019_JSTATS_91" role="doc-biblioref">2019</a>)</span></li>
+</ul>
+</section><section id="stm-vs-vanilla-lda" class="slide level2">
+<h2>STM vs “vanilla LDA”</h2>
+<ul>
+<li>STM extends CTM (i.e. assumes that topics are correlated)</li>
+<li>STM can incorporate arbitrary document meta-data into the topic model</li>
+</ul>
+</section><section id="basic-text-mining-concepts" class="slide level2">
+<h2>Basic text mining concepts</h2>
+<ul>
+<li>documents</li>
+<li>corpus</li>
+<li>tokens</li>
+<li>terms</li>
+</ul>
+</section><section id="basic-topic-modeling-steps" class="slide level2">
+<h2>Basic Topic modeling steps</h2>
+<ol type="1">
+<li>get documents to analyse</li>
+<li>preprocess</li>
+<li>create a corpus</li>
+<li>tokenize</li>
+<li>create document-term/feature matrix</li>
+<li><em>(evaluate alternative topic numbers)</em></li>
+<li>decide on K, the number of topics, and fit a topic model</li>
+<li><em>(validate semantic integrity of the topic model)</em></li>
+<li>test impact of document meta-data on topics</li>
+</ol>
+</section><section id="r-packages-to-use" class="slide level2">
+<h2>R packages to use</h2>
+<ul>
+<li>quanteda</li>
+<li>tidytext</li>
+<li>(snowballc)</li>
+<li>(spacyr)</li>
+<li>stringr</li>
+<li>stm</li>
+</ul>
+</section></section>
+<section><section id="structural-topic-modeling-applied" class="title-slide slide level1"><h1>Structural topic modeling applied</h1></section><section id="a-topic-model-of-covid-preprints" class="slide level2">
+<h2>A Topic model of Covid preprints</h2>
+<p>The following slides step through a detailed example of fitting a topic model to preprints on <a href="https://www.biorxiv.org/">bioRxiv</a> and <a href="https://www.medrxiv.org/">medRxiv</a> related to <em>Covid-19</em>.</p>
+<p>R code and detailed examples are available here:</p>
+<ul>
+<li><strong>Code</strong>: <a href="https://github.com/sdaume/srcquantcourse" class="uri">https://github.com/sdaume/srcquantcourse</a></li>
+<li><strong>Documentation</strong>: <a href="https://sdaume.github.io/srcquantcourse" class="uri">https://sdaume.github.io/srcquantcourse</a></li>
+</ul>
+</section><section id="motivation" class="slide level2">
+<h2>Motivation</h2>
+<ul>
+<li>understand prevalent topics in preprints from <a href="https://www.biorxiv.org/">bioRxiv</a> and <a href="https://www.medrxiv.org/">medRxiv</a></li>
+<li>explore the effect of document metadata (covariates), such as:
+<ul>
+<li>Which preprint server it was published on?</li>
+<li>When it was published?</li>
+<li>If it has been published after peer review?</li>
+</ul></li>
+</ul>
+</section><section id="getting-data" class="slide level2">
+<h2>Getting data</h2>
+<p>Preprint data on <a href="https://www.biorxiv.org/">bioRxiv</a> and <a href="https://www.medrxiv.org/">medRxiv</a> can be retrieved via a <strong>public API</strong> with the help of the <a href="https://docs.ropensci.org/medrxivr/"><code>medrxivr</code></a> R package.</p>
+</section><section id="preparing-preprint-metadata" class="slide level2">
+<h2>Preparing preprint metadata</h2>
+<pre class="r"><code>library(dplyr)
+library(medrxivr)
+
+# get publications from medRxiv and bioRxiv
+pubs_biorxiv_raw &lt;- medrxivr::mx_api_content(server = &quot;biorxiv&quot;,
+                                             #from_date = &quot;2019-01-01&quot;,
+                                             to_date = &quot;2023-12-31&quot;)
+
+pubs_medrxiv_raw &lt;- medrxivr::mx_api_content(server = &quot;medrxiv&quot;,
+                                             #from_date = &quot;2019-01-01&quot;,
+                                             to_date = &quot;2023-12-31&quot;)
+
+pubs_biorxiv_raw &lt;- pubs_biorxiv_raw %&gt;%
+  mutate(server = &quot;biorxiv&quot;)
+
+pubs_medrxiv_raw &lt;- pubs_medrxiv_raw %&gt;%
+  mutate(server = &quot;medrxiv&quot;)
+
+preprints_raw &lt;- dplyr::bind_rows(pubs_biorxiv_raw, pubs_medrxiv_raw)
+
+save(preprints_raw, file = &quot;./data-raw/preprints_raw.Rdata&quot;)</code></pre>
+</section><section id="preprint-metadata" class="slide level2">
+<h2>Preprint metadata</h2>
+<pre><code>glimpse(preprints_raw)
+
+Rows: 365,526
+Columns: 16
+$ doi                              &lt;chr&gt; &quot;10.1101/001891&quot;, &quot;10.1101/001867&quot;, &quot;10.1101…
+$ title                            &lt;chr&gt; &quot;Population genomics of Saccharomyces cerevi…
+$ authors                          &lt;chr&gt; &quot;Carlotta De Filippo;Monica Di Paola;Irene S…
+$ author_corresponding             &lt;chr&gt; &quot;Duccio  Cavalieri&quot;, &quot;David  Morrison&quot;, &quot;Dav…
+$ author_corresponding_institution &lt;chr&gt; &quot;Fondazione E. Mach (FEM)&quot;, &quot;Swedish Univers…
+$ date                             &lt;chr&gt; &quot;2014-01-17&quot;, &quot;2014-01-17&quot;, &quot;2014-01-17&quot;, &quot;2…
+$ version                          &lt;chr&gt; &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;2&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;1&quot;, &quot;2&quot;,…
+$ license                          &lt;chr&gt; &quot;cc_by_nc_nd&quot;, &quot;cc_by_nc&quot;, &quot;cc_by_nc&quot;, &quot;cc_b…
+$ category                         &lt;chr&gt; &quot;Evolutionary Biology &quot;, &quot;Ecology &quot;, &quot;Molecu…
+$ jatsxml                          &lt;chr&gt; &quot;https://www.biorxiv.org/content/early/2014/…
+$ abstract                         &lt;chr&gt; &quot;The quest for the ecological niches of Sacc…
+$ published                        &lt;chr&gt; &quot;NA&quot;, &quot;NA&quot;, &quot;NA&quot;, &quot;NA&quot;, &quot;10.1093/bioinformat…
+$ node                             &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 1…
+$ link_page                        &lt;chr&gt; &quot;https://www.biorxiv.org/content/10.1101/001…
+$ link_pdf                         &lt;chr&gt; &quot;https://www.biorxiv.org/content/10.1101/001…
+$ server                           &lt;chr&gt; &quot;biorxiv&quot;, &quot;biorxiv&quot;, &quot;biorxiv&quot;, &quot;biorxiv&quot;, …</code></pre>
+</section><section id="cleaning-filtering-and-annotating" class="slide level2">
+<h2>Cleaning, filtering and annotating</h2>
+<pre class="r"><code>library(dplyr)
+
+preprints_cleaned &lt;- preprints_raw %&gt;%
+  group_by(doi) %&gt;%
+  filter(version == max(version)) %&gt;%
+  ungroup() %&gt;%
+  distinct(doi, .keep_all = TRUE)</code></pre>
+</section><section id="cleaning-filtering-and-annotating-1" class="slide level2">
+<h2>Cleaning, filtering and annotating</h2>
+<pre class="r"><code>preprints &lt;- preprints_cleaned %&gt;%
+  mutate(published = stringr::str_trim(published)) %&gt;%
+  mutate(published = na_if(published, &quot;NA&quot;)) %&gt;%
+  mutate(is_published = as.numeric(!is.na(published))) %&gt;%
+  mutate(is_published = case_when(is_published == 1 ~ &quot;published&quot;,
+                                  is_published == 0 ~ &quot;not published&quot;,
+                                  TRUE ~ &quot;undefined&quot;)) %&gt;%
+  mutate(year = lubridate::year(date)) %&gt;%
+  filter(year &gt;= 2020 &amp; year &lt;= 2023) %&gt;% 
+  select(doi, server, title, abstract, date, year, version, is_published)</code></pre>
+</section><section id="cleaning-filtering-and-annotating-2" class="slide level2">
+<h2>Cleaning, filtering and annotating</h2>
+<pre class="r"><code>library(stringr)
+
+keywords &lt;- c(&quot;sars-cov&quot;, &quot;covid&quot;)
+
+search_pattern &lt;- stringr::regex(paste(keywords, collapse = &quot;|&quot;), 
+                                 ignore_case = TRUE)
+
+covid_preprints &lt;- preprints %&gt;%
+  filter(stringr::str_detect(title, pattern = search_pattern) |
+           stringr::str_detect(abstract, pattern = search_pattern))</code></pre>
+</section><section id="preprocessing-the-documents-for-text-analysis" class="slide level2">
+<h2>Preprocessing the documents for text analysis</h2>
+<p>From text to data:</p>
+<ul>
+<li>create a corpus</li>
+<li>tokenize and preprocess</li>
+<li>create a document-feature matrix</li>
+</ul>
+</section><section id="preprocessing-the-documents-for-text-analysis-1" class="slide level2">
+<h2>Preprocessing the documents for text analysis</h2>
+<p>Text preprocessing choices could strongly influence the results of a text analysis!</p>
+<p> </p>
+<p>Choices need to be:</p>
+<ul>
+<li>thoroughly explained,</li>
+<li>carefully evaluated and</li>
+<li>ideally be based on theory (see <span class="citation" data-cites="DennySpirling_2018_PA_26">(Denny and Spirling <a href="#/ref-DennySpirling_2018_PA_26" role="doc-biblioref">2018</a>)</span>)</li>
+</ul>
+</section><section id="create-a-corpus" class="slide level2">
+<h2>Create a corpus</h2>
+<pre class="r"><code>library(quanteda)
+
+pubs_corpus &lt;- covid_preprints %&gt;%
+  quanteda::corpus(docid_field = &quot;doi&quot;, text_field = &quot;abstract&quot;)
+
+# pubs_corpus
+# Corpus consisting of 29,692 documents and 6 docvars.</code></pre>
+<aside class="notes">
+<p>First, we create a <strong>corpus</strong> object from the dataframe of preprints. The corpus is essentially a library of documents that will be used for the next steps. It specifies which variable should be used to uniquely identify documents and which variable holds the textual content (here the preprint <em>abstracts</em>) that should be processed.</p>
+<p>Echoing the corpus will provide some basic information. All other variables in the original dataframe will be interpreted and included as document metadata (<em>‘docvars’</em>), which could later be included in the STM topic modelling process.</p>
+</aside>
+</section><section id="tokenize-and-preprocess" class="slide level2">
+<h2>Tokenize and preprocess</h2>
+<pre class="r"><code>pubs_tokens &lt;- pubs_corpus %&gt;%
+  quanteda::tokens(remove_punct = TRUE,
+                   remove_symbols = TRUE,
+                   remove_numbers = TRUE,
+                   remove_url = TRUE,
+                   remove_separators = TRUE,
+                   split_hyphens = TRUE) </code></pre>
+<aside class="notes">
+<p>For further analysis the corpus documents have to be <strong>tokenized</strong>, i.e. further processing the texts have to be broken into semantic units that are relevant for our analysis. The most common approach is to interpret each <em>word</em> (typically designated by whitespaces or punctuation) as a token. This is applied here as well. <code>quanteda</code> offers several alternative approaches. Instead of individual words, sequences of words (<em>n-grams</em>) could for example be used.</p>
+<p>The tokenization method also provides several options for preprocessing and filtering the tokens. Here for example, while tokenizing, we will simultaneously remove punctuation, numbers, special symbols and URLs. Furthermore, we split words containing hyphens, a word like <em>social-ecological</em> will thus be split into two individual tokens (<em>social</em> and <em>ecological</em>).</p>
+<p>The text preprocessing choices could strongly influence the results of a text analysis and should be thoroughly explained, carefully evaluated and ideally be based on theory (see <span class="citation" data-cites="DennySpirling_2018_PA_26">(Denny and Spirling <a href="#/ref-DennySpirling_2018_PA_26" role="doc-biblioref">2018</a>)</span>).</p>
+</aside>
+</section><section id="create-a-document-feature-matrix" class="slide level2">
+<h2>Create a Document-feature matrix</h2>
+<pre class="r"><code>pubs_dfm &lt;- pubs_tokens %&gt;%
+  quanteda::dfm()</code></pre>
+<aside class="notes">
+<p>The <strong>tokens</strong> object is then used to create a <em>document-feature matrix</em>. For further statistical analysis this reduces the tokens to a matrix of documents (rows) and unique <strong>terms</strong> (columns) that counts the number of occurrences for each term in each document. <code>quanteda</code> captures this as <em>features</em> which supports more general options than <strong>terms</strong> (see the <code>quanteda</code> documentation for details).</p>
+</aside>
+</section><section id="filter-terms-and-documents" class="slide level2">
+<h2>Filter terms and documents</h2>
+<pre class="r"><code>pubs_dfm &lt;- pubs_dfm %&gt;%
+  quanteda::dfm_remove(pattern = quanteda::stopwords(&quot;english&quot;)) #%&gt;%
+  #quanteda::dfm_wordstem()</code></pre>
+<pre><code># echo the result
+&gt; pubs_dfm
+
+Document-feature matrix of: 29,692 documents, 82,472 features (99.87% sparse) and 6 docvars.
+                features
+docs             nitric oxide synthesised three isoforms synthases viz nnos neurons enos
+  10.1101/038398      6     6           1     1        1         1   1    1       2    1
+  10.1101/058511      0     0           0     0        0         0   0    0       0    0
+  10.1101/292979      0     0           0     2        0         0   0    0       0    0
+  10.1101/402370      0     0           0     0        0         0   0    0       0    0
+  10.1101/420737      0     0           0     0        0         0   0    0       0    0
+  10.1101/596700      0     0           0     0        0         0   0    0       0    0
+[ reached max_ndoc ... 29,686 more documents, reached max_nfeat ... 82,462 more features ]</code></pre>
+<aside class="notes">
+<p>This is followed by other (optional) processing and filtering steps. A common option for example — to reduce the size of the data or assist in the interpretation — is the removal of so-called <strong>stopwords</strong> (e.g. <em>“the”, “and”, “or”</em> etc).</p>
+<p>A step omitted here is reducing words (terms) to their word stem. The stemming algorithm (several are available) reduces words to its word stem. The terms “universal”, “university” and “universe” would for example be reduced to the same word stem of “univers”; this example indicates that this approach may require careful consideration.</p>
+<p>Stemming has the advantage that it could potentially reduce the size of the matrix substantially.</p>
+</aside>
+</section><section id="stemming" class="slide level2">
+<h2>Stemming</h2>
+<p><em>“Stemming”</em> will reduce the matrix, but could result in loosing semantic information.</p>
+<p>For example: <strong>“universal”</strong>, <strong>“university”</strong> and <strong>“universe”</strong> all have the stem <strong>“univers”</strong>!</p>
+</section><section id="more-filtering" class="slide level2">
+<h2>More filtering</h2>
+<pre class="r"><code>pubs_dfm &lt;- pubs_dfm %&gt;%
+  quanteda::dfm_remove(min_nchar = 2) %&gt;%
+  quanteda::dfm_trim(min_docfreq = 2, docfreq_type = &quot;count&quot;) %&gt;%
+  quanteda::dfm_subset(quanteda::ntoken(.) &gt; 4)</code></pre>
+<pre><code># echo the result
+&gt; pubs_dfm
+
+Document-feature matrix of: 29,691 documents, 37,093 features (99.72% sparse) and 6 docvars.
+                features
+docs             nitric oxide synthesised three isoforms synthases viz neurons enos endothelial
+  10.1101/038398      6     6           1     1        1         1   1       2    1           2
+  10.1101/058511      0     0           0     0        0         0   0       0    0           0
+  10.1101/292979      0     0           0     2        0         0   0       0    0           0
+  10.1101/402370      0     0           0     0        0         0   0       0    0           0
+  10.1101/420737      0     0           0     0        0         0   0       0    0           0
+  10.1101/596700      0     0           0     0        0         0   0       0    0           0
+[ reached max_ndoc ... 29,685 more documents, reached max_nfeat ... 37,083 more features ]</code></pre>
+<aside class="notes">
+<p>Further options may be considered to reduce noise and/or the size of the matrix. The following code removes for example terms (or features) that consist only of one character, terms that do not appear in at least two different documents, and furthermore would remove documents that do not contain at least 5 tokens. In our example this drops one document and reduces the number of retained features by more than half.</p>
+</aside>
+</section><section id="fitting-the-stm-topic-model" class="slide level2">
+<h2>Fitting the STM topic model</h2>
+<pre class="r"><code>library(stm)
+
+covid_stm_docs &lt;- quanteda::convert(pubs_dfm, to = &quot;stm&quot;)
+
+covid_model_K20 &lt;- stm(documents = covid_stm_docs$documents,
+                       vocab = covid_stm_docs$vocab,
+                       data = covid_stm_docs$meta,
+                       prevalence = ~ server * s(year),
+                       K = 20,
+                       verbose = TRUE,
+                       seed = 9868467)</code></pre>
+<aside class="notes">
+<p>The key input to any topic modelling algorithm is the number of topics (<code>K</code>) that the model should be fit to, which we here set to 20 (see the separate document for a discussion on suitable choices for the number of topics).</p>
+<p>Before fitting the topic model we convert the document-feature matrix into the native STM format. In order to fit a topic model with the <code>stm()</code> function we need the set of <code>documents</code>, the <code>vocabulary</code> of which these documents are composed and a dataframe specifying the values of all document meta-data variables (<code>data</code>) which can be used in the process as “covariates” that might influence the prevalence of topics in a document.</p>
+<p>In the example below, we ask <code>stm</code> to incorporate the origin of the document (<code>server</code>) and the publication <code>year</code> when fitting the topic model. The argument <code>prevalence = ~ server * s(year)</code> expresses that we assume that the prevalence of topics in a document is influenced by these two variables, and that they also interact, i.e. we work with the hypothesis that different temporal trends could be expected for documents published on either of the two preprint servers<a href="#/fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>.</p>
+<p>The consideration of covariates is optional. If omitted the model reduces to a <em>Correlated Topic Model</em> <span class="citation" data-cites="BleiLafferty2007_AAS_1 RobertsStewart_et_2019_JSTATS_91">(Blei and Lafferty <a href="#/ref-BleiLafferty2007_AAS_1" role="doc-biblioref">2007</a>; Roberts, Stewart, and Tingley <a href="#/ref-RobertsStewart_et_2019_JSTATS_91" role="doc-biblioref">2019</a>)</span>.</p>
+<p>We also supply a <code>seed</code>, which allows to replicate the results of the topic modeling.</p>
+</aside>
+</section><section id="choosing-k" class="slide level2">
+<h2>Choosing ‘K’</h2>
+<p><img src="figures/unnamed-chunk-12-1.png" width="80%" /></p>
+</section><section id="choosing-k-1" class="slide level2">
+<h2>Choosing ‘K’</h2>
+<p><img src="figures/unnamed-chunk-13-1.png" width="80%" /></p>
+</section><section id="estimating-the-effect-of-document-covariates" class="slide level2">
+<h2>Estimating the effect of document covariates</h2>
+<pre class="r"><code>covid_effect_K20 &lt;- estimateEffect(1:20 ~ server * s(year),
+                                   stmobj = covid_model_K20,
+                                   metadata = covid_stm_docs$meta)</code></pre>
+<aside class="notes">
+<p>Once the model has converged we can estimate the effect of document covariates on the topic prevalence. The <code>estimateEffect()</code> function allows to run regressions based on the formula specified as the first argument. It is here identical to the formula used when fitting the topic model, and regressions are run for all 20 topics. The same metadata as used previously needs to be supplied for this function in addition to the topic model object.</p>
+<p>This concludes fitting the model. The following sections step through a sample exploration of this topic model.</p>
+</aside>
+</section><section id="basic-topic-model-information" class="slide level2">
+<h2>Basic topic model information</h2>
+<pre class="r"><code>
+plot(covid_model_K20, n = 5)</code></pre>
+<p><img src="figures/unnamed-chunk-15-1.png" width="70%" /></p>
+<aside class="notes">
+<p>The topic model is defined by two matrices that capture probability distributions of topics over documents (<em>gamma</em> matrix) and words (or terms) over topics (<em>beta</em> matrix). We can start exploring these with some of the built-in functions of <code>stm</code>.</p>
+<p>The <code>plot()</code> function plots a chart showing topic proportions for all topics in the model. A topic is identified by a unique ID (1-20) and in the plot below the five words (or terms) that have the highest probability of being associated with the given topic. This gives an early indication of the distinct latent topics in the analysed subset of preprints.</p>
+</aside>
+</section><section id="topic-words" class="slide level2">
+<h2>Topic words</h2>
+<pre class="r"><code>summary(covid_model_K20)
+&gt;# A topic model with 20 topics, 29691 documents and a 37093 word dictionary.
+&gt;# Topic 1 Top Words:
+&gt;#       Highest Prob: model, can, covid, transmission, epidemic, data, disease 
+&gt;#       FREX: npis, mathematical, compartmental, scenarios, seir, reproduction, sir 
+&gt;#       Lift: 1we, abms, ao_scplowbstractc_scplowas, apt, artefact, asilv, asymptotically 
+&gt;#       Score: distancing, social, epidemic, reproduction, npis, model, r0 
+&gt;# Topic 2 Top Words:
+&gt;#       Highest Prob: cov, sars, drug, antiviral, activity, drugs, covid 
+&gt;#       FREX: src, figdir, o_linksmallfig, c_fig, m_fig, o_fig, gif 
+&gt;#       Lift: k777, gif, pmmov, wwtps, 13k, 17k, 18k 
+&gt;#       Score: mpro, antiviral, drug, inhibitors, protease, drugs, compounds 
+&gt;# Topic 3 Top Words:
+&gt;#       Highest Prob: covid, risk, age, mortality, ci, associated, years 
+&gt;#       FREX: hispanic, ethnicity, pregnant, racial, black, smoking, preterm 
+&gt;#       Lift: 65s, asmr, assault, backgroundethnic, backgroundracial, backgroundsocio, brunt 
+&gt;#       Score: ci, age, women, mortality, ethnicity, aor, hispanic 
+&gt;# Topic 4 Top Words:
+&gt;#       Highest Prob: covid, health, pandemic, mental, social, study, survey 
+&gt;#       FREX: loneliness, emotional, attitude, depression, insecurity, mental, anxiety 
+&gt;#       Lift: insecurity, accelerometers, amhara, angry, anovas, asd, asleep 
+&gt;#       Score: mental, anxiety, depression, respondents, social, psychological, students 
+&gt;# Topic 5 Top Words:
+&gt;#       Highest Prob: sars, cov, infection, testing, transmission, cases, children 
+&gt;#       FREX: ifr, seroprevalence, schools, school, contacts, household, attack 
+&gt;#       Lift: inmates, 19y, 35y, 39y, 9a, abidjan, addscovid 
+&gt;#       Score: school, seroprevalence, children, schools, household, transmission, testing 
+&gt;# Topic 6 Top Words:
+&gt;#       Highest Prob: cov, sars, virus, viral, coronavirus, respiratory, infection 
+&gt;#       FREX: bats, cats, deer, animals, covs, wildlife, hcov 
+&gt;#       Lift: cats, 5x106, aav6, aegyptiacus, aethiops, affinis, agm 
+&gt;#       Score: cov, sars, mice, rna, viruses, coronaviruses, animals 
+&gt;# Topic 7 Top Words:
+&gt;#       Highest Prob: patients, covid, hospital, disease, clinical, severe, admission 
+&gt;#       FREX: acei, admission, arbs, admitted, icu, aki, aceis 
+&gt;#       Lift: 1.1x109, 2020r1g1a1a01006229, 2l, 4.0x109, 40y, ahmad, ahrq 
+&gt;#       Score: patients, admission, icu, hospital, admitted, ci, hospitalized 
+&gt;# Topic 8 Top Words:
+&gt;#       Highest Prob: covid, cases, countries, number, deaths, data, pandemic 
+&gt;#       FREX: cfr, italy, cities, country, countries, fatality, china 
+&gt;#       Lift: 1000m, 1th, 55th, abysmally, abyss, adhanom, adminstat 
+&gt;#       Score: countries, cases, lockdown, deaths, country, cfr, daily 
+&gt;# Topic 9 Top Words:
+&gt;#       Highest Prob: protein, binding, spike, sars, cov, ace2, rbd 
+&gt;#       FREX: conformational, cryo, conformation, glycans, conformations, nanobodies, residues 
+&gt;#       Lift: 13c, 6lzg, 6m0j, 6vw1, 6vxx, aabpu, abdab 
+&gt;#       Score: binding, rbd, protein, spike, ace2, proteins, epitopes 
+&gt;# Topic 10 Top Words:
+&gt;#       Highest Prob: data, can, learning, covid, using, model, based 
+&gt;#       FREX: aerosol, n95, aerosols, respirators, decontamination, airborne, machine 
+&gt;#       Lift: elastomeric, forehead, papr, radiomics, exhaled, singing, 0.3m 
+&gt;#       Score: learning, masks, aerosol, machine, respirators, n95, mask 
+&gt;# Topic 11 Top Words:
+&gt;#       Highest Prob: vaccine, vaccination, covid, middle, vaccines, dot, dose 
+&gt;#       FREX: hesitancy, dot, vaccinate, middle, hesitant, rollout, ve 
+&gt;#       Lift: #949850, acceptant, adjrr, aesis, amparo, analysesthe, andersen 
+&gt;#       Score: vaccination, vaccine, dot, booster, dose, vaccinated, middle 
+&gt;# Topic 12 Top Words:
+&gt;#       Highest Prob: studies, care, covid, health, research, data, pandemic 
+&gt;#       FREX: reviews, telemedicine, preprints, scoping, articles, blacksquare, publications 
+&gt;#       Lift: preprints, 1.2m, aas, abbreviating, accustomed, activists, advisor 
+&gt;#       Score: review, care, services, articles, reviews, pubmed, service 
+&gt;# Topic 13 Top Words:
+&gt;#       Highest Prob: sars, cov, genome, mutations, sequencing, viral, variants 
+&gt;#       FREX: phylogenetic, gisaid, clades, wgs, genomes, genomic, haplotype 
+&gt;#       Lift: clades, snvs, 1.1.7s, 11083g, 14408c, 17del, 20a 
+&gt;#       Score: mutations, genome, wastewater, genomes, sequences, sequencing, genomic 
+&gt;# Topic 14 Top Words:
+&gt;#       Highest Prob: cells, cell, sars, cov, expression, infection, ace2 
+&gt;#       FREX: autophagy, mirnas, mirna, at2, ifns, ciliated, scrna 
+&gt;#       Lift: 25hc, angiotensinogen, antagonizes, apcs, arf6, asgr1, at2s 
+&gt;#       Score: cells, expression, ace2, cell, genes, epithelial, tmprss2 
+&gt;# Topic 15 Top Words:
+&gt;#       Highest Prob: antibody, sars, cov, antibodies, igg, responses, vaccine 
+&gt;#       FREX: iga, bau, igg, humoral, immunogenicity, as03, reactogenicity 
+&gt;#       Lift: 1x1011, 28d, 30ug, ad26cov2, addas03, adhu5, atellica 
+&gt;#       Score: igg, antibody, antibodies, neutralizing, rbd, vaccine, spike 
+&gt;# Topic 16 Top Words:
+&gt;#       Highest Prob: sars, cov, pcr, samples, rt, test, testing 
+&gt;#       FREX: ag, rdt, rdts, lod, rt, panbio, kits 
+&gt;#       Lift: poct, cobas, panbio, #yomecorono, 1.6x104, 10min, 15min 
+&gt;#       Score: rt, pcr, assay, samples, saliva, detection, assays 
+&gt;# Topic 17 Top Words:
+&gt;#       Highest Prob: variants, omicron, variant, delta, ba, cov, sars 
+&gt;#       FREX: omicron, ba, xbb, subvariants, delta, bq, voc 
+&gt;#       Lift: 1.5s, 129s2, 1f11, 2.86s, 3b8, 417n, 75d30121c11061 
+&gt;#       Score: omicron, ba, variants, variant, delta, mutations, voc 
+&gt;# Topic 18 Top Words:
+&gt;#       Highest Prob: covid, patients, disease, severe, immune, inflammatory, associated 
+&gt;#       FREX: autoantibodies, ipf, balf, neutrophils, il, fibrosis, autoantibody 
+&gt;#       Lift: 18f, 24hr, a2ar, aab, actinobacteria, activin, adiponectin 
+&gt;#       Score: inflammatory, il, patients, cytokine, inflammation, cytokines, endothelial 
+&gt;# Topic 19 Top Words:
+&gt;#       Highest Prob: patients, treatment, covid, group, days, day, trial 
+&gt;#       FREX: placebo, randomized, hcq, soc, azithromycin, arm, tocilizumab 
+&gt;#       Lift: 200mg, 400mg, 500mg, 600mg, 800mg, aureobasidium, ayush 
+&gt;#       Score: placebo, hcq, trial, patients, randomized, tocilizumab, hydroxychloroquine 
+&gt;# Topic 20 Top Words:
+&gt;#       Highest Prob: covid, symptoms, long, workers, infection, participants, study 
+&gt;#       FREX: hcws, taste, smell, hcw, fatigue, workers, headache 
+&gt;#       Lift: chemesthetic, dirty, eyewear, firefighters, ohs, principality, psychophysical 
+&gt;#       Score: symptoms, hcws, workers, participants, symptom, hcw, fatigue</code></pre>
+<aside class="notes">
+<p>The <code>summary()</code> function provides a more detailed view of the topics and can help to begin interpreting and labeling the 20 topics. Specifically, the output shows four different sets of words associated with a topic. <em>‘Highest Prob’</em> lists the words that have the highest probability of being associated with a topic. A comparison of different topics highlights that a term such as <em>covid</em> has a high probability for several topics. The list of <em>‘FREX’</em> words summarizes words that are frequent and exclusive in a topic, i.e. characterize a topic in comparison to other topics (consult <code>stm::labelTopics()</code> for details as well as <em>Lift</em> and <em>Score</em> word sets).</p>
+</aside>
+</section><section id="topic-document-gamma-distribution" class="slide level2">
+<h2>Topic-document (‘gamma’) distribution</h2>
+<pre class="r"><code># retrieve the &#39;gamma&#39; matrix
+gamma &lt;- tidytext::tidy(covid_model_K20, matrix = &quot;gamma&quot;)
+
+glimpse(gamma)
+&gt;# Rows: 593,820
+&gt;# Columns: 3
+&gt;# $ document &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18…
+&gt;# $ topic    &lt;int&gt; 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1…
+&gt;# $ gamma    &lt;dbl&gt; 0.001283143, 0.003547179, 0.003745510, 0.005495076, 0.0630417…</code></pre>
+<aside class="notes">
+<p>As mentioned, the topic model is defined by the <em>gamma</em> (distribution of topics over words) and <em>beta</em> (distribution of terms over topics) matrices. With the help of the <code>tidytext</code> package we can extract those into dataframes for a more detailed analysis.</p>
+<p>Each row in the following dataframe lists the probability (<code>gamma</code>) of a given <code>topic</code> occurring in a given <code>document</code><a href="#/fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>.</p>
+</aside>
+</section><section id="term-topic-beta-distribution" class="slide level2">
+<h2>Term-topic (‘beta’) distribution</h2>
+<pre class="r"><code># retrieve the &#39;beta&#39; matrix
+beta &lt;- tidytext::tidy(covid_model_K20, matrix = &quot;beta&quot;)
+
+glimpse(beta)
+&gt;# Rows: 741,860
+&gt;# Columns: 3
+&gt;# $ topic &lt;int&gt; 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 1…
+&gt;# $ term  &lt;chr&gt; &quot;#1&quot;, &quot;#1&quot;, &quot;#1&quot;, &quot;#1&quot;, &quot;#1&quot;, &quot;#1&quot;, &quot;#1&quot;, &quot;#1&quot;, &quot;#1&quot;, &quot;#1&quot;, &quot;#1&quot;…
+&gt;# $ beta  &lt;dbl&gt; 1.874650e-112, 2.519509e-119, 1.248970e-118, 6.665355e-160, 3.21…</code></pre>
+<aside class="notes">
+<p>Similarly, the <em>beta</em> matrix (extracted into a dataframe) lists for each row the probability (<code>beta</code>) of a given <code>term</code> occurring in a given <code>topic</code>.</p>
+<p>Starting with the <em>beta</em> matrix we can create word clouds to explore useful semantic labels for each topic.</p>
+</aside>
+</section><section id="understanding-and-labeling-topics" class="slide level2">
+<h2>Understanding and labeling topics</h2>
+<div class="figure">
+<p><img src="figures/unnamed-chunk-19-1.png" alt="**Word clouds showing the 50 most probable terms for selected topics.** *FREX* terms are highlighted in orange. Words are scaled by normalized probability." width="80%" /></p>
+<p class="caption">
+<p><strong>Word clouds showing the 50 most probable terms for selected topics.</strong> <em>FREX</em> terms are highlighted in orange. Words are scaled by normalized probability.</p>
+</p>
+</div>
+<aside class="notes">
+<p>As mentioned previously <code>stm</code> can use the word probabilities to also compute <em>FREX</em> (frequent and exclusive) words per topic. Those can be retrieved with the <code>stm::labelTopics()</code> function, which returns ordered lists of the different word sets characterizing a topic. We can combine the information about <em>high probability</em> and <em>FREX</em> words to create word clouds for each topic, which might help to assign a summary label for each topic.</p>
+<p>From the review of this combination of <em>FREX</em> and <em>high probability</em> terms distinct topics are emerging, such as: “epidemic models” (Topic 1), “vaccines” (Topic 11), “testing” (Topic 16), “virus variants” (Topic 17), “treatments” (Topic 2), “mortality risks” (Topic 3), “mental health” (Topic 4), “country-wise case reports” (Topic 8), “virus molecular structure” (Topic 9).</p>
+<p>Deriving semantic labels will also benefit from a review of sample documents that are representative for certain topics, i.e. where the topic model assigns a high topic proportion of a given topic to the document. Furthermore, the consistency of assigned semantic labels should be checked prior to further analysis (see for example the <a href="https://github.com/gesistsa/oolong"><code>oolong</code> package</a> for a systematic approach).</p>
+</aside>
+</section><section id="covariate-effects" class="slide level2">
+<h2>Covariate effects</h2>
+<pre class="r"><code>
+summary(covid_effect_K20)
+&gt;# 
+&gt;# Call:
+&gt;# estimateEffect(formula = 1:20 ~ server * s(year), stmobj = covid_model_K20, 
+&gt;#     metadata = covid_stm_docs$meta)
+&gt;# 
+&gt;# 
+&gt;# Topic 1:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0234515  0.0036964   6.344 2.27e-10 ***
+&gt;# servermedrxiv           0.1239364  0.0043129  28.736  &lt; 2e-16 ***
+&gt;# s(year)1               -0.0019176  0.0147550  -0.130    0.897    
+&gt;# s(year)2               -0.0007684  0.0153892  -0.050    0.960    
+&gt;# s(year)3                0.0084132  0.0066881   1.258    0.208    
+&gt;# servermedrxiv:s(year)1 -0.0695085  0.0173024  -4.017 5.90e-05 ***
+&gt;# servermedrxiv:s(year)2 -0.0965498  0.0188849  -5.113 3.20e-07 ***
+&gt;# servermedrxiv:s(year)3 -0.0705657  0.0084431  -8.358  &lt; 2e-16 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 2:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.098665   0.002880  34.262  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.085926   0.003158 -27.212  &lt; 2e-16 ***
+&gt;# s(year)1               -0.019958   0.011371  -1.755   0.0792 .  
+&gt;# s(year)2               -0.011330   0.013466  -0.841   0.4002    
+&gt;# s(year)3               -0.028581   0.004509  -6.338 2.36e-10 ***
+&gt;# servermedrxiv:s(year)1  0.021636   0.012575   1.721   0.0853 .  
+&gt;# servermedrxiv:s(year)2  0.008216   0.014417   0.570   0.5688    
+&gt;# servermedrxiv:s(year)3  0.030329   0.005231   5.797 6.81e-09 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 3:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.011092   0.002813   3.943 8.06e-05 ***
+&gt;# servermedrxiv           0.053932   0.003297  16.356  &lt; 2e-16 ***
+&gt;# s(year)1               -0.002642   0.011400  -0.232    0.817    
+&gt;# s(year)2               -0.001958   0.011826  -0.166    0.868    
+&gt;# s(year)3                0.001212   0.004877   0.248    0.804    
+&gt;# servermedrxiv:s(year)1  0.015020   0.013729   1.094    0.274    
+&gt;# servermedrxiv:s(year)2  0.014190   0.014918   0.951    0.341    
+&gt;# servermedrxiv:s(year)3  0.029833   0.006503   4.588 4.50e-06 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 4:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.008823   0.003238   2.724  0.00644 ** 
+&gt;# servermedrxiv           0.057738   0.003798  15.203  &lt; 2e-16 ***
+&gt;# s(year)1                0.004814   0.013529   0.356  0.72200    
+&gt;# s(year)2               -0.005213   0.014162  -0.368  0.71282    
+&gt;# s(year)3                0.004560   0.005826   0.783  0.43375    
+&gt;# servermedrxiv:s(year)1  0.020339   0.016434   1.238  0.21587    
+&gt;# servermedrxiv:s(year)2 -0.004031   0.018172  -0.222  0.82445    
+&gt;# servermedrxiv:s(year)3  0.020310   0.007672   2.647  0.00812 ** 
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 5:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0049430  0.0023398   2.113   0.0346 *  
+&gt;# servermedrxiv           0.0542764  0.0027865  19.479   &lt;2e-16 ***
+&gt;# s(year)1               -0.0008134  0.0094139  -0.086   0.9311    
+&gt;# s(year)2                0.0001471  0.0099193   0.015   0.9882    
+&gt;# s(year)3                0.0010546  0.0041428   0.255   0.7991    
+&gt;# servermedrxiv:s(year)1  0.0260782  0.0114114   2.285   0.0223 *  
+&gt;# servermedrxiv:s(year)2 -0.0018302  0.0120509  -0.152   0.8793    
+&gt;# servermedrxiv:s(year)3 -0.0084726  0.0053670  -1.579   0.1144    
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 6:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.148602   0.003866  38.434  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.115782   0.004229 -27.376  &lt; 2e-16 ***
+&gt;# s(year)1               -0.021101   0.013517  -1.561   0.1185    
+&gt;# s(year)2               -0.049243   0.012155  -4.051 5.11e-05 ***
+&gt;# s(year)3               -0.043708   0.006071  -7.200 6.18e-13 ***
+&gt;# servermedrxiv:s(year)1  0.005903   0.015136   0.390   0.6965    
+&gt;# servermedrxiv:s(year)2  0.035413   0.013879   2.552   0.0107 *  
+&gt;# servermedrxiv:s(year)3  0.031026   0.006946   4.467 7.97e-06 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 7:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.010755   0.002934   3.665 0.000247 ***
+&gt;# servermedrxiv           0.085991   0.003494  24.613  &lt; 2e-16 ***
+&gt;# s(year)1               -0.004033   0.011512  -0.350 0.726124    
+&gt;# s(year)2               -0.007886   0.012201  -0.646 0.518060    
+&gt;# s(year)3               -0.003443   0.005144  -0.669 0.503331    
+&gt;# servermedrxiv:s(year)1 -0.049305   0.014424  -3.418 0.000631 ***
+&gt;# servermedrxiv:s(year)2 -0.019589   0.015580  -1.257 0.208630    
+&gt;# servermedrxiv:s(year)3 -0.038387   0.006513  -5.894 3.82e-09 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 8:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.027280   0.003058   8.922  &lt; 2e-16 ***
+&gt;# servermedrxiv           0.108710   0.003615  30.070  &lt; 2e-16 ***
+&gt;# s(year)1               -0.012889   0.012357  -1.043  0.29692    
+&gt;# s(year)2               -0.018333   0.012554  -1.460  0.14423    
+&gt;# s(year)3               -0.017113   0.005274  -3.245  0.00118 ** 
+&gt;# servermedrxiv:s(year)1 -0.088615   0.014896  -5.949 2.73e-09 ***
+&gt;# servermedrxiv:s(year)2 -0.046434   0.015515  -2.993  0.00277 ** 
+&gt;# servermedrxiv:s(year)3 -0.060223   0.006653  -9.052  &lt; 2e-16 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 9:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.170474   0.004565  37.348  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.163920   0.004774 -34.337  &lt; 2e-16 ***
+&gt;# s(year)1                0.018139   0.018989   0.955 0.339489    
+&gt;# s(year)2               -0.034923   0.019954  -1.750 0.080097 .  
+&gt;# s(year)3               -0.027951   0.006600  -4.235 2.29e-05 ***
+&gt;# servermedrxiv:s(year)1 -0.010980   0.020160  -0.545 0.585981    
+&gt;# servermedrxiv:s(year)2  0.033233   0.021775   1.526 0.126979    
+&gt;# servermedrxiv:s(year)3  0.027871   0.007250   3.844 0.000121 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 10:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0447574  0.0033294  13.443  &lt; 2e-16 ***
+&gt;# servermedrxiv           0.0117705  0.0036073   3.263   0.0011 ** 
+&gt;# s(year)1                0.0040479  0.0146668   0.276   0.7826    
+&gt;# s(year)2                0.0002623  0.0132770   0.020   0.9842    
+&gt;# s(year)3                0.0261219  0.0058535   4.463 8.13e-06 ***
+&gt;# servermedrxiv:s(year)1 -0.0176944  0.0162961  -1.086   0.2776    
+&gt;# servermedrxiv:s(year)2 -0.0303798  0.0153824  -1.975   0.0483 *  
+&gt;# servermedrxiv:s(year)3 -0.0408835  0.0069903  -5.849 5.01e-09 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 11:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                        Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)            0.005048   0.002350   2.148  0.03172 *  
+&gt;# servermedrxiv          0.008220   0.002685   3.061  0.00221 ** 
+&gt;# s(year)1               0.010261   0.009886   1.038  0.29933    
+&gt;# s(year)2               0.009911   0.010201   0.972  0.33129    
+&gt;# s(year)3               0.006487   0.004252   1.525  0.12717    
+&gt;# servermedrxiv:s(year)1 0.056818   0.011643   4.880 1.07e-06 ***
+&gt;# servermedrxiv:s(year)2 0.073874   0.012513   5.904 3.59e-09 ***
+&gt;# servermedrxiv:s(year)3 0.046904   0.005889   7.964 1.72e-15 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 12:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.022004   0.002821   7.799 6.44e-15 ***
+&gt;# servermedrxiv           0.041906   0.003351  12.505  &lt; 2e-16 ***
+&gt;# s(year)1               -0.008612   0.011290  -0.763    0.446    
+&gt;# s(year)2               -0.005776   0.012238  -0.472    0.637    
+&gt;# s(year)3               -0.002634   0.004890  -0.539    0.590    
+&gt;# servermedrxiv:s(year)1 -0.006542   0.013997  -0.467    0.640    
+&gt;# servermedrxiv:s(year)2  0.009470   0.015896   0.596    0.551    
+&gt;# servermedrxiv:s(year)3  0.034847   0.006471   5.385 7.30e-08 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 13:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.104347   0.003136  33.278  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.086326   0.003442 -25.084  &lt; 2e-16 ***
+&gt;# s(year)1               -0.031507   0.015444  -2.040   0.0414 *  
+&gt;# s(year)2               -0.027982   0.015186  -1.843   0.0654 .  
+&gt;# s(year)3               -0.023283   0.005574  -4.177 2.96e-05 ***
+&gt;# servermedrxiv:s(year)1  0.077694   0.018009   4.314 1.61e-05 ***
+&gt;# servermedrxiv:s(year)2  0.028379   0.017050   1.664   0.0960 .  
+&gt;# servermedrxiv:s(year)3  0.041046   0.006634   6.187 6.21e-10 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 14:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.124590   0.003384  36.820   &lt;2e-16 ***
+&gt;# servermedrxiv          -0.112726   0.003591 -31.387   &lt;2e-16 ***
+&gt;# s(year)1                0.004251   0.015015   0.283    0.777    
+&gt;# s(year)2               -0.007534   0.015561  -0.484    0.628    
+&gt;# s(year)3                0.007579   0.006327   1.198    0.231    
+&gt;# servermedrxiv:s(year)1 -0.003159   0.015996  -0.198    0.843    
+&gt;# servermedrxiv:s(year)2  0.005290   0.016662   0.317    0.751    
+&gt;# servermedrxiv:s(year)3 -0.005121   0.007090  -0.722    0.470    
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 15:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.053500   0.003506  15.260  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.027398   0.003954  -6.930  4.3e-12 ***
+&gt;# s(year)1                0.044569   0.014766   3.018  0.00254 ** 
+&gt;# s(year)2                0.024796   0.015595   1.590  0.11185    
+&gt;# s(year)3                0.017761   0.006468   2.746  0.00604 ** 
+&gt;# servermedrxiv:s(year)1  0.003689   0.017297   0.213  0.83112    
+&gt;# servermedrxiv:s(year)2  0.033607   0.017897   1.878  0.06042 .  
+&gt;# servermedrxiv:s(year)3 -0.003409   0.007628  -0.447  0.65498    
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 16:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0531712  0.0034678  15.333  &lt; 2e-16 ***
+&gt;# servermedrxiv           0.0176174  0.0040551   4.344 1.40e-05 ***
+&gt;# s(year)1               -0.0494979  0.0130158  -3.803 0.000143 ***
+&gt;# s(year)2               -0.0294507  0.0131905  -2.233 0.025574 *  
+&gt;# s(year)3               -0.0279314  0.0057186  -4.884 1.04e-06 ***
+&gt;# servermedrxiv:s(year)1  0.0608908  0.0150385   4.049 5.16e-05 ***
+&gt;# servermedrxiv:s(year)2  0.0011834  0.0159698   0.074 0.940929    
+&gt;# servermedrxiv:s(year)3 -0.0007032  0.0072105  -0.098 0.922307    
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 17:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.012520   0.002371   5.280 1.30e-07 ***
+&gt;# servermedrxiv          -0.010867   0.002660  -4.086 4.40e-05 ***
+&gt;# s(year)1                0.062508   0.012011   5.204 1.96e-07 ***
+&gt;# s(year)2                0.167150   0.016081  10.394  &lt; 2e-16 ***
+&gt;# s(year)3                0.074767   0.005337  14.010  &lt; 2e-16 ***
+&gt;# servermedrxiv:s(year)1 -0.043602   0.013428  -3.247  0.00117 ** 
+&gt;# servermedrxiv:s(year)2 -0.080085   0.017937  -4.465 8.05e-06 ***
+&gt;# servermedrxiv:s(year)3 -0.037938   0.006115  -6.204 5.58e-10 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 18:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                         Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.055671   0.003054  18.226  &lt; 2e-16 ***
+&gt;# servermedrxiv          -0.019875   0.003469  -5.730 1.02e-08 ***
+&gt;# s(year)1                0.005595   0.011997   0.466  0.64098    
+&gt;# s(year)2                0.004178   0.012679   0.330  0.74178    
+&gt;# s(year)3                0.029362   0.005773   5.086 3.67e-07 ***
+&gt;# servermedrxiv:s(year)1 -0.004546   0.014663  -0.310  0.75652    
+&gt;# servermedrxiv:s(year)2 -0.004705   0.015357  -0.306  0.75934    
+&gt;# servermedrxiv:s(year)3 -0.020633   0.006881  -2.998  0.00272 ** 
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 19:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0135420  0.0025816   5.246 1.57e-07 ***
+&gt;# servermedrxiv           0.0273553  0.0030260   9.040  &lt; 2e-16 ***
+&gt;# s(year)1                0.0005638  0.0100195   0.056   0.9551    
+&gt;# s(year)2               -0.0062746  0.0106155  -0.591   0.5545    
+&gt;# s(year)3               -0.0030674  0.0043700  -0.702   0.4827    
+&gt;# servermedrxiv:s(year)1 -0.0031003  0.0122137  -0.254   0.7996    
+&gt;# servermedrxiv:s(year)2  0.0280690  0.0131424   2.136   0.0327 *  
+&gt;# servermedrxiv:s(year)3  0.0027473  0.0057495   0.478   0.6328    
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+&gt;# 
+&gt;# 
+&gt;# Topic 20:
+&gt;# 
+&gt;# Coefficients:
+&gt;#                          Estimate Std. Error t value Pr(&gt;|t|)    
+&gt;# (Intercept)             0.0067098  0.0019459   3.448 0.000565 ***
+&gt;# servermedrxiv           0.0314496  0.0021906  14.357  &lt; 2e-16 ***
+&gt;# s(year)1               -0.0013966  0.0077057  -0.181 0.856184    
+&gt;# s(year)2               -0.0001134  0.0081834  -0.014 0.988945    
+&gt;# s(year)3                0.0005030  0.0033764   0.149 0.881568    
+&gt;# servermedrxiv:s(year)1  0.0085872  0.0096124   0.893 0.371678    
+&gt;# servermedrxiv:s(year)2  0.0129469  0.0106830   1.212 0.225552    
+&gt;# servermedrxiv:s(year)3  0.0212786  0.0045697   4.656 3.23e-06 ***
+&gt;# ---
+&gt;# Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<aside class="notes">
+<p>A key feature of STM is the incorporation of document covariates into the topic model. In our example we considered the publication year and the preprint server as covariates that might influence the prevalence of a topic in a document. We also applied a regression for these covariates to the fit model, which were extracted with <code>stm::estimateEffect()</code>.</p>
+<p>As a first exploration we can print the regression tables for all or selected topics.</p>
+</aside>
+</section><section id="publication-year" class="slide level2">
+<h2>Publication year</h2>
+<p><img src="figures/unnamed-chunk-22-1.png" width="70%" /></p>
+<aside class="notes">
+<p><code>stm</code> offers several built-in methods to explore the covariate effects visually. The visualization of the effect of preprint <em>publication year</em> on <em>expected topic proportions</em> confirm some trends that appear to match intuitively with different phases of the Covid-19 pandemic. Modelling the spread of infections (Topic 1) had a high relevance initially, but declined later, the same applies to (PCR-)testing (Topic 16), while vaccines (Topic 11) received limited coverage in earlier preprints, but became more important in later years as they were developed and distributed.</p>
+</aside>
+</section><section id="plotting-with-stm" class="slide level2">
+<h2>Plotting with <code>stm</code></h2>
+<pre class="r"><code>plot(covid_effect_K20,
+     covariate = &quot;year&quot;,
+     method = &quot;continuous&quot;,
+     model = covid_model_K20,
+     topics = c(1, 16, 11),
+     xaxt = &quot;n&quot;,
+     main = &#39;Effect of publication year on prevalence of Topic 1 (&quot;epidemic \nmodels&quot;), Topic 16 (&quot;testing&quot;) and Topic 11 (&quot;vaccines&quot;)&#39;,
+     labeltype = &quot;prob&quot;,
+     xlab = &quot;Publication year&quot;)
+axis(1, at = c(&quot;2020&quot;,&quot;2021&quot;,&quot;2022&quot;,&quot;2023&quot;), labels = c(2020, 2021, 2022, 2023))</code></pre>
+</section><section id="plotting-with-stminsights" class="slide level2">
+<h2>Plotting with <code>stminsights</code></h2>
+<p><img src="figures/unnamed-chunk-24-1.png" width="80%" /></p>
+<aside class="notes">
+<p>Alternatively, the <code>stminsights</code> package could be used to extract the same regression information from the <code>stm</code> effects object and create customized charts.</p>
+</aside>
+</section><section id="treatment-effect-preprint-server" class="slide level2">
+<h2>‘Treatment’ effect: preprint server</h2>
+<p><img data-src="figures/unnamed-chunk-25-1.png" /></p>
+<aside class="notes">
+<p>The model also incorporated the preprint server (<em>bioRxiv</em> and <em>medRxiv</em>) as a covariate. We hypothesized that the prevalence of certain topics will be influenced by this covariate, i.e. that we are more likely to see certain topics on either <em>bioRxiv</em> and <em>medRxiv</em>. STM interprets this as a <em>treatment</em> (see <span class="citation" data-cites="RobertsStewart_et_2014_AJPS_58">(Roberts et al. <a href="#/ref-RobertsStewart_et_2014_AJPS_58" role="doc-biblioref">2014</a>)</span> for background and examples) and we can extract the effect of this treatment from the regression object returned by <code>estimateEffect()</code>.</p>
+<p>The <code>stm::plot()</code> offers different methods to explore those effects. The figure below lists the effect of <em>‘treatment medrxiv’</em> for all topics in the model. The treatment can have a positive or negative effect. Here we can for example see that Topic 4 (“mental health”) can be expected with higher prevalence in <em>medRxiv</em> preprints, whereas Topic 9 (“virus molecular structure”) will have a much lower prevalence in <em>medRxiv</em> preprints, i.e. should be expected with higher prevalence in <em>bioRxiv</em> preprints.</p>
+</aside>
+</section><section id="treatment-effect-preprint-server-1" class="slide level2">
+<h2>‘Treatment’ effect: preprint server</h2>
+<p><img data-src="figures/unnamed-chunk-26-1.png" /></p>
+<aside class="notes">
+<p>We can also compare the topical prevalence effect of covariate values for a single topic. The figure below confirms the previous observation for Topic 9 (“virus molecular structure”) which has a prevalence close to zero in <em>medRxiv</em> preprints but a prevalence of approximately 0.17 for <em>bioRxiv</em> preprints, i.e. it seems to appear almost exclusively in the latter.</p>
+</aside>
+</section><section id="combination-of-preprint-server-and-publication-year" class="slide level2">
+<h2>Combination of preprint server and publication year</h2>
+<p><img src="figures/unnamed-chunk-27-1.png" width="70%" /></p>
+<aside class="notes">
+<p>Finally, we can also explore the combined effect of covariates; we assumed an interacting effect of the two covariates <code>server</code> and <code>year</code>. The plot below visualizes this for Topic 17 (“virus variants”) and illustrates that the topical prevalence increased throughout the pandemic in all preprints but that the topic apparently received more coverage in <em>bioRxiv</em> preprints.</p>
+</aside>
+</section><section id="using-stminsight" class="slide level2">
+<h2>Using <code>stminsight</code></h2>
+<p><img src="figures/unnamed-chunk-28-1.png" width="80%" /></p>
+<aside class="notes">
+<p>Again, <code>stminsights</code> can be used to retrieve this information and create customized visualizations for the combined covariate effect.</p>
+</aside>
+</section><section id="exploring-the-topic-structure" class="slide level2">
+<h2>Exploring the topic structure</h2>
+</section><section id="topic-correlations" class="slide level2">
+<h2>Topic correlations</h2>
+<pre class="r"><code>covid_topic_correlations &lt;- topicCorr(covid_model_K20)
+plot(covid_topic_correlations)</code></pre>
+<p><img src="figures/unnamed-chunk-29-1.png" width="80%" /></p>
+<aside class="notes">
+<p>Finally, considering that STM is extending <span class="citation" data-cites="RobertsStewart_et_2019_JSTATS_91">(Roberts, Stewart, and Tingley <a href="#/ref-RobertsStewart_et_2019_JSTATS_91" role="doc-biblioref">2019</a>)</span> a correlated topic model <span class="citation" data-cites="BleiLafferty2007_AAS_1">(Blei and Lafferty <a href="#/ref-BleiLafferty2007_AAS_1" role="doc-biblioref">2007</a>)</span> we may also explore if topics are frequently cooccuring. A a topic correlation matrix is retrieved with <code>stm::topicCorr()</code> which can then be plotted. The resulting figure below indicates at least two clusters of topics.</p>
+</aside>
+</section><section id="network-analysis-of-topics" class="slide level2">
+<h2>Network analysis of topics</h2>
+<div class="fig-container" data-file="topic_correlation.html">
+
+</div>
+<aside class="notes">
+<p>The correlation matrix can be used for further analysis (e.g. networks and clusters) or alternative visualizations. Both are outside the scope of this example and the course module. For illustration, the following figure creates an alternative network visualization, with nodes colored according to a community analysis of the topical network, which here reveals four distinct topical clusters.</p>
+</aside>
+</section></section>
+<section><section id="exercises" class="title-slide slide level1"><h1>Exercises</h1></section><section id="exploring-biodiversity-preprints" class="slide level2">
+<h2>Exploring biodiversity preprints</h2>
+<ul>
+<li>Create a subset of preprints referencing “biodiversity”; fit a topic model with 10 topics and explore the interacting effect of covariates <code>is_published</code> and <code>year</code> (not <code>s(year)</code>).</li>
+</ul>
+</section></section>
+<section><section id="thank-you" class="title-slide slide level1"><h1>Thank You!</h1></section><section id="key-resources" class="slide level2">
+<h2>Key Resources</h2>
+<ul>
+<li><a href="http://quanteda.io/">quanteda R package</a></li>
+<li><a href="https://www.jstatsoft.org/article/view/v091i02">stm: An R Package for Structural Topic Models</a> <span class="citation" data-cites="RobertsStewart_et_2019_JSTATS_91">(Roberts, Stewart, and Tingley <a href="#/ref-RobertsStewart_et_2019_JSTATS_91" role="doc-biblioref">2019</a>)</span></li>
+<li><a href="https://github.com/chainsawriot/oolong">oolong R package</a></li>
+</ul>
+</section><section id="references" class="slide level2 top-aligned-slide">
+<h2>References</h2>
+<div id="refs" role="doc-bibliography">
+<div id="ref-Blei2012_COMMACM_55">
+<p>Blei, David. 2012. “Probabilistic Topic Models.” <em>Communications of the ACM</em> 55 (4): 77–84. <a href="https://doi.org/10.1145/2133806.2133826">https://doi.org/10.1145/2133806.2133826</a>.</p>
+</div>
+<div id="ref-BleiLafferty2007_AAS_1">
+<p>Blei, David M., and John D. Lafferty. 2007. “A Correlated Topic Model of Science.” <em>The Annals of Applied Statistics</em> 1 (1): 17–35.</p>
+</div>
+<div id="ref-BleiNgEt2003_JMLR_3">
+<p>Blei, David M., Andrew Y. Ng, and Michael I. Jordan. 2003. “Latent Dirichlet Allocation.” <em>The Journal of Machine Learning Research</em> 3 (March): 993–1022.</p>
+</div>
+<div id="ref-CallaghanMinx_et_2020_NCC_10">
+<p>Callaghan, Max W., Jan C. Minx, and Piers M. Forster. 2020. “A Topography of Climate Change Research.” <em>Nature Climate Change</em> 10 (2): 118–23. <a href="https://doi.org/10.1038/s41558-019-0684-5">https://doi.org/10.1038/s41558-019-0684-5</a>.</p>
+</div>
+<div id="ref-DaumeAlbertEt2014_FORESTECOSYST_1">
+<p>Daume, Stefan, Matthias Albert, and Klaus von Gadow. 2014. “Assessing Citizen Science Opportunities in Forest Monitoring Using Probabilistic Topic Modelling.” <em>Forest Ecosystems</em> 1 (1): 11. <a href="https://doi.org/10.1186/s40663-014-0011-6">https://doi.org/10.1186/s40663-014-0011-6</a>.</p>
+</div>
+<div id="ref-DennySpirling_2018_PA_26">
+<p>Denny, Matthew J., and Arthur Spirling. 2018. “Text Preprocessing for Unsupervised Learning: Why It Matters, When It Misleads, and What to Do About It.” <em>Political Analysis</em> 26 (2): 168–89. <a href="https://doi.org/10.1017/pan.2017.44">https://doi.org/10.1017/pan.2017.44</a>.</p>
+</div>
+<div id="ref-Farell_2016_PNAS_113">
+<p>Farrell, Justin. 2016. “Corporate Funding and Ideological Polarization About Climate Change.” <em>Proceedings of the National Academy of Sciences of the United States of America</em> 113 (1): 92–97. <a href="https://doi.org/10.1073/pnas.1509433112">https://doi.org/10.1073/pnas.1509433112</a>.</p>
+</div>
+<div id="ref-PovitkinaCarlssonJagers_et_2021_GEC_70">
+<p>Povitkina, Marina, Sverker Carlsson Jagers, Simon Matti, and Johan Martinsson. 2021. “Why Are Carbon Taxes Unfair? Disentangling Public Perceptions of Fairness.” <em>Global Environmental Change</em> 70 (September): 102356. <a href="https://doi.org/10.1016/j.gloenvcha.2021.102356">https://doi.org/10.1016/j.gloenvcha.2021.102356</a>.</p>
+</div>
+<div id="ref-RobertsStewart_et_2019_JSTATS_91">
+<p>Roberts, Margaret E., Brandon M. Stewart, and Dustin Tingley. 2019. “Stm: An R Package for Structural Topic Models.” <em>Journal of Statistical Software</em> 91 (1): 1–40. <a href="https://doi.org/10.18637/jss.v091.i02">https://doi.org/10.18637/jss.v091.i02</a>.</p>
+</div>
+<div id="ref-RobertsStewart_et_2014_AJPS_58">
+<p>Roberts, Margaret E., Brandon M. Stewart, Dustin Tingley, Christopher Lucas, Jetson Leder-Luis, Shana Kushner Gadarian, Bethany Albertson, and David G. Rand. 2014. “Structural Topic Models for Open-Ended Survey Responses.” <em>American Journal of Political Science</em> 58 (4): 1064–82. <a href="https://doi.org/10.1111/ajps.12103">https://doi.org/10.1111/ajps.12103</a>.</p>
+</div>
+<div id="ref-SzekelyBrocke_2017_PO_12">
+<p>Székely, Nadine, and Jan vom Brocke. 2017. “What Can We Learn from Corporate Sustainability Reporting? Deriving Propositions for Research and Practice from over 9,500 Corporate Sustainability Reports Published Between 1999 and 2015 Using Topic Modelling Technique.” <em>PLOS ONE</em> 12 (4): e0174807. <a href="https://doi.org/10.1371/journal.pone.0174807">https://doi.org/10.1371/journal.pone.0174807</a>.</p>
+</div>
+</div>
+</section><section id="colophon" class="slide level2 colophon">
+<h2>Colophon</h2>
+<p><strong>“Structural Topic Modeling with R”</strong> by <em>Stefan Daume</em></p>
+<p> </p>
+<p>Presented at DS4SD SRC R course on 11. April 2025.</p>
+<p> </p>
+<p>This presentation can be cited using: <em>doi:…</em></p>
+<p> </p>
+<p><strong>PRESENTATION DETAILS</strong></p>
+<p><strong>Author/Affiliation:</strong> Stefan Daume, Stockholm Resilience Centre, Stockholm University</p>
+<p><strong>Presentation URL:</strong> <a href="https://sdaume.github.io/ds4sd-2024-modules/topicmodels/slides/" class="uri">https://sdaume.github.io/ds4sd-2024-modules/topicmodels/slides/</a></p>
+<p><strong>Presentation Source:</strong> [TBD]</p>
+<p><strong>Presentation PDF:</strong> [TBD]</p>
+<p> </p>
+<p><strong>CREDITS &amp; LICENSES</strong></p>
+<p>This presentation is delivered with the help of several free and open source tools and libraries. It utilises the <a href="https://revealjs.com/">reveal.js</a> presentation framework and has been created using <a href="https://rmarkdown.rstudio.com">RMarkdown</a>, <a href="https://yihui.name/knitr/">knitr</a>, <a href="https://www.rstudio.com">RStudio</a> and <a href="https://pandoc.org/">Pandoc</a>. <a href="https://highlightjs.org">highlight.js</a> provides syntax highlighting for code sections. <a href="https://www.mathjax.org">MathJax</a> supports the rendering of mathematical notations. PDF and JPG copies of this presentation were generated with <a href="https://github.com/astefanutti/decktape">DeckTape</a>. Please note the respective licenses of these tools and libraries.</p>
+<p> </p>
+<p>If not noted and attributed otherwise, the contents (text, charts, images) of this presentation are <strong>Copyright © 2025 of the Author</strong> and provided under a <em>CC BY 4.0</em> public domain license.</p>
+</section></section>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>NOTE we use the recommended spline function for the <code>year</code> variable. Consult the STM documentation for details on this.<a href="#/fnref1" class="footnote-back" role="doc-backlink">↩</a></p></li>
+<li id="fn2" role="doc-endnote"><p>NOTE that for each document a non-zero probability for all topics is assigned.<a href="#/fnref2" class="footnote-back" role="doc-backlink">↩</a></p></li>
+</ol>
+</section>
+    </div>
+  </div>
+
+  <script src="./reveal.js-3.6.0/lib/js/head.min.js"></script>
+  <script src="./reveal.js-3.6.0/js/reveal.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+        // Push each slide change to the browser history
+        history: true,
+        // Transition style
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+        math: {
+          mathjax: './MathJax-2.7.5/MathJax.js',
+          config: 'TeX-MML-AM_SVG-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: './reveal.js-3.6.0/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: './reveal.js-3.6.0/plugin/zoom-js/zoom.js', async: true },
+          { src: './reveal.js-3.6.0/plugin/math/math.js', async: true },
+          { src: './reveal.js-3.6.0/plugin/notes/notes.js', async: true },
+          { src: './reveal.js-3.6.0/plugin/reveald3/reveald3.js', async: true }
+        ]
+      });
+    </script>
+    </body>
+</html>
