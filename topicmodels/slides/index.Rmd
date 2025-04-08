@@ -33,6 +33,69 @@ library(quanteda.textstats)
 library(stm)
 library(stminsights)
 library(ggplot2)
+library(gt)
+
+library(gutenbergr)
+library(tidytext)
+
+# get text
+book <- gutenberg_download(c(244))
+
+# tidy the text into individual words
+tidy_book <- book %>%
+  #mutate(line = row_number()) %>%
+  unnest_tokens(word, text)
+
+# count the word/term frequency
+word_count <- tidy_book %>%
+  count(word, sort = TRUE)
+
+# remove stopwords
+word_count_filtered <- tidy_book %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE)
+
+# ngrams as tokens
+tidy_ngrams <- book %>%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  filter(!is.na(bigram)) %>%
+  count(bigram, sort = TRUE)
+
+# ngrams as tokens (stop words filtered)
+tidy_ngrams_filtered <- book %>%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  filter(!is.na(bigram)) %>%
+  tidyr::separate(bigram, c("token1", "token2"), sep = " ") %>%
+  anti_join(by = c("token1" = "word"), stop_words) %>%
+  anti_join(by = c("token2" = "word"), stop_words) %>%
+  tidyr::unite(bigram, token1, token2, sep = " ")
+
+bigram_count <- tidy_ngrams_filtered %>%
+  count(bigram, sort = TRUE)
+
+# sentiment sample
+# index line numbers and tidy
+tidy_book_indexed <- book %>%
+  mutate(line = row_number()) %>%
+  unnest_tokens(word, text)
+
+# get a sentiment dictionary
+afinn_dict <- get_sentiments("afinn")
+
+# most frequent words that overlap
+# with the AFINN sentiment dictionary
+sentiment_count <- tidy_book_indexed %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE) %>%
+  inner_join(afinn_dict)
+
+# mean sentiment summarized for 
+# blocks of 50 consecutive lines
+sentiment_trend <- tidy_book_indexed %>%
+  inner_join(afinn_dict) %>%
+  group_by(index = line %/% 50) %>%
+  summarise(mean_sentiment = mean(value)) %>%
+  ungroup()
 ```
 
 [//]: <> (Alternative background colours are #002b36 #333 #1E8C45)
@@ -78,7 +141,422 @@ library(ggplot2)
 </div>
 
 
-# Topic modeling: "Text as data"
+# "Text as data" - Basic text mining
+
+## Getting and exploring text
+
+Basic packages:
+
+* tidytext
+* stringr
+* dplyr
+* tidyr
+* (SnowballC)
+* (spacyr)
+* (textdata)
+
+
+## Basic and common steps
+
+1. get text (e.g., via gutenbergr)
+2. tidy
+3. tokenize
+4. transform
+5. (annotate)
+6. analyze
+
+
+
+## Basic analysis: get text, tidy, count
+
+```{r eval=FALSE, echo=TRUE}
+library(gutenbergr)
+library(dplyr)
+library(tidytext)
+
+# get "mystery" text
+book <- gutenberg_download(c(244))
+
+# tidy the text into individual words
+# also lowercases and remove punctuation
+tidy_book <- book %>%
+  unnest_tokens(output = word, input = text)
+
+# count the word/term frequency
+word_count <- tidy_book %>%
+  count(word, sort = TRUE)
+```
+
+
+## Most frequent words
+
+<div style="display:table;width:100%;table-layout:fixed;">
+  <div style="display:table-cell;width:60%;padding-right:5%;text-align:left;vertical-align:top;">
+
+```{r eval=FALSE, echo=TRUE}
+library(gutenbergr)
+library(dplyr)
+library(tidytext)
+
+# get "mystery" text
+book <- gutenberg_download(c(244))
+
+# tidy the text into individual words
+# also lowercases and removes punctuation
+tidy_book <- book %>%
+  unnest_tokens(output = word, input = text)
+
+# count the word/term frequency
+word_count <- tidy_book %>%
+  count(word, sort = TRUE)
+```
+
+  </div>
+  
+  
+  <div style="display:table-cell;width:40%;padding-left:5%;text-align:left;vertical-align:top;">
+  
+```{r echo=FALSE}
+word_count %>%
+  slice_head(n = 10) %>%
+  gt() %>%
+  tab_header(
+    title = stringr::str_to_title("Mystery book word count"),
+    subtitle = md("(10 most frequent terms)")
+  )
+```
+
+  </div>
+</div>
+
+
+<aside class="notes">
+* you then point to the ".bib" file in the document's YAML header and include citations of your references as such `[@CitationKey]` in your text
+* and add a `# References` section at the end of your header
+</aside>
+
+
+## Exclude "stop words"
+
+<div style="display:table;width:100%;table-layout:fixed;">
+  <div style="display:table-cell;width:60%;padding-right:5%;text-align:left;vertical-align:top;">
+
+```{r eval=FALSE, echo=TRUE}
+library(gutenbergr)
+library(dplyr)
+library(tidytext)
+
+# get "mystery" text
+book <- gutenberg_download(c(244))
+
+# tidy the text into individual words
+# also lowercases and removes punctuation
+tidy_book <- book %>%
+  unnest_tokens(output = word, input = text)
+
+# remove stopwords 
+# (lexicon provided with tidytext)
+word_count_filtered <- tidy_book %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE)
+```
+
+  </div>
+  
+  
+  <div style="display:table-cell;width:40%;padding-left:5%;text-align:left;vertical-align:top;">
+  
+```{r echo=FALSE}
+stop_words %>%
+  slice_head(n = 10) %>%
+  gt() %>%
+  tab_header(
+    title = stringr::str_to_title("Sample stop words"),
+    subtitle = md("(dataset included in `tidytext`)")
+  )
+```
+
+  </div>
+</div>
+
+
+<aside class="notes">
+* TBD
+</aside>
+
+
+
+## Filtered word count
+
+<div style="display:table;width:100%;table-layout:fixed;">
+  <div style="display:table-cell;width:60%;padding-right:5%;text-align:left;vertical-align:top;">
+
+```{r eval=FALSE, echo=TRUE}
+library(gutenbergr)
+library(dplyr)
+library(tidytext)
+
+# get "mystery" text
+book <- gutenberg_download(c(244))
+
+# tidy the text into individual words
+# also lowercases and removes punctuation
+tidy_book <- book %>%
+  unnest_tokens(output = word, input = text)
+
+# remove stopwords 
+# (lexicon provided with tidytext)
+word_count_filtered <- tidy_book %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE)
+```
+
+  </div>
+  
+  
+  <div style="display:table-cell;width:40%;padding-left:5%;text-align:left;vertical-align:top;">
+  
+```{r echo=FALSE}
+word_count_filtered %>%
+  slice_head(n = 10) %>%
+  gt() %>%
+  tab_header(
+    title = stringr::str_to_title("Mystery book word count"),
+    subtitle = md("(10 most frequent terms **without stopwords**)")
+  )
+```
+
+  </div>
+</div>
+
+
+
+## Tokens can be more than words
+
+<div style="display:table;width:100%;table-layout:fixed;">
+  <div style="display:table-cell;width:70%;padding-right:5%;text-align:left;vertical-align:top;">
+
+```{r eval=FALSE, echo=TRUE}
+library(gutenbergr)
+library(dplyr)
+library(tidytext)
+
+# get "mystery" text
+book <- gutenberg_download(c(244))
+
+# ngrams as tokens
+tidy_ngrams <- book %>%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  filter(!is.na(bigram)) %>%
+  count(bigram, sort = TRUE)
+```
+
+  </div>
+  
+  
+  <div style="display:table-cell;width:30%;padding-left:5%;text-align:left;vertical-align:top;">
+  
+```{r echo=FALSE}
+tidy_ngrams %>%
+  slice_head(n = 10) %>%
+  gt() %>%
+  tab_header(
+    title = md("Mystery Book *n-gram* Count"),
+    subtitle = md("(10 most frequent terms)")
+  )
+```
+
+  </div>
+</div>
+
+<aside class="notes">
+* typically, in text analysis, individual words are used as tokens
+* but what constitutes a relevant basic unit of information can vary
+* sometimes, n-grams (multiple successive words) could be the tokens to analyse
+</aside>
+
+
+## "The game's afoot ..."
+
+<div style="display:table;width:100%;table-layout:fixed;">
+  <div style="display:table-cell;width:70%;padding-right:5%;text-align:left;vertical-align:top;">
+
+```{r eval=FALSE, echo=TRUE}
+library(gutenbergr)
+library(dplyr)
+library(tidytext)
+
+# get "mystery" text
+book <- gutenberg_download(c(244))
+
+# ngrams as tokens (stop words filtered)
+tidy_ngrams_filtered <- book %>%
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  filter(!is.na(bigram)) %>%
+  tidyr::separate(bigram, c("token1", "token2"), sep = " ") %>%
+  anti_join(by = c("token1" = "word"), stop_words) %>%
+  anti_join(by = c("token2" = "word"), stop_words) %>%
+  tidyr::unite(bigram, token1, token2, sep = " ")
+
+bigram_count <- tidy_ngrams_filtered %>%
+  count(bigram, sort = TRUE)
+```
+
+  </div>
+  
+  
+  <div style="display:table-cell;width:30%;padding-left:5%;text-align:left;vertical-align:top;">
+  
+```{r echo=FALSE}
+bigram_count %>%
+  slice_head(n = 10) %>%
+  gt() %>%
+  tab_header(
+    title = md("Mystery Book *n-gram* Count"),
+    subtitle = md("(10 most frequent n-grams <br> **without items containing a stop word**)")
+  )
+```
+
+  </div>
+</div>
+
+<aside class="notes">
+* typically, in text analysis, individual words are used as tokens
+* but what constitutes a relevant basic unit of information can vary
+* sometimes, n-grams (multiple successive words) could be the tokens to analyse
+</aside>
+
+
+## Further options: Sentiment Analysis
+
+```{r echo=FALSE}
+afinn_dict <- get_sentiments("afinn")
+
+afinn_dict %>%
+  slice_sample(n = 10) %>%
+  gt() %>%
+  tab_header(
+    title = md("Sentiment words and valence"),
+    subtitle = md("*AFINN sentiment dictionary*")
+  )
+```
+
+
+
+## Frequent sentiment words
+
+<div style="display:table;width:100%;table-layout:fixed;">
+  <div style="display:table-cell;width:70%;padding-right:5%;text-align:left;vertical-align:top;">
+
+```{r eval=FALSE, echo=TRUE}
+library(gutenbergr)
+library(dplyr)
+library(tidytext)
+
+# get text
+book <- gutenberg_download(c(244))
+
+# index line numbers and tidy
+tidy_book_indexed <- book %>%
+  mutate(line = row_number()) %>%
+  unnest_tokens(word, text)
+
+# get a sentiment dictionary
+afinn_dict <- get_sentiments("afinn")
+
+# most frequent words that overlap
+# with the AFINN sentiment dictionary
+sentiment_count <- tidy_book_indexed %>%
+  anti_join(stop_words) %>%
+  count(word, sort = TRUE) %>%
+  inner_join(afinn_dict)
+```
+
+  </div>
+  
+  
+  <div style="display:table-cell;width:30%;padding-left:5%;text-align:left;vertical-align:top;">
+  
+```{r echo=FALSE}
+sentiment_count %>%
+  slice_head(n = 10) %>%
+  gt() %>%
+  tab_header(
+    title = md("Sentiment word count"),
+    subtitle = md("(10 most frequent words overlapping <br> with the AFINN dictionary)")
+  )
+```
+
+  </div>
+</div>
+
+<aside class="notes">
+* typically, in text analysis, individual words are used as tokens
+* but what constitutes a relevant basic unit of information can vary
+* sometimes, n-grams (multiple successive words) could be the tokens to analyse
+</aside>
+
+
+## Sentiment trend
+
+<div style="display:table;width:100%;table-layout:fixed;">
+  <div style="display:table-cell;width:50%;padding-right:5%;text-align:left;vertical-align:top;">
+
+```{r eval=FALSE, echo=TRUE}
+library(gutenbergr)
+library(dplyr)
+library(tidytext)
+
+# get text
+book <- gutenberg_download(c(244))
+
+# index line numbers and tidy
+tidy_book_indexed <- book %>%
+  mutate(line = row_number()) %>%
+  unnest_tokens(word, text)
+
+# get a sentiment dictionary
+afinn_dict <- get_sentiments("afinn")
+
+# mean sentiment summarized for 
+# blocks of 50 consecutive lines
+sentiment_trend <- tidy_book_indexed %>%
+  inner_join(afinn_dict) %>%
+  group_by(index = line %/% 50) %>%
+  summarise(mean_sentiment = mean(value)) %>%
+  ungroup()
+
+ggplot(sentiment_trend, 
+       aes(x = index, 
+           y = mean_sentiment)) +
+  geom_point() +
+  geom_smooth()
+```
+
+  </div>
+  
+  
+  <div style="display:table-cell;width:50%;padding-left:5%;text-align:left;vertical-align:top;">
+  
+```{r echo=FALSE}
+ggplot(sentiment_trend, aes(x = index, y = mean_sentiment)) +
+  geom_point() +
+  geom_smooth()
+```
+
+  </div>
+</div>
+
+<aside class="notes">
+* typically, in text analysis, individual words are used as tokens
+* but what constitutes a relevant basic unit of information can vary
+* sometimes, n-grams (multiple successive words) could be the tokens to analyse
+</aside>
+
+
+
+
+# "Text as data" - Topic modeling
 
 ## The notion of "latent topics"
 
