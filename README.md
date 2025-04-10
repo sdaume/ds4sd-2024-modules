@@ -18,10 +18,7 @@ This repo contains slides, handouts, examples and other resources for the module
 
 ### Topic Modeling
 
-* **Presentation slides**: https://sdaume.github.io/ds4sd-2024-modules/topicmodels/slides/index.html
-* **Handouts and examples**: 
-  * Illustrated example and exercise: https://sdaume.github.io/srcquantcourse/
-  * Repo with workable example scripts: https://github.com/sdaume/srcquantcourse
+TBD ...
 
 
 
