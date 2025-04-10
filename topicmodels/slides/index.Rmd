@@ -9,7 +9,7 @@ output:
 # pandoc -t revealjs --template=./topicmodels/slides/custom_pandoc_template/default.revealjs -s -o ./topicmodels/slides/index.html ./topicmodels/slides/index.md ./topicmodels/slides/index_metadata.yaml -V revealjs-url=./reveal.js-3.6.0 --mathjax --no-highlight -V highlighting-css=zenburn -V controlsLayout=edges --bibliography ./topicmodels/slides/topicmodels-ds4sd.bib
 
 # create pdf
-# decktape -s 1920x1080 reveal ./topicmodels/slides/index.html ./workflows/slides/2025-ds4sd-topicmodels.pdf
+# decktape -s 1920x1080 reveal ./topicmodels/slides/index.html ./topicmodels/slides/2025-ds4sd-topicmodels.pdf
 
 # create screenshots
 # decktape reveal ./topicmodels/slides/index.html ./topicmodels/slides/2025-ds4sd-topicmodels.pdf --screenshots --screenshots-directory ./topicmodels/handouts/screenshots
@@ -39,7 +39,8 @@ library(gutenbergr)
 library(tidytext)
 
 # get text
-book <- gutenberg_download(c(244))
+#book <- gutenberg_download(c(244))
+load("scarlet_book.Rdata")
 
 # tidy the text into individual words
 tidy_book <- book %>%
@@ -57,13 +58,17 @@ word_count_filtered <- tidy_book %>%
 
 # ngrams as tokens
 tidy_ngrams <- book %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  unnest_tokens(bigram, text, 
+                token = "ngrams", n = 2,
+                collapse = c("gutenberg_id")) %>%
   filter(!is.na(bigram)) %>%
   count(bigram, sort = TRUE)
 
 # ngrams as tokens (stop words filtered)
 tidy_ngrams_filtered <- book %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  unnest_tokens(bigram, text, 
+                token = "ngrams", n = 2,
+                collapse = c("gutenberg_id")) %>%
   filter(!is.na(bigram)) %>%
   tidyr::separate(bigram, c("token1", "token2"), sep = " ") %>%
   anti_join(by = c("token1" = "word"), stop_words) %>%
@@ -93,7 +98,7 @@ sentiment_count <- tidy_book_indexed %>%
 # blocks of 50 consecutive lines
 sentiment_trend <- tidy_book_indexed %>%
   inner_join(afinn_dict) %>%
-  group_by(index = line %/% 50) %>%
+  group_by(index = line %/% 100) %>%
   summarise(mean_sentiment = mean(value)) %>%
   ungroup()
 ```
@@ -143,7 +148,7 @@ sentiment_trend <- tidy_book_indexed %>%
 
 # "Text as data" - Basic text mining
 
-## Getting and exploring text
+## Text mining packages
 
 Basic packages:
 
@@ -156,7 +161,7 @@ Basic packages:
 * (textdata)
 
 
-## Basic and common steps
+## Basic text mining steps
 
 1. get text (e.g., via gutenbergr)
 2. tidy
@@ -177,6 +182,11 @@ library(tidytext)
 # get "mystery" text
 book <- gutenberg_download(c(244))
 
+# books are lines of text with associated book ID
+# tibble [4,737 × 2] (S3: tbl_df/tbl/data.frame)
+#  $ gutenberg_id: int [1:4737] 244 244 244  ...
+#  $ text        : chr [1:4737] "" "" "" ...
+
 # tidy the text into individual words
 # also lowercases and remove punctuation
 tidy_book <- book %>%
@@ -186,6 +196,12 @@ tidy_book <- book %>%
 word_count <- tidy_book %>%
   count(word, sort = TRUE)
 ```
+
+<aside class="notes">
+* books from project gutenberg are returned as dataframes/tibbles with two columns that provide the text per line and the associated book ID
+* `unnest_tokens()` both tokenizes and tidys the text (i.e., whitespace, punctuation is removed, the tokens are transformed to lowercase)  
+</aside>
+
 
 
 ## Most frequent words
@@ -231,8 +247,7 @@ word_count %>%
 
 
 <aside class="notes">
-* you then point to the ".bib" file in the document's YAML header and include citations of your references as such `[@CitationKey]` in your text
-* and add a `# References` section at the end of your header
+
 </aside>
 
 
@@ -257,7 +272,7 @@ tidy_book <- book %>%
 # remove stopwords 
 # (lexicon provided with tidytext)
 word_count_filtered <- tidy_book %>%
-  anti_join(stop_words) %>%
+  anti_join(stop_words, by = "word") %>%
   count(word, sort = TRUE)
 ```
 
@@ -281,7 +296,8 @@ stop_words %>%
 
 
 <aside class="notes">
-* TBD
+* the removed stopwords represent only `r (nrow(word_count)-nrow(word_count_filtered))/nrow(word_count) * 100` % of the vocabulary (terms)
+* but `r (sum(word_count$n)-sum(word_count_filtered$n))/sum(word_count$n) *100`% of all tokens 
 </aside>
 
 
@@ -307,7 +323,7 @@ tidy_book <- book %>%
 # remove stopwords 
 # (lexicon provided with tidytext)
 word_count_filtered <- tidy_book %>%
-  anti_join(stop_words) %>%
+  anti_join(stop_words, by = "word") %>%
   count(word, sort = TRUE)
 ```
 
@@ -346,7 +362,9 @@ book <- gutenberg_download(c(244))
 
 # ngrams as tokens
 tidy_ngrams <- book %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  unnest_tokens(bigram, text, 
+                token = "ngrams", n = 2,
+                collapse = c("gutenberg_id")) %>%
   filter(!is.na(bigram)) %>%
   count(bigram, sort = TRUE)
 ```
@@ -391,7 +409,9 @@ book <- gutenberg_download(c(244))
 
 # ngrams as tokens (stop words filtered)
 tidy_ngrams_filtered <- book %>%
-  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>%
+  unnest_tokens(bigram, text, 
+                token = "ngrams", n = 2,
+                collapse = c("gutenberg_id")) %>%
   filter(!is.na(bigram)) %>%
   tidyr::separate(bigram, c("token1", "token2"), sep = " ") %>%
   anti_join(by = c("token1" = "word"), stop_words) %>%
@@ -522,7 +542,7 @@ afinn_dict <- get_sentiments("afinn")
 # blocks of 50 consecutive lines
 sentiment_trend <- tidy_book_indexed %>%
   inner_join(afinn_dict) %>%
-  group_by(index = line %/% 50) %>%
+  group_by(index = line %/% 100) %>%
   summarise(mean_sentiment = mean(value)) %>%
   ungroup()
 
@@ -530,6 +550,7 @@ ggplot(sentiment_trend,
        aes(x = index, 
            y = mean_sentiment)) +
   geom_point() +
+  geom_line() +
   geom_smooth()
 ```
 
@@ -563,8 +584,21 @@ ggplot(sentiment_trend, aes(x = index, y = mean_sentiment)) +
 Topic modeling applies **unsupervised probabilistic classification** to identify the **latent** ("hidden") topics in a collection of documents.
 
 <aside class="notes">
-* requires document collections!
-* topics are defined as collections of words
+* **"Latent Topics"**
+  * e.g., if we review articles about urban sustainability, we would expect the major topics about *urban environments* and *sustainability* to be present
+  * But how prevalent is each?
+  * Which subtopics are emerging?
+  * Which auxiliary topics (technology, social networks, AI)?
+  * Are there unexpected topics? 
+  * In which combinations do these topics occur?
+
+* How do we find these? 
+  * Manual analysis and categorisation. Possibly to create a labelled training data set for Machine Learning classifiers.
+  * Or use unsupervised probabilistic classification, i.e. topic modeling.
+
+* **NOTE:**
+  * Requires document collections!
+  * Topics are defined as collections of words that frequently co-occur.
 </aside>
 
 
